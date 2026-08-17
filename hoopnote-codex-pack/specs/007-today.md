@@ -17,7 +17,8 @@ Implement the Today experience using deterministic placeholder selection before 
 - Generate one deterministic starter focus from eligible foundation content when none exists.
 - Store status viewed/completed/skipped.
 - Show short 'why this focus' reason.
-- Support practice/game/recovery day context selection if a session exists.
+- Support practice/game/learning guideline context selection if a session exists.
+- Recovery sessions remain valid session records but do not request MVP guideline recommendations.
 - Offline rendering from local data.
 
 ## Acceptance criteria

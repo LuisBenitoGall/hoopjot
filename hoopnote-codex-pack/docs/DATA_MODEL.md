@@ -82,7 +82,7 @@ type GoalType =
   | "finishing"
   | "decision_making"
   | "confidence"
-  | "return_to_play"
+  | "rebuild_game_confidence"
   | "custom";
 
 interface PlayerGoal {
@@ -98,6 +98,8 @@ interface PlayerGoal {
 ```
 
 Maximum three active goals.
+
+`rebuild_game_confidence` is explicitly non-medical. It may influence basketball fundamentals, confidence, habits and learning recommendations. It must never influence rehabilitation progression, physical load, pain interpretation, medical clearance or decisions about whether the user should play.
 
 ## Skill
 
@@ -121,6 +123,8 @@ interface Skill {
 Global curated content linked to one or more skills.
 
 ```ts
+type GuidelineContext = "practice" | "game" | "learning";
+
 interface Guideline {
   id: string;
   skillIds: string[];
@@ -128,13 +132,15 @@ interface Guideline {
   subcategory: string;
   level: "foundation" | "intermediate" | "advanced";
   positions: PlayerPosition[] | ["all"];
-  contexts: SessionType[];
+  contexts: GuidelineContext[];
   translationKey: string;
   active: boolean;
 }
 ```
 
 Translated content is kept separately from domain identity.
+
+Guideline contexts intentionally exclude `recovery`. Recovery remains a valid session type, but is not an MVP guideline recommendation context.
 
 ## Session
 

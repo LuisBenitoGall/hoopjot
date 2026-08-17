@@ -1,0 +1,15 @@
+{
+  "appName": "Hoopnote",
+  "backHome": "Volver al inicio",
+  "language": {
+    "en": "English",
+    "es": "Español"
+  },
+  "languageLabel": "Idioma",
+  "shellDescription": "El enrutado, Tailwind, las pruebas, la i18n y el plugin PWA están conectados sin funciones de producto.",
+  "shellEyebrow": "Base de app",
+  "shellStatus": "Base frontend lista.",
+  "smokeDescription": "La ruta de humo se renderizó mediante React Router.",
+  "smokeTitle": "Ruta de prueba de humo"
+}
+

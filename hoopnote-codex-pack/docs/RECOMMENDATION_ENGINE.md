@@ -22,10 +22,12 @@ The engine must be deterministic, testable and explainable.
 A guideline is eligible when:
 - active;
 - translated for current locale or fallback;
-- relevant to current context;
+- relevant to the current guideline context (`practice`, `game` or `learning`);
 - player level can reasonably use it;
 - not medically restricted content;
 - not shown within the strict repeat cooldown.
+
+Recovery sessions do not request MVP guideline recommendations.
 
 ## Suggested scoring
 
@@ -50,6 +52,8 @@ These weights are initial configuration, not eternal truth.
 - Recent repeated negative observation: boost for 7 days.
 - Strong repeated positive evidence: gradually reduce remediation priority.
 - Player goal match remains a stable positive signal.
+
+The `rebuild_game_confidence` goal may boost recommendations related to basketball fundamentals, confidence, habits and learning. It must not affect rehabilitation progression, physical load, pain interpretation, medical clearance or decisions about whether the user should play.
 
 ## Development path
 

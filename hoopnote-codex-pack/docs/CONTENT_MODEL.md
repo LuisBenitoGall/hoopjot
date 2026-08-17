@@ -26,6 +26,8 @@ interface GuidelineTranslation {
 Core metadata:
 
 ```ts
+type GuidelineContext = "practice" | "game" | "learning";
+
 interface GuidelineDefinition {
   id: string;
   skillIds: string[];
@@ -33,11 +35,13 @@ interface GuidelineDefinition {
   subcategory: string;
   level: "foundation" | "intermediate" | "advanced";
   positions: string[] | ["all"];
-  contexts: ("practice" | "game" | "learning")[];
+  contexts: GuidelineContext[];
   priorityForPositions?: Record<string, number>;
   translationKey: string;
 }
 ```
+
+Recovery remains a valid session type, but it is not an MVP guideline recommendation context.
 
 ## Editorial rules
 

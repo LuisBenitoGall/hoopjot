@@ -1,0 +1,15 @@
+{
+  "appName": "Hoopnote",
+  "backHome": "Back home",
+  "language": {
+    "en": "English",
+    "es": "Español"
+  },
+  "languageLabel": "Language",
+  "shellDescription": "Routing, Tailwind, tests, i18n and the PWA plugin are wired in without product features.",
+  "shellEyebrow": "App shell",
+  "shellStatus": "Frontend foundation ready.",
+  "smokeDescription": "The smoke route rendered through React Router.",
+  "smokeTitle": "Smoke test route"
+}
+
