@@ -2,7 +2,9 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import enCommon from './en/common.json';
+import enContent from './en/content.json';
 import esCommon from './es/common.json';
+import esContent from './es/content.json';
 import { defaultLocale, isSupportedLocale } from './locales';
 
 function getInitialLocale() {
@@ -24,13 +26,15 @@ void i18n.use(initReactI18next).init({
     escapeValue: false
   },
   lng: getInitialLocale(),
-  ns: ['common'],
+  ns: ['common', 'content'],
   resources: {
     en: {
-      common: enCommon
+      common: enCommon,
+      content: enContent
     },
     es: {
-      common: esCommon
+      common: esCommon,
+      content: esContent
     }
   }
 });
@@ -42,4 +46,3 @@ i18n.on('languageChanged', (locale) => {
 document.documentElement.lang = getInitialLocale();
 
 export default i18n;
-

@@ -1,0 +1,64 @@
+{
+  "guidelines": {
+    "att_finish_two_foot_balance": {
+      "cue": "TWO FEET / STRONG EYES",
+      "instruction": "When traffic is near, land on two feet before your finish so you can absorb contact and choose the angle.",
+      "title": "Finish with two-foot balance"
+    },
+    "att_offball_show_target_window": {
+      "cue": "WINDOW / HANDS / HOLD",
+      "instruction": "Move into a passing lane where the passer can see your hands and deliver on time.",
+      "title": "Show a target window"
+    },
+    "att_onball_protect_outside_hip": {
+      "cue": "BODY BETWEEN BALL",
+      "instruction": "On a live dribble, keep the ball outside your hip and use your body between the defender and the ball.",
+      "title": "Protect the outside hip"
+    },
+    "comm_screen_call_early": {
+      "cue": "EARLY / LOUD / DIRECTION",
+      "instruction": "Say the screen direction before contact so the defense has time to adjust.",
+      "title": "Call the screen early"
+    },
+    "decision_extra_pass_window": {
+      "cue": "CATCH / CHECK NEXT",
+      "instruction": "After catching an advantage, check the next pass before the defense recovers.",
+      "title": "Find the extra-pass window"
+    },
+    "def_offball_see_player_ball": {
+      "cue": "BOTH IN VIEW",
+      "instruction": "When guarding away from the ball, open your stance enough to track both your matchup and the ball.",
+      "title": "See player and ball"
+    },
+    "def_onball_contain_first_step": {
+      "cue": "CHEST / SLIDE / HANDS BACK",
+      "instruction": "Start chest to the ball and slide to cut off the first driving lane before reaching.",
+      "title": "Contain the first step"
+    },
+    "def_rebound_find_player_first": {
+      "cue": "SHOT / PLAYER / CONTACT / BALL",
+      "instruction": "When the shot goes up, locate your opponent before tracking the ball.",
+      "title": "Find your player first"
+    },
+    "habits_confidence_next_play_reset": {
+      "cue": "NEXT JOB NOW",
+      "instruction": "After a mistake, name the next job and move into it before replaying the last action.",
+      "title": "Reset for the next play"
+    },
+    "habits_prep_one_cue": {
+      "cue": "ONE CUE ONLY",
+      "instruction": "Before a session, choose one cue you can repeat on the floor instead of tracking everything.",
+      "title": "Carry one court focus"
+    },
+    "transition_run_immediately": {
+      "cue": "CHANGE / RUN",
+      "instruction": "When possession changes, react immediately. Sprint into your transition responsibility before becoming a spectator.",
+      "title": "Run first"
+    },
+    "transition_stop_ball_early": {
+      "cue": "BALL FIRST / MATCH BEHIND",
+      "instruction": "On defensive transition, the nearest player slows the ball before it reaches the paint, while teammates match up behind.",
+      "title": "Stop the ball early"
+    }
+  }
+}

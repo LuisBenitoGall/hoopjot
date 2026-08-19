@@ -1,5 +1,5 @@
 {
-  "name": "hoopnote",
+  "name": "hoopjot",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -23,6 +23,7 @@
     "@supabase/supabase-js": "^2.45.6",
     "dexie": "^4.0.10",
     "i18next": "^23.16.8",
+    "lucide-react": "^1.31.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.0",
@@ -44,6 +45,7 @@
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
+    "fake-indexeddb": "^6.2.5",
     "globals": "^15.12.0",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.49",

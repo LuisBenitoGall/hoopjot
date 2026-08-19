@@ -1,0 +1,64 @@
+{
+  "guidelines": {
+    "att_finish_two_foot_balance": {
+      "cue": "DOS PIES / MIRADA FIRME",
+      "instruction": "Cuando haya tráfico cerca, cae a dos pies antes de finalizar para absorber contacto y elegir el ángulo.",
+      "title": "Finaliza con equilibrio a dos pies"
+    },
+    "att_offball_show_target_window": {
+      "cue": "VENTANA / MANOS / MANTÉN",
+      "instruction": "Muévete a una línea de pase donde quien pasa pueda ver tus manos y llegar a tiempo.",
+      "title": "Muestra una ventana de pase"
+    },
+    "att_onball_protect_outside_hip": {
+      "cue": "CUERPO ENTRE BALÓN",
+      "instruction": "En bote vivo, mantén el balón por fuera de la cadera y pon tu cuerpo entre la defensa y el balón.",
+      "title": "Protege la cadera exterior"
+    },
+    "comm_screen_call_early": {
+      "cue": "PRONTO / FUERTE / DIRECCIÓN",
+      "instruction": "Di la dirección del bloqueo antes del contacto para que la defensa tenga tiempo de ajustar.",
+      "title": "Avisa el bloqueo pronto"
+    },
+    "decision_extra_pass_window": {
+      "cue": "RECIBE / MIRA SIGUIENTE",
+      "instruction": "Tras recibir con ventaja, mira el siguiente pase antes de que la defensa recupere.",
+      "title": "Busca la ventana del pase extra"
+    },
+    "def_offball_see_player_ball": {
+      "cue": "AMBOS A LA VISTA",
+      "instruction": "Cuando defiendas lejos del balón, abre la postura lo suficiente para ver a tu marca y el balón.",
+      "title": "Ve a tu marca y el balón"
+    },
+    "def_onball_contain_first_step": {
+      "cue": "PECHO / DESLIZA / MANOS ATRÁS",
+      "instruction": "Empieza con el pecho orientado al balón y desliza para cerrar la primera línea de penetración antes de meter la mano.",
+      "title": "Contén el primer paso"
+    },
+    "def_rebound_find_player_first": {
+      "cue": "TIRO / RIVAL / CONTACTO / BALÓN",
+      "instruction": "Cuando salga el tiro, localiza a tu rival antes de seguir el balón.",
+      "title": "Localiza primero a tu rival"
+    },
+    "habits_confidence_next_play_reset": {
+      "cue": "SIGUIENTE TAREA YA",
+      "instruction": "Después de un error, nombra la siguiente tarea y entra en ella antes de repasar la acción anterior.",
+      "title": "Reinicia para la siguiente jugada"
+    },
+    "habits_prep_one_cue": {
+      "cue": "UNA SOLA SEÑAL",
+      "instruction": "Antes de una sesión, elige una señal que puedas repetir en la cancha en vez de perseguirlo todo.",
+      "title": "Lleva un solo foco a la cancha"
+    },
+    "transition_run_immediately": {
+      "cue": "CAMBIO / CORRE",
+      "instruction": "Cuando cambie la posesión, reacciona inmediatamente. Corre hacia tu responsabilidad de transición antes de quedarte mirando.",
+      "title": "Corre primero"
+    },
+    "transition_stop_ball_early": {
+      "cue": "BALÓN PRIMERO / EMPAREJA DETRÁS",
+      "instruction": "En transición defensiva, quien esté más cerca frena el balón antes de que llegue a la zona, mientras el equipo empareja detrás.",
+      "title": "Frena el balón pronto"
+    }
+  }
+}

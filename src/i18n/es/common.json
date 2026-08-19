@@ -1,15 +1,589 @@
 {
-  "appName": "Hoopnote",
+  "appName": "Hoopjot",
+  "auth": {
+    "emailLabel": "Email",
+    "errors": {
+      "configuration_missing": "Supabase no está configurado para este entorno.",
+      "network_unavailable": "Se necesita conexión para esta acción de autenticación.",
+      "provider_error": "No se pudo completar la autenticación. Revisa los datos e inténtalo de nuevo."
+    },
+    "eyebrow": "Cuenta privada de jugador",
+    "loading": "Comprobando sesión",
+    "messages": {
+      "checkEmail": "Revisa tu email para confirmar la cuenta.",
+      "passwordUpdated": "Contraseña actualizada.",
+      "recoverySent": "Si la dirección está registrada, se enviará un email de recuperación."
+    },
+    "newPasswordLabel": "Nueva contraseña",
+    "onboarding": {
+      "description": "Tu cuenta está lista. El flujo de perfil y objetivos llega en el siguiente hito.",
+      "nextSpec": "Este placeholder soporta la ruta de usuario autenticado sin onboarding sin implementar onboarding.",
+      "title": "El onboarding viene después"
+    },
+    "passwordLabel": "Contraseña",
+    "recovery": {
+      "description": "Envía un email de recuperación para volver a entrar en tu cuenta.",
+      "remembered": "¿Recordaste tu contraseña?",
+      "submit": "Enviar email de recuperación",
+      "title": "Restablecer contraseña"
+    },
+    "signIn": {
+      "createAccount": "Crea una",
+      "description": "Usa tu cuenta de email para restaurar tu sesión de Hoopjot.",
+      "forgotPassword": "¿Olvidaste la contraseña?",
+      "noAccount": "¿Aún no tienes cuenta?",
+      "submit": "Iniciar sesión",
+      "title": "Iniciar sesión"
+    },
+    "signOut": "Cerrar sesión",
+    "signUp": {
+      "description": "El registro por email mantiene tu diario de baloncesto privado y portable.",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "submit": "Crear cuenta",
+      "title": "Crear cuenta"
+    },
+    "submitting": "Procesando...",
+    "updatePassword": {
+      "description": "Elige una nueva contraseña para terminar la recuperación de la cuenta.",
+      "submit": "Actualizar contraseña",
+      "title": "Crea una nueva contraseña"
+    },
+    "welcome": {
+      "description": "Crea una cuenta privada para mantener tus focos, sesiones y reflexiones asociados a ti.",
+      "primaryAction": "Crear cuenta",
+      "secondaryAction": "Iniciar sesión",
+      "title": "Tu libreta de baloncesto empieza aquí"
+    }
+  },
   "backHome": "Volver al inicio",
+  "chips": {
+    "attack": "Ataque",
+    "defense": "Defensa",
+    "transition": "Transición"
+  },
+  "dailyFocus": {
+    "action": "Empezar foco",
+    "category": "Defensa",
+    "cue": "TIRO / RIVAL / CONTACTO / BALÓN",
+    "explanation": "Cuando salga el tiro, localiza tu emparejamiento antes de seguir el balón.",
+    "reason": "Este ejemplo muestra cómo una recomendación futura puede explicarse sin fingir que es un entrenador.",
+    "reasonLabel": "Por qué este foco",
+    "title": "Localiza primero a tu rival"
+  },
+  "designSystem": {
+    "intro": "Una superficie móvil para focos, reflexión rápida, estados vacíos y navegación.",
+    "title": "Listo para las repeticiones de hoy"
+  },
+  "emptyState": {
+    "description": "Después de una sesión, las reflexiones aparecerán aquí para revisarlas rápido.",
+    "title": "Nada registrado todavía"
+  },
+  "errors": {
+    "app": {
+      "action": "Recargar app",
+      "description": "Tus datos locales siguen guardados en este dispositivo. Recarga la app e inténtalo de nuevo.",
+      "title": "Hoopjot necesita recargarse"
+    }
+  },
+  "game": {
+    "backToGame": "Volver a Juego",
+    "catalogVersion": "Catálogo v{{version}}",
+    "categories": {
+      "all": "Todas",
+      "attack": "Ataque",
+      "communication": "Comunicación",
+      "decision_making": "Toma de decisiones",
+      "defense": "Defensa",
+      "habits": "Hábitos",
+      "transition": "Transición"
+    },
+    "categoryFilterLabel": "Categoría",
+    "contexts": {
+      "game": "Juego",
+      "learning": "Aprendizaje",
+      "practice": "Entrenamiento"
+    },
+    "cueLabel": "Señal de cancha",
+    "detailNotFoundDescription": "Esta pauta no está disponible en el catálogo incluido.",
+    "detailNotFoundTitle": "Pauta no encontrada",
+    "emptyDescription": "Ninguna pauta inicial coincide con estos filtros.",
+    "emptyTitle": "No se encontraron pautas",
+    "eyebrow": "Juego",
+    "instructionLabel": "Instrucción",
+    "contextLabel": "Contexto",
+    "levels": {
+      "advanced": "Avanzado",
+      "foundation": "Base",
+      "intermediate": "Intermedio"
+    },
+    "levelLabel": "Nivel",
+    "loading": "Cargando contenido",
+    "metadataLabel": "Detalles de la pauta",
+    "openGuideline": "Abrir pauta",
+    "openGuidelineLabel": "Abrir pauta: {{title}}",
+    "positions": {
+      "all": "Todas las posiciones"
+    },
+    "positionsLabel": "Posiciones",
+    "resultCount_one": "{{count}} pauta",
+    "resultCount_other": "{{count}} pautas",
+    "subcategoryFilterLabel": "Subcategoría",
+    "subcategories": {
+      "all": "Todas las subcategorías",
+      "communication": "Comunicación",
+      "confidence_attention": "Confianza y atención",
+      "decision_making": "Toma de decisiones",
+      "defensive_transition": "Transición defensiva",
+      "finishing": "Finalizaciones",
+      "off_ball": "Sin balón",
+      "offensive_transition": "Transición ofensiva",
+      "on_ball": "Con balón",
+      "preparation": "Preparación",
+      "rebounding": "Rebote"
+    },
+    "title": "Base de conocimiento de baloncesto"
+  },
+  "journal": {
+    "actions": {
+      "back": "Volver al diario",
+      "openDetail": "Abrir detalle",
+      "retry": "Reintentar"
+    },
+    "card": {
+      "focusLabel": "Foco",
+      "reflectionLabel": "Reflexión"
+    },
+    "checkIn": {
+      "none": "No se registró check-in previo para esta sesión.",
+      "title": "Check-in previo"
+    },
+    "detail": {
+      "emptyDescription": "Puede que esta sesión se haya eliminado o no esté disponible en este dispositivo.",
+      "emptyTitle": "Sesión no encontrada"
+    },
+    "empty": {
+      "description": "Inicia una sesión y guarda una reflexión para revisarla aquí.",
+      "title": "Aún no hay sesiones"
+    },
+    "errors": {
+      "detailDescription": "No se pudo cargar el detalle de esta sesión desde este dispositivo.",
+      "detailTitle": "Detalle de sesión no disponible",
+      "loadDescription": "No se pudo cargar tu diario local desde este dispositivo.",
+      "loadTitle": "Diario no disponible"
+    },
+    "eyebrow": "Diario",
+    "filters": {
+      "all": "Todas",
+      "label": "Tipo de sesión"
+    },
+    "focus": {
+      "attached": "Foco vinculado",
+      "none": "Sin foco asociado",
+      "title": "Foco diario"
+    },
+    "intro": "Tus sesiones, focos y reflexiones rápidas en un solo lugar.",
+    "loading": "Cargando diario",
+    "loadingDetail": "Cargando detalle de sesión",
+    "notLogged": "Sin registrar",
+    "openDetailLabel": "Abrir detalle de sesión: {{type}}, {{date}}",
+    "ratingValue": "{{value}} de 5",
+    "reflection": {
+      "focusRating": "Valoración del foco",
+      "none": "No se ha registrado una reflexión para esta sesión.",
+      "title": "Reflexión"
+    },
+    "resultCount_one": "{{count}} sesión",
+    "resultCount_other": "{{count}} sesiones",
+    "status": {
+      "inProgressDescription": "La sesión empezó y queda pendiente la reflexión.",
+      "needsReflection": "Falta reflexión",
+      "needsReflectionDescription": "No se ha guardado una reflexión para esta sesión.",
+      "reflectedDescription": "Hay una reflexión guardada para esta sesión."
+    },
+    "title": "Diario"
+  },
   "language": {
     "en": "English",
     "es": "Español"
   },
   "languageLabel": "Idioma",
+  "nav": {
+    "game": "Juego",
+    "journal": "Diario",
+    "label": "Principal",
+    "profile": "Perfil",
+    "progress": "Progreso",
+    "today": "Hoy"
+  },
+  "offlineBadge": {
+    "needsAttention": "Sync necesita atención",
+    "offline": "Listo sin conexión",
+    "online": "Con conexión",
+    "reconnecting": "Reconectando",
+    "syncing": "Sincronizando"
+  },
+  "sync": {
+    "bootstrap": {
+      "eyebrow": "Sincronización de perfil",
+      "needsAttentionDescription": "Hoopjot aún no pudo cargar tu perfil remoto. Revisa la configuración de Supabase o inténtalo de nuevo antes de repetir el onboarding.",
+      "needsAttentionTitle": "Sincronización de perfil no disponible",
+      "offlineDescription": "Conéctate una vez para que Hoopjot compruebe si tu perfil ya existe antes de empezar de nuevo el onboarding.",
+      "offlineTitle": "Conéctate para restaurar tu perfil",
+      "retry": "Reintentar sync"
+    }
+  },
+  "onboarding": {
+    "actions": {
+      "back": "Atrás",
+      "finish": "Terminar",
+      "finishing": "Terminando...",
+      "next": "Continuar"
+    },
+    "assessment": {
+      "ballHandling": "Manejo de balón",
+      "confidence": "Confianza",
+      "decisionMaking": "Toma de decisiones",
+      "defense": "Defensa",
+      "maxLabel": "Fuerte",
+      "minLabel": "Por trabajar",
+      "shooting": "Tiro",
+      "valueLabel": "{{value}} de 5"
+    },
+    "competitiveLevels": {
+      "academy": "Academia",
+      "club": "Club",
+      "college": "Universidad",
+      "high_school": "Instituto",
+      "other": "Otro",
+      "professional": "Profesional",
+      "recreational": "Recreativo",
+      "semi_pro": "Semiprofesional"
+    },
+    "dominantHands": {
+      "both": "Ambas",
+      "left": "Izquierda",
+      "prefer_not_to_say": "Prefiero no decirlo",
+      "right": "Derecha"
+    },
+    "errors": {
+      "birthYearRequired": "El año de nacimiento es obligatorio.",
+      "competitiveLevelRequired": "El nivel competitivo es obligatorio.",
+      "goalRequired": "Elige al menos un objetivo.",
+      "invalidAge": "Hoopjot es para jugadores de 16 años o más.",
+      "primaryPositionRequired": "La posición principal es obligatoria.",
+      "saveFailed": "No se pudo guardar el onboarding localmente. Inténtalo de nuevo.",
+      "tooManyGoals": "Elige como máximo tres objetivos."
+    },
+    "eyebrow": "Onboarding",
+    "fields": {
+      "alias": "Alias",
+      "birthYear": "Año de nacimiento",
+      "competitiveLevel": "Nivel competitivo",
+      "dominantHand": "Mano dominante",
+      "experienceYears": "Años jugando",
+      "heightCm": "Altura en cm",
+      "physicalNote": "Nota física",
+      "physicalStatus": "Contexto físico",
+      "primaryPosition": "Posición principal",
+      "secondaryPosition": "Posición secundaria",
+      "selectPlaceholder": "Seleccionar",
+      "weeklyGames": "Partidos semanales",
+      "weeklyPractices": "Entrenamientos semanales"
+    },
+    "goalCount": "{{count}} de {{max}} objetivos seleccionados",
+    "goals": {
+      "confidence": "Confianza",
+      "decision_making": "Toma de decisiones",
+      "defense": "Defensa",
+      "finishing": "Finalizaciones",
+      "fundamentals": "Fundamentos",
+      "game_understanding": "Lectura del juego",
+      "rebounding": "Rebote",
+      "rebuild_game_confidence": "Recuperar confianza de juego"
+    },
+    "loading": "Cargando onboarding",
+    "physicalStatuses": {
+      "limited": "Limitado",
+      "none": "Ninguno",
+      "prefer_not_to_say": "Prefiero no decirlo",
+      "recovering": "En recuperación"
+    },
+    "positions": {
+      "center": "Pívot",
+      "point_guard": "Base",
+      "power_forward": "Ala-pívot",
+      "shooting_guard": "Escolta",
+      "small_forward": "Alero"
+    },
+    "progress": "Paso {{current}} de {{total}}",
+    "progressLabel": "Progreso de onboarding",
+    "steps": {
+      "assessment": {
+        "description": "Empieza con valoraciones honestas. Son privadas y fáciles de actualizar después.",
+        "title": "Marca tu punto de partida"
+      },
+      "completion": {
+        "description": "Revisa lo esencial antes de abrir la app principal.",
+        "title": "Listo para empezar"
+      },
+      "experience": {
+        "description": "Añade el contexto de baloncesto que Hoopjot necesita para tu perfil.",
+        "title": "¿Dónde juegas?"
+      },
+      "goals": {
+        "description": "Elige hasta tres prioridades para tu ciclo de mejora.",
+        "title": "Elige tus objetivos"
+      },
+      "locale": {
+        "description": "Elige el idioma que Hoopjot usará para tu perfil y la app.",
+        "title": "Elige tu idioma"
+      },
+      "physical": {
+        "description": "Esto es opcional. Hoopjot nunca da alta médica ni progresión de rehabilitación.",
+        "title": "Añade contexto físico"
+      },
+      "profile": {
+        "description": "El alias y la altura pueden quedar en blanco. El año de nacimiento mantiene Hoopjot adecuado por edad.",
+        "title": "Crea tu perfil de jugador"
+      }
+    },
+    "summary": {
+      "goals": "Objetivos",
+      "level": "Nivel",
+      "locale": "Idioma",
+      "position": "Posición"
+    }
+  },
+  "progress": {
+    "actions": {
+      "generateReview": "Generar revisión semanal",
+      "generatingReview": "Generando...",
+      "retry": "Reintentar",
+      "saveNotes": "Guardar notas",
+      "savingNotes": "Guardando..."
+    },
+    "building": {
+      "description": "Hoopjot está empezando a conectar tu historial de focos, sesiones y reflexiones. Sigue guardando notas breves y las señales se volverán más estables.",
+      "title": "Construyendo patrones iniciales"
+    },
+    "empty": {
+      "description": "Inicia una sesión y guarda una reflexión para que el progreso aparezca aquí desde datos locales estructurados.",
+      "title": "Aún no hay señales de progreso"
+    },
+    "errors": {
+      "loadDescription": "No se pudo cargar tu vista local de progreso desde este dispositivo.",
+      "loadTitle": "Progreso no disponible"
+    },
+    "eyebrow": "Progreso",
+    "focusAreas": {
+      "emptyDescription": "Las áreas de foco comunes aparecerán cuando se creen focos diarios.",
+      "lastFocused": "Último foco {{date}}",
+      "sectionLabel": "Áreas de foco comunes",
+      "title": "Áreas de foco comunes"
+    },
+    "intro": "Señales cualitativas desde tus sesiones, focos y reflexiones locales.",
+    "learningStates": {
+      "building": "Construyendo patrones",
+      "empty": "Sin datos todavía",
+      "ready": "Señales listas"
+    },
+    "loading": "Cargando progreso",
+    "recentSessions": {
+      "emptyDescription": "Tus sesiones recientes aparecerán aquí cuando las registres.",
+      "noFocus": "Sin foco asociado",
+      "noReflection": "Sin reflexión guardada todavía",
+      "reflectionSaved": "Reflexión guardada",
+      "sectionLabel": "Sesiones recientes",
+      "title": "Sesiones recientes"
+    },
+    "signals": {
+      "emptyDescription": "Las señales necesitan reflexiones estructuradas, observaciones o estados de habilidad.",
+      "evidenceLabel": "Basado en datos locales estructurados",
+      "sectionLabel": "Señales de progreso",
+      "title": "Señales"
+    },
+    "skillFallback": "Habilidad {{skillId}}",
+    "summaryLabel": "Resumen de progreso",
+    "title": "Progreso",
+    "trends": {
+      "improving": "Mejorando",
+      "learning": "Aprendiendo",
+      "needs_attention": "Necesita atención",
+      "stable": "Estable"
+    },
+    "weekLabel": "Semana de {{date}}",
+    "weeklyReview": {
+      "description": "La revisión semanal se genera solo desde datos estructurados. Añade tus propias notas sobre qué mejoró y qué trabajar después.",
+      "highlighted": "Lo destacado",
+      "improving": "Qué mejoró",
+      "nextPriority": "Qué mejorar después",
+      "noItems": "Sin señal estructurada todavía",
+      "recurring": "Foco recurrente",
+      "saved": "Guardado localmente",
+      "sectionLabel": "Revisión semanal",
+      "title": "Revisión semanal",
+      "userImprovementLabel": "¿Qué mejoró?",
+      "userImprovementPlaceholder": "Escribe una o dos cosas que se sintieron mejor esta semana.",
+      "userNextWeekLabel": "¿Qué mejorar después?",
+      "userNextWeekPlaceholder": "Elige el siguiente foco útil con tus propias palabras."
+    }
+  },
+  "pwa": {
+    "update": {
+      "action": "Actualizar",
+      "applying": "Actualizando...",
+      "description": "Actualiza cuando quieras pasar a la versión más reciente de la app.",
+      "label": "Actualización de app",
+      "title": "Actualización lista"
+    }
+  },
+  "rating": {
+    "label": "¿Qué tan claro se siente este foco?",
+    "maxLabel": "Muy claro",
+    "minLabel": "Poco claro",
+    "valueLabel": "{{value}} de 5"
+  },
+  "sessions": {
+    "actions": {
+      "complete": "Completar y guardar reflexión",
+      "retry": "Reintentar",
+      "saving": "Guardando...",
+      "start": "Iniciar sesión"
+    },
+    "checkIn": {
+      "bodyLabel": "Sensación corporal",
+      "bodyMax": "Bien",
+      "bodyMin": "Regular",
+      "clear": "Borrar",
+      "confidenceLabel": "Confianza",
+      "confidenceMax": "Estable",
+      "confidenceMin": "Con dudas",
+      "description": "Valoraciones opcionales. Es un check rápido de sensaciones, no un diagnóstico ni un plan de carga.",
+      "energyLabel": "Energía",
+      "energyMax": "Alta",
+      "energyMin": "Baja",
+      "ratingValue": "{{label}} {{value}} de 5",
+      "sectionLabel": "Check-in previo",
+      "title": "Check-in rápido"
+    },
+    "errors": {
+      "loadDescription": "No se pudo cargar el estado local de la sesión en este dispositivo.",
+      "loadTitle": "Sesión no disponible"
+    },
+    "eyebrow": "Sesión",
+    "intro": "Empieza en pocos toques y termina con una valoración obligatoria y notas opcionales.",
+    "loading": "Cargando sesión",
+    "reflection": {
+      "coachFeedbackLabel": "Feedback del entrenador",
+      "coachFeedbackPlaceholder": "¿Algo que dijo un entrenador y conviene recordar?",
+      "noteLabel": "¿Qué pasó?",
+      "notePlaceholder": "Una nota rápida de la sesión.",
+      "ratingLabel": "¿Cómo fue el foco?",
+      "ratingMax": "Fuerte",
+      "ratingMin": "Por trabajar",
+      "ratingValue": "{{value}} de 5",
+      "rememberLabel": "Recordar para la próxima",
+      "rememberPlaceholder": "Una señal breve para la siguiente sesión."
+    },
+    "saved": {
+      "description": "Reflexión guardada con valoración del foco {{rating}} de 5.",
+      "title": "Reflexión guardada"
+    },
+    "sectionLabel": "Sesión y reflexión",
+    "status": {
+      "inProgress": "En curso",
+      "reflectionSaved": "Reflexión guardada"
+    },
+    "title": "Sesión y reflexión",
+    "typeLabel": "Tipo de sesión",
+    "types": {
+      "game": "Partido",
+      "learning": "Aprendizaje",
+      "practice": "Entrenamiento",
+      "recovery": "Recuperación"
+    }
+  },
   "shellDescription": "El enrutado, Tailwind, las pruebas, la i18n y el plugin PWA están conectados sin funciones de producto.",
-  "shellEyebrow": "Base de app",
+  "shellEyebrow": "Hoy",
   "shellStatus": "Base frontend lista.",
   "smokeDescription": "La ruta de humo se renderizó mediante React Router.",
-  "smokeTitle": "Ruta de prueba de humo"
+  "smokeTitle": "Ruta de prueba de humo",
+  "today": {
+    "actions": {
+      "markCompleted": "Completar",
+      "markSkipped": "Omitir",
+      "markViewed": "Marcar visto",
+      "retry": "Reintentar",
+      "saving": "Guardando..."
+    },
+    "errors": {
+      "loadDescription": "No se pudo cargar tu foco local. Inténtalo de nuevo desde este dispositivo.",
+      "loadTitle": "Foco no disponible"
+    },
+    "eyebrow": "Hoy",
+    "focusSectionLabel": "Foco diario",
+    "intro": "Una señal de cancha para la siguiente sesión. Se guarda localmente y queda disponible sin conexión.",
+    "loading": "Cargando el foco de hoy",
+    "noFocus": {
+      "emptyDescription": "No hay una pauta de base disponible para la selección inicial de hoy.",
+      "emptyTitle": "No hay foco disponible",
+      "recoveryDescription": "Las sesiones de recuperación quedan en tu diario, pero Hoopjot no genera recomendaciones MVP de pautas de baloncesto para días de recuperación.",
+      "recoveryTitle": "Hoy no hay foco de baloncesto"
+    },
+    "reasonLabel": "Por qué este foco",
+    "reasons": {
+      "coach_feedback": "Este foco se conecta con una nota estructurada reciente de feedback del entrenador.",
+      "development_path": "Este foco encaja con el siguiente paso del camino de desarrollo actual.",
+      "goal": "Este foco se alinea con uno de tus objetivos activos de baloncesto.",
+      "recent_difficulty": "Este foco responde a una señal estructurada reciente de dificultad.",
+      "rotation": "Este foco mantiene trabajo de base útil en rotación sin repetir demasiado pronto."
+    },
+    "statusLabel": "Estado del foco",
+    "statuses": {
+      "completed": "Completado",
+      "planned": "Planificado",
+      "skipped": "Omitido",
+      "viewed": "Visto"
+    },
+    "title": "Foco de hoy"
+  },
+  "profile": {
+    "actions": {
+      "retry": "Reintentar",
+      "reset": "Restablecer cambios",
+      "save": "Guardar perfil",
+      "saving": "Guardando..."
+    },
+    "empty": {
+      "description": "Completa el onboarding de nuevo en este dispositivo para que Hoopjot pueda reconstruir tu perfil local.",
+      "title": "Perfil no encontrado"
+    },
+    "errors": {
+      "birthYearRequired": "El año de nacimiento es obligatorio.",
+      "competitiveLevelRequired": "El nivel competitivo es obligatorio.",
+      "invalidAge": "Hoopjot es para jugadores de 16 años o más.",
+      "loadDescription": "No se pudo cargar tu perfil desde este dispositivo.",
+      "loadTitle": "Perfil no disponible",
+      "notFound": "No se encontró el perfil en este dispositivo.",
+      "primaryPositionRequired": "La posición principal es obligatoria.",
+      "saveFailed": "No se pudo guardar el perfil localmente. Inténtalo de nuevo."
+    },
+    "eyebrow": "Perfil",
+    "fields": {
+      "email": "Email de la cuenta",
+      "locale": "Idioma de la app"
+    },
+    "intro": "Revisa y actualiza el contexto de jugador que Hoopjot usa para recomendaciones locales y sincronización.",
+    "loading": "Cargando perfil",
+    "notAvailable": "No disponible",
+    "physicalDescription": "Contexto opcional. Hoopjot nunca da alta médica, interpretación del dolor ni progresión de rehabilitación.",
+    "saved": "Guardado localmente",
+    "sections": {
+      "account": "Cuenta",
+      "basketball": "Contexto de baloncesto",
+      "physical": "Contexto físico",
+      "player": "Datos de jugador"
+    },
+    "title": "Perfil"
+  }
 }
-

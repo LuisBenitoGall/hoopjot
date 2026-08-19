@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
-  <title id="title">Hoopnote app icon</title>
-  <rect width="512" height="512" rx="106" fill="#fffaf5" />
-  <path d="M85 155h342M85 256h342M85 357h342" stroke="#17144f" stroke-width="27" stroke-linecap="round" opacity=".16" />
-  <circle cx="256" cy="256" r="144" fill="#ff7a00" />
-  <path d="M256 112v288M112 256h288M155 155c53 48 53 154 0 202M357 155c-53 48-53 154 0 202" stroke="#17144f" stroke-width="21" stroke-linecap="round" opacity=".78" />
-  <path d="M341 101 405 43l-16 80 80-16-64 64" fill="none" stroke="#5634d6" stroke-width="27" stroke-linecap="round" stroke-linejoin="round" />
-</svg>
-

@@ -1,15 +1,589 @@
 {
-  "appName": "Hoopnote",
+  "appName": "Hoopjot",
+  "auth": {
+    "emailLabel": "Email",
+    "errors": {
+      "configuration_missing": "Supabase is not configured for this environment.",
+      "network_unavailable": "A network connection is required for this auth action.",
+      "provider_error": "Authentication could not be completed. Check the details and try again."
+    },
+    "eyebrow": "Private player account",
+    "loading": "Checking session",
+    "messages": {
+      "checkEmail": "Check your email to confirm your account.",
+      "passwordUpdated": "Password updated.",
+      "recoverySent": "Recovery email sent if the address is registered."
+    },
+    "newPasswordLabel": "New password",
+    "onboarding": {
+      "description": "Your account is ready. The profile and goals flow arrives in the next milestone.",
+      "nextSpec": "This placeholder supports the authenticated-but-not-onboarded route without implementing onboarding.",
+      "title": "Onboarding comes next"
+    },
+    "passwordLabel": "Password",
+    "recovery": {
+      "description": "Send a recovery email to regain access to your account.",
+      "remembered": "Remembered your password?",
+      "submit": "Send recovery email",
+      "title": "Reset password"
+    },
+    "signIn": {
+      "createAccount": "Create one",
+      "description": "Use your email account to restore your Hoopjot session.",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "No account yet?",
+      "submit": "Sign in",
+      "title": "Sign in"
+    },
+    "signOut": "Sign out",
+    "signUp": {
+      "description": "Email registration keeps your basketball journal private and portable.",
+      "hasAccount": "Already have an account?",
+      "submit": "Create account",
+      "title": "Create account"
+    },
+    "submitting": "Working...",
+    "updatePassword": {
+      "description": "Choose a new password to finish account recovery.",
+      "submit": "Update password",
+      "title": "Create a new password"
+    },
+    "welcome": {
+      "description": "Create a private account to keep your focus, sessions and reflections tied to you.",
+      "primaryAction": "Create account",
+      "secondaryAction": "Sign in",
+      "title": "Your basketball notebook starts here"
+    }
+  },
   "backHome": "Back home",
+  "chips": {
+    "attack": "Attack",
+    "defense": "Defense",
+    "transition": "Transition"
+  },
+  "dailyFocus": {
+    "action": "Start focus",
+    "category": "Defense",
+    "cue": "SHOT / PLAYER / CONTACT / BALL",
+    "explanation": "When the shot goes up, locate your matchup before tracking the ball.",
+    "reason": "This fixture shows how a future recommendation can explain itself without pretending to be a coach.",
+    "reasonLabel": "Why this focus",
+    "title": "Find your player first"
+  },
+  "designSystem": {
+    "intro": "A mobile-first surface for focus cards, quick reflection, empty states and navigation.",
+    "title": "Ready for today's reps"
+  },
+  "emptyState": {
+    "description": "After a session, reflections will land here for quick review.",
+    "title": "Nothing logged yet"
+  },
+  "errors": {
+    "app": {
+      "action": "Reload app",
+      "description": "Your local data is still stored on this device. Reload the app shell and try again.",
+      "title": "Hoopjot needs a reload"
+    }
+  },
+  "game": {
+    "backToGame": "Back to Game",
+    "catalogVersion": "Catalog v{{version}}",
+    "categories": {
+      "all": "All",
+      "attack": "Attack",
+      "communication": "Communication",
+      "decision_making": "Decision making",
+      "defense": "Defense",
+      "habits": "Habits",
+      "transition": "Transition"
+    },
+    "categoryFilterLabel": "Category",
+    "contexts": {
+      "game": "Game",
+      "learning": "Learning",
+      "practice": "Practice"
+    },
+    "cueLabel": "Court cue",
+    "detailNotFoundDescription": "This guideline is not available in the bundled catalog.",
+    "detailNotFoundTitle": "Guideline not found",
+    "emptyDescription": "No starter guidelines match these filters.",
+    "emptyTitle": "No guidelines found",
+    "eyebrow": "Game",
+    "instructionLabel": "Instruction",
+    "contextLabel": "Context",
+    "levels": {
+      "advanced": "Advanced",
+      "foundation": "Foundation",
+      "intermediate": "Intermediate"
+    },
+    "levelLabel": "Level",
+    "loading": "Loading content",
+    "metadataLabel": "Guideline details",
+    "openGuideline": "Open guideline",
+    "openGuidelineLabel": "Open guideline: {{title}}",
+    "positions": {
+      "all": "All positions"
+    },
+    "positionsLabel": "Positions",
+    "resultCount_one": "{{count}} guideline",
+    "resultCount_other": "{{count}} guidelines",
+    "subcategoryFilterLabel": "Subcategory",
+    "subcategories": {
+      "all": "All subcategories",
+      "communication": "Communication",
+      "confidence_attention": "Confidence and attention",
+      "decision_making": "Decision making",
+      "defensive_transition": "Defensive transition",
+      "finishing": "Finishing",
+      "off_ball": "Off ball",
+      "offensive_transition": "Offensive transition",
+      "on_ball": "On ball",
+      "preparation": "Preparation",
+      "rebounding": "Rebounding"
+    },
+    "title": "Basketball knowledge base"
+  },
+  "journal": {
+    "actions": {
+      "back": "Back to Journal",
+      "openDetail": "Open detail",
+      "retry": "Retry"
+    },
+    "card": {
+      "focusLabel": "Focus",
+      "reflectionLabel": "Reflection"
+    },
+    "checkIn": {
+      "none": "No pre-session check-in was logged for this session.",
+      "title": "Pre-session check-in"
+    },
+    "detail": {
+      "emptyDescription": "This session may have been deleted or is not available on this device.",
+      "emptyTitle": "Session not found"
+    },
+    "empty": {
+      "description": "Start and reflect on a session, then it will appear here for review.",
+      "title": "No sessions yet"
+    },
+    "errors": {
+      "detailDescription": "This session detail could not be loaded from this device.",
+      "detailTitle": "Session detail unavailable",
+      "loadDescription": "Your local journal could not be loaded from this device.",
+      "loadTitle": "Journal unavailable"
+    },
+    "eyebrow": "Journal",
+    "filters": {
+      "all": "All",
+      "label": "Session type"
+    },
+    "focus": {
+      "attached": "Linked focus",
+      "none": "No focus attached",
+      "title": "Daily focus"
+    },
+    "intro": "Your sessions, focuses and quick reflections in one place.",
+    "loading": "Loading journal",
+    "loadingDetail": "Loading session detail",
+    "notLogged": "Not logged",
+    "openDetailLabel": "Open session detail: {{type}}, {{date}}",
+    "ratingValue": "{{value}} of 5",
+    "reflection": {
+      "focusRating": "Focus rating",
+      "none": "No reflection has been logged for this session.",
+      "title": "Reflection"
+    },
+    "resultCount_one": "{{count}} session",
+    "resultCount_other": "{{count}} sessions",
+    "status": {
+      "inProgressDescription": "The session has started and is waiting for a reflection.",
+      "needsReflection": "Reflection missing",
+      "needsReflectionDescription": "No reflection has been saved for this session.",
+      "reflectedDescription": "A reflection is saved for this session."
+    },
+    "title": "Journal"
+  },
   "language": {
     "en": "English",
     "es": "Español"
   },
   "languageLabel": "Language",
+  "nav": {
+    "game": "Game",
+    "journal": "Journal",
+    "label": "Primary",
+    "profile": "Profile",
+    "progress": "Progress",
+    "today": "Today"
+  },
+  "offlineBadge": {
+    "needsAttention": "Sync needs attention",
+    "offline": "Offline ready",
+    "online": "Online",
+    "reconnecting": "Reconnecting",
+    "syncing": "Syncing"
+  },
+  "sync": {
+    "bootstrap": {
+      "eyebrow": "Profile sync",
+      "needsAttentionDescription": "Hoopjot could not load your remote profile yet. Check the Supabase setup or try again before repeating onboarding.",
+      "needsAttentionTitle": "Profile sync unavailable",
+      "offlineDescription": "Connect to the network once so Hoopjot can check whether your profile already exists before starting onboarding again.",
+      "offlineTitle": "Connect to restore your profile",
+      "retry": "Retry sync"
+    }
+  },
+  "onboarding": {
+    "actions": {
+      "back": "Back",
+      "finish": "Finish",
+      "finishing": "Finishing...",
+      "next": "Continue"
+    },
+    "assessment": {
+      "ballHandling": "Ball handling",
+      "confidence": "Confidence",
+      "decisionMaking": "Decision making",
+      "defense": "Defense",
+      "maxLabel": "Strong",
+      "minLabel": "Needs work",
+      "shooting": "Shooting",
+      "valueLabel": "{{value}} of 5"
+    },
+    "competitiveLevels": {
+      "academy": "Academy",
+      "club": "Club",
+      "college": "College",
+      "high_school": "High school",
+      "other": "Other",
+      "professional": "Professional",
+      "recreational": "Recreational",
+      "semi_pro": "Semi-pro"
+    },
+    "dominantHands": {
+      "both": "Both",
+      "left": "Left",
+      "prefer_not_to_say": "Prefer not to say",
+      "right": "Right"
+    },
+    "errors": {
+      "birthYearRequired": "Birth year is required.",
+      "competitiveLevelRequired": "Competitive level is required.",
+      "goalRequired": "Choose at least one goal.",
+      "invalidAge": "Hoopjot is for players 16 and older.",
+      "primaryPositionRequired": "Primary position is required.",
+      "saveFailed": "Onboarding could not be saved locally. Try again.",
+      "tooManyGoals": "Choose no more than three goals."
+    },
+    "eyebrow": "Onboarding",
+    "fields": {
+      "alias": "Alias",
+      "birthYear": "Birth year",
+      "competitiveLevel": "Competitive level",
+      "dominantHand": "Dominant hand",
+      "experienceYears": "Years playing",
+      "heightCm": "Height in cm",
+      "physicalNote": "Physical note",
+      "physicalStatus": "Physical context",
+      "primaryPosition": "Primary position",
+      "secondaryPosition": "Secondary position",
+      "selectPlaceholder": "Select",
+      "weeklyGames": "Weekly games",
+      "weeklyPractices": "Weekly practices"
+    },
+    "goalCount": "{{count}} of {{max}} goals selected",
+    "goals": {
+      "confidence": "Confidence",
+      "decision_making": "Decision making",
+      "defense": "Defense",
+      "finishing": "Finishing",
+      "fundamentals": "Fundamentals",
+      "game_understanding": "Game understanding",
+      "rebounding": "Rebounding",
+      "rebuild_game_confidence": "Rebuild game confidence"
+    },
+    "loading": "Loading onboarding",
+    "physicalStatuses": {
+      "limited": "Limited",
+      "none": "None",
+      "prefer_not_to_say": "Prefer not to say",
+      "recovering": "Recovering"
+    },
+    "positions": {
+      "center": "Center",
+      "point_guard": "Point guard",
+      "power_forward": "Power forward",
+      "shooting_guard": "Shooting guard",
+      "small_forward": "Small forward"
+    },
+    "progress": "Step {{current}} of {{total}}",
+    "progressLabel": "Onboarding progress",
+    "steps": {
+      "assessment": {
+        "description": "Start with honest ratings. They are private and easy to update later.",
+        "title": "Set your baseline"
+      },
+      "completion": {
+        "description": "Review the essentials before Hoopjot opens the main app.",
+        "title": "Ready to start"
+      },
+      "experience": {
+        "description": "Add the basketball context Hoopjot needs for your profile.",
+        "title": "Where do you play?"
+      },
+      "goals": {
+        "description": "Pick up to three priorities for your development loop.",
+        "title": "Choose your goals"
+      },
+      "locale": {
+        "description": "Choose the language Hoopjot should use for your profile and app.",
+        "title": "Pick your language"
+      },
+      "physical": {
+        "description": "This is optional. Hoopjot never gives medical clearance or rehab progression.",
+        "title": "Add physical context"
+      },
+      "profile": {
+        "description": "Alias and height can stay blank. Birth year keeps Hoopjot age-appropriate.",
+        "title": "Create your player profile"
+      }
+    },
+    "summary": {
+      "goals": "Goals",
+      "level": "Level",
+      "locale": "Language",
+      "position": "Position"
+    }
+  },
+  "progress": {
+    "actions": {
+      "generateReview": "Generate weekly review",
+      "generatingReview": "Generating...",
+      "retry": "Retry",
+      "saveNotes": "Save notes",
+      "savingNotes": "Saving..."
+    },
+    "building": {
+      "description": "Hoopjot is starting to connect your focus history, sessions and reflections. Keep logging short notes and the signals will get steadier.",
+      "title": "Early pattern building"
+    },
+    "empty": {
+      "description": "Start and reflect on a session, then progress will appear here from structured local data.",
+      "title": "No progress signals yet"
+    },
+    "errors": {
+      "loadDescription": "Your local progress view could not be loaded from this device.",
+      "loadTitle": "Progress unavailable"
+    },
+    "eyebrow": "Progress",
+    "focusAreas": {
+      "emptyDescription": "Common focus areas appear after daily focuses are created.",
+      "lastFocused": "Last focused {{date}}",
+      "sectionLabel": "Common focus areas",
+      "title": "Common focus areas"
+    },
+    "intro": "Qualitative signals from your local sessions, focuses and reflections.",
+    "learningStates": {
+      "building": "Building patterns",
+      "empty": "No data yet",
+      "ready": "Signals ready"
+    },
+    "loading": "Loading progress",
+    "recentSessions": {
+      "emptyDescription": "Your latest sessions will appear here once logged.",
+      "noFocus": "No focus attached",
+      "noReflection": "No reflection saved yet",
+      "reflectionSaved": "Reflection saved",
+      "sectionLabel": "Recent sessions",
+      "title": "Recent sessions"
+    },
+    "signals": {
+      "emptyDescription": "Signals need structured reflections, observations or skill states.",
+      "evidenceLabel": "Based on structured local data",
+      "sectionLabel": "Progress signals",
+      "title": "Signals"
+    },
+    "skillFallback": "Skill {{skillId}}",
+    "summaryLabel": "Progress summary",
+    "title": "Progress",
+    "trends": {
+      "improving": "Improving",
+      "learning": "Learning",
+      "needs_attention": "Needs attention",
+      "stable": "Stable"
+    },
+    "weekLabel": "Week of {{date}}",
+    "weeklyReview": {
+      "description": "Weekly review is generated from structured data only. Add your own notes for what improved and what to work on next.",
+      "highlighted": "What stood out",
+      "improving": "What improved",
+      "nextPriority": "What to improve next",
+      "noItems": "No structured signal yet",
+      "recurring": "Recurring focus",
+      "saved": "Saved locally",
+      "sectionLabel": "Weekly review",
+      "title": "Weekly review",
+      "userImprovementLabel": "What improved?",
+      "userImprovementPlaceholder": "Write one or two things that felt better this week.",
+      "userNextWeekLabel": "What to improve next?",
+      "userNextWeekPlaceholder": "Choose the next useful focus in your own words."
+    }
+  },
+  "pwa": {
+    "update": {
+      "action": "Refresh",
+      "applying": "Refreshing...",
+      "description": "Refresh when you are ready to switch to the newest app version.",
+      "label": "App update",
+      "title": "Update ready"
+    }
+  },
+  "rating": {
+    "label": "How clear does this focus feel?",
+    "maxLabel": "Very clear",
+    "minLabel": "Not clear",
+    "valueLabel": "{{value}} of 5"
+  },
+  "sessions": {
+    "actions": {
+      "complete": "Complete + save reflection",
+      "retry": "Retry",
+      "saving": "Saving...",
+      "start": "Start session"
+    },
+    "checkIn": {
+      "bodyLabel": "Body feel",
+      "bodyMax": "Ready",
+      "bodyMin": "Heavy",
+      "clear": "Clear",
+      "confidenceLabel": "Confidence",
+      "confidenceMax": "Settled",
+      "confidenceMin": "Unsure",
+      "description": "Optional ratings only. This is a quick body check, not a diagnosis or load plan.",
+      "energyLabel": "Energy",
+      "energyMax": "High",
+      "energyMin": "Low",
+      "ratingValue": "{{label}} {{value}} of 5",
+      "sectionLabel": "Pre-session check-in",
+      "title": "Quick check-in"
+    },
+    "errors": {
+      "loadDescription": "Your local session state could not be loaded from this device.",
+      "loadTitle": "Session unavailable"
+    },
+    "eyebrow": "Session",
+    "intro": "Start in a few taps, then finish with one required rating and optional notes.",
+    "loading": "Loading session",
+    "reflection": {
+      "coachFeedbackLabel": "Coach feedback",
+      "coachFeedbackPlaceholder": "Anything a coach said that should stick?",
+      "noteLabel": "What happened?",
+      "notePlaceholder": "One quick note from the session.",
+      "ratingLabel": "How did the focus go?",
+      "ratingMax": "Strong",
+      "ratingMin": "Needs work",
+      "ratingValue": "{{value}} of 5",
+      "rememberLabel": "Remember next time",
+      "rememberPlaceholder": "A short cue for the next session."
+    },
+    "saved": {
+      "description": "Reflection saved with focus rating {{rating}} of 5.",
+      "title": "Reflection saved"
+    },
+    "sectionLabel": "Session and reflection",
+    "status": {
+      "inProgress": "In progress",
+      "reflectionSaved": "Reflection saved"
+    },
+    "title": "Session and reflection",
+    "typeLabel": "Session type",
+    "types": {
+      "game": "Game",
+      "learning": "Learning",
+      "practice": "Practice",
+      "recovery": "Recovery"
+    }
+  },
   "shellDescription": "Routing, Tailwind, tests, i18n and the PWA plugin are wired in without product features.",
-  "shellEyebrow": "App shell",
+  "shellEyebrow": "Today",
   "shellStatus": "Frontend foundation ready.",
   "smokeDescription": "The smoke route rendered through React Router.",
-  "smokeTitle": "Smoke test route"
+  "smokeTitle": "Smoke test route",
+  "today": {
+    "actions": {
+      "markCompleted": "Complete",
+      "markSkipped": "Skip",
+      "markViewed": "Mark viewed",
+      "retry": "Retry",
+      "saving": "Saving..."
+    },
+    "errors": {
+      "loadDescription": "Your local focus could not be loaded. Try again from this device.",
+      "loadTitle": "Focus unavailable"
+    },
+    "eyebrow": "Today",
+    "focusSectionLabel": "Daily focus",
+    "intro": "One court-side cue for the next session. It saves locally and stays available offline.",
+    "loading": "Loading today's focus",
+    "noFocus": {
+      "emptyDescription": "No foundation guideline is available for today's starter selection.",
+      "emptyTitle": "No focus available",
+      "recoveryDescription": "Recovery sessions stay in your journal, but Hoopjot does not generate MVP basketball guideline recommendations for recovery days.",
+      "recoveryTitle": "No basketball focus today"
+    },
+    "reasonLabel": "Why this focus",
+    "reasons": {
+      "coach_feedback": "This focus connects to a recent structured coach-feedback note.",
+      "development_path": "This focus fits the next step in the current development path.",
+      "goal": "This focus lines up with one of your active basketball goals.",
+      "recent_difficulty": "This focus responds to a recent structured difficulty signal.",
+      "rotation": "This focus keeps useful foundation work rotating without repeating too soon."
+    },
+    "statusLabel": "Focus status",
+    "statuses": {
+      "completed": "Completed",
+      "planned": "Planned",
+      "skipped": "Skipped",
+      "viewed": "Viewed"
+    },
+    "title": "Today's focus"
+  },
+  "profile": {
+    "actions": {
+      "retry": "Retry",
+      "reset": "Reset changes",
+      "save": "Save profile",
+      "saving": "Saving..."
+    },
+    "empty": {
+      "description": "Complete onboarding again on this device so Hoopjot can rebuild your local profile.",
+      "title": "Profile not found"
+    },
+    "errors": {
+      "birthYearRequired": "Birth year is required.",
+      "competitiveLevelRequired": "Competitive level is required.",
+      "invalidAge": "Hoopjot is for players 16 and older.",
+      "loadDescription": "Your profile could not be loaded from this device.",
+      "loadTitle": "Profile unavailable",
+      "notFound": "Profile was not found on this device.",
+      "primaryPositionRequired": "Primary position is required.",
+      "saveFailed": "Profile could not be saved locally. Try again."
+    },
+    "eyebrow": "Profile",
+    "fields": {
+      "email": "Account email",
+      "locale": "App language"
+    },
+    "intro": "Review and update the player context Hoopjot uses for local recommendations and sync.",
+    "loading": "Loading profile",
+    "notAvailable": "Not available",
+    "physicalDescription": "Optional context only. Hoopjot never gives medical clearance, pain interpretation or rehab progression.",
+    "saved": "Saved locally",
+    "sections": {
+      "account": "Account",
+      "basketball": "Basketball context",
+      "physical": "Physical context",
+      "player": "Player details"
+    },
+    "title": "Profile"
+  }
 }
-
