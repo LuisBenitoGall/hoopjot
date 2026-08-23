@@ -1,10 +1,10 @@
 import 'fake-indexeddb/auto';
 
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../../persistence/local';
 import {
   defaultSelfAssessment,
@@ -16,7 +16,7 @@ import type { OnboardingDraft } from '../../domain';
 const userId = '11111111-1111-4111-8111-111111111111';
 const now = new Date('2026-08-18T12:00:00.000Z');
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('OnboardingService', () => {
   afterEach(async () => {
@@ -79,7 +79,7 @@ describe('OnboardingService', () => {
 });
 
 function makeService() {
-  const db = createHoopnoteLocalDb(`hoopnote-onboarding-service-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-onboarding-service-${crypto.randomUUID()}`);
   openedDbs.push(db);
   const repositories = createLocalRepositories(db);
   const ids = [

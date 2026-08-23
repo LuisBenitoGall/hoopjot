@@ -2,11 +2,11 @@
 
 ## Product name
 
-**Hoopnote**
+**Hoopjot**
 
 ## Product statement
 
-Hoopnote helps basketball players improve intentionally by turning each practice or game into a small learning loop:
+Hoopjot helps basketball players improve intentionally by turning each practice or game into a small learning loop:
 
 **focus → play → reflect → learn → adapt**
 
@@ -23,7 +23,7 @@ The product is not a virtual coach. It is a personal basketball journal and atte
 - Developmental, competitive, college or similar structured environment.
 - Has access to real coaches/trainers.
 - Wants to improve tactical understanding, fundamentals and habits.
-- May have a physical limitation or injury context, but Hoopnote never replaces medical professionals.
+- May have a physical limitation or injury context, but Hoopjot never replaces medical professionals.
 
 ## Core concepts
 
@@ -141,7 +141,7 @@ No punitive streak mechanics.
 The application does not improvise technical guidance.
 
 ### 6. Safe boundaries
-Physical-context information can influence wording and warnings, but Hoopnote never decides whether a user should train through pain or progress rehabilitation.
+Physical-context information can influence wording and warnings, but Hoopjot never decides whether a user should train through pain or progress rehabilitation.
 
 ## Success indicators
 

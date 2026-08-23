@@ -33,23 +33,23 @@ export function DailyFocusCard({
   title
 }: DailyFocusCardProps) {
   return (
-    <Card className="relative overflow-hidden border-hoopnote-ink bg-hoopnote-surface p-0">
-      <div className="absolute inset-x-5 top-0 h-1.5 rounded-b-control bg-hoopnote-orange" />
+    <Card className="relative overflow-hidden border-hoopjot-ink bg-hoopjot-surface p-0">
+      <div className="absolute inset-x-5 top-0 h-1.5 rounded-b-control bg-hoopjot-orange" />
       <div className="space-y-5 p-5 pt-7">
         <Chip tone={categoryTone}>{categoryLabel}</Chip>
 
         <div className="space-y-3">
-          <h2 className="text-[2rem] font-black leading-none text-hoopnote-ink">{title}</h2>
-          <p className="text-base leading-7 text-hoopnote-muted">{explanation}</p>
+          <h2 className="text-[2rem] font-black leading-none text-hoopjot-ink">{title}</h2>
+          <p className="text-base leading-7 text-hoopjot-muted">{explanation}</p>
         </div>
 
-        <div className="rounded-card border-2 border-dashed border-hoopnote-purple/40 bg-hoopnote-purple/10 p-4">
-          <p className="text-xl font-black leading-tight text-hoopnote-ink">{cue}</p>
+        <div className="rounded-card border-2 border-dashed border-hoopjot-purple/40 bg-hoopjot-purple/10 p-4">
+          <p className="text-xl font-black leading-tight text-hoopjot-ink">{cue}</p>
         </div>
 
-        <div className="border-l-4 border-hoopnote-blue pl-4">
-          <p className="text-sm font-black text-hoopnote-ink">{reasonLabel}</p>
-          <p className="mt-1 text-sm leading-6 text-hoopnote-muted">{reason}</p>
+        <div className="border-l-4 border-hoopjot-blue pl-4">
+          <p className="text-sm font-black text-hoopjot-ink">{reasonLabel}</p>
+          <p className="mt-1 text-sm leading-6 text-hoopjot-muted">{reason}</p>
         </div>
 
         <Button

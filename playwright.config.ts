@@ -11,7 +11,7 @@ export default defineConfig({
   },
   webServer: {
     command:
-      'cmd /c "set VITE_ENABLE_E2E_AUTH=true&& set VITE_SUPABASE_URL=https://hoopnote-e2e.supabase.co&& set VITE_SUPABASE_ANON_KEY=hoopnote-e2e-anon-key&& pnpm build && pnpm preview --host 127.0.0.1 --port 4173"',
+      'cmd /c "set VITE_ENABLE_E2E_AUTH=true&& set VITE_SUPABASE_URL=https://hoopjot-e2e.supabase.co&& set VITE_SUPABASE_ANON_KEY=hoopjot-e2e-anon-key&& pnpm build && pnpm preview --host 127.0.0.1 --port 4173"',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000

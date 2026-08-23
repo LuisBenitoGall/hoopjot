@@ -133,9 +133,9 @@ export function TodayRoute({ service: injectedService }: TodayRouteProps) {
     <AppShell activeItemId="today">
       <div className="space-y-5 pb-3">
         <section className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopnote-purple">{t('today.eyebrow')}</p>
+          <p className="text-sm font-bold text-hoopjot-purple">{t('today.eyebrow')}</p>
           <h1 className="text-4xl font-black leading-none">{t('today.title')}</h1>
-          <p className="text-base leading-7 text-hoopnote-muted">{t('today.intro')}</p>
+          <p className="text-base leading-7 text-hoopjot-muted">{t('today.intro')}</p>
         </section>
 
         {routeState.status === 'loading' ? (
@@ -252,7 +252,7 @@ function StatusControls({
 
   return (
     <section className="space-y-3" aria-label={t('today.statusLabel')}>
-      <p className="text-sm font-black text-hoopnote-ink">{t('today.statusLabel')}</p>
+      <p className="text-sm font-black text-hoopjot-ink">{t('today.statusLabel')}</p>
       <div className="grid gap-2 sm:grid-cols-3">
         {statusActions.map((action) => {
           const Icon = action.icon;

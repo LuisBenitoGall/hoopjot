@@ -6,7 +6,7 @@ import type {
   RemoteUserData
 } from './types';
 
-const storageKey = 'hoopnote:e2e-remote-data';
+const storageKey = 'hoopjot:e2e-remote-data';
 
 const emptyRemoteUserData: RemoteUserData = {
   checkIns: [],
@@ -50,7 +50,7 @@ export function shouldUseE2ERemoteSyncAdapter(): boolean {
   return (
     import.meta.env.VITE_ENABLE_E2E_AUTH === 'true' &&
     typeof globalThis.sessionStorage !== 'undefined' &&
-    globalThis.sessionStorage.getItem('hoopnote:e2e-remote-sync') === '1'
+    globalThis.sessionStorage.getItem('hoopjot:e2e-remote-sync') === '1'
   );
 }
 

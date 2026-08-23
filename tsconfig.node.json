@@ -11,6 +11,13 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["eslint.config.js", "playwright.config.ts", "postcss.config.js", "tailwind.config.ts", "vite.config.ts", "vitest.config.ts"]
+  "include": [
+    "eslint.config.js",
+    "playwright.config.ts",
+    "playwright.remote.config.ts",
+    "postcss.config.js",
+    "tailwind.config.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ]
 }
-

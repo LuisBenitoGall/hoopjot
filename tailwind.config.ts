@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        hoopnote: {
+        hoopjot: {
           orange: '#ff7a00',
           purple: '#5634d6',
           blue: '#1769e0',

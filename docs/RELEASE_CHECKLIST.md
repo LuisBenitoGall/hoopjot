@@ -14,6 +14,15 @@ pnpm test:e2e
 
 All commands must pass. Investigate warnings that affect release risk, especially service worker, security, accessibility and chunk/runtime warnings.
 
+For deployed-environment validation, run the separate remote smoke after setting local/CI secrets:
+
+```powershell
+$env:PLAYWRIGHT_BASE_URL="https://hoopjot.vercel.app"
+$env:E2E_EMAIL="..."
+$env:E2E_PASSWORD="..."
+pnpm test:e2e:remote
+```
+
 ## Manual QA
 
 - Installability prompt or browser install path is available after production load.

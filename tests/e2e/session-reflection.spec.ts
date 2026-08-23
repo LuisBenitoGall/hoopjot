@@ -4,12 +4,12 @@ test('records a session and rating-only reflection locally while offline', async
   context,
   page
 }, testInfo) => {
-  const dbName = `hoopnote-e2e-session-${testInfo.workerIndex}-${Date.now()}`;
+  const dbName = `hoopjot-e2e-session-${testInfo.workerIndex}-${Date.now()}`;
 
   await page.addInitScript((name) => {
-    window.sessionStorage.setItem('hoopnote:e2e-auth', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-onboarded', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
+    window.sessionStorage.setItem('hoopjot:e2e-auth', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-onboarded', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
   }, dbName);
 
   await page.goto('/app');

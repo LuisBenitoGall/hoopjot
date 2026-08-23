@@ -19,6 +19,19 @@ test('redirects unauthenticated app access to sign in', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Sign in' })).toBeVisible();
 });
 
+test('renders public legal pages and cookie settings', async ({ page }) => {
+  await page.goto('/legal/privacy');
+
+  await expect(page.getByRole('heading', { name: 'Privacy policy' })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: 'Legal documents' })).toBeVisible();
+
+  await page.goto('/legal/cookies');
+
+  await expect(page.getByRole('heading', { name: 'Cookie policy' })).toBeVisible();
+  await page.getByRole('article').getByRole('button', { name: 'Manage cookies' }).click();
+  await expect(page.getByRole('dialog', { name: 'Cookie preferences' })).toBeVisible();
+});
+
 for (const width of [360, 430]) {
   test(`auth screens have no horizontal overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 820 });

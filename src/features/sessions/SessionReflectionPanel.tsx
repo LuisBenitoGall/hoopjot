@@ -151,9 +151,9 @@ export function SessionReflectionPanel({ service, userId }: SessionReflectionPan
   return (
     <section className="space-y-4" aria-label={t('sessions.sectionLabel')}>
       <div className="space-y-2">
-        <p className="text-sm font-bold text-hoopnote-purple">{t('sessions.eyebrow')}</p>
+        <p className="text-sm font-bold text-hoopjot-purple">{t('sessions.eyebrow')}</p>
         <h2 className="text-2xl font-black leading-tight">{t('sessions.title')}</h2>
-        <p className="text-sm leading-6 text-hoopnote-muted">{t('sessions.intro')}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{t('sessions.intro')}</p>
       </div>
 
       {panelState.status === 'loading' ? (
@@ -241,7 +241,7 @@ function StartSessionForm({
   return (
     <Card className="space-y-5">
       <fieldset className="space-y-3">
-        <legend className="text-sm font-black text-hoopnote-ink">
+        <legend className="text-sm font-black text-hoopjot-ink">
           {t('sessions.typeLabel')}
         </legend>
         <div className="grid grid-cols-2 gap-2">
@@ -254,10 +254,10 @@ function StartSessionForm({
                 aria-pressed={selected}
                 className={cx(
                   'flex min-h-12 items-center justify-center gap-2 rounded-control border-2 px-3 text-sm font-black outline-none motion-safe:transition',
-                  'focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30',
+                  'focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30',
                   selected
-                    ? 'border-hoopnote-ink bg-hoopnote-ink text-white shadow-control'
-                    : 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink hover:border-hoopnote-purple',
+                    ? 'border-hoopjot-ink bg-hoopjot-ink text-white shadow-control'
+                    : 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink hover:border-hoopjot-purple',
                 )}
                 key={option.type}
                 onClick={() => onSelectedTypeChange(option.type)}
@@ -273,10 +273,10 @@ function StartSessionForm({
 
       <section className="space-y-4" aria-label={t('sessions.checkIn.sectionLabel')}>
         <div>
-          <h3 className="text-sm font-black text-hoopnote-ink">
+          <h3 className="text-sm font-black text-hoopjot-ink">
             {t('sessions.checkIn.title')}
           </h3>
-          <p className="mt-1 text-sm leading-6 text-hoopnote-muted">
+          <p className="mt-1 text-sm leading-6 text-hoopjot-muted">
             {t('sessions.checkIn.description')}
           </p>
         </div>
@@ -422,7 +422,7 @@ function SavedSessionSummary({
       </div>
       <div>
         <h3 className="text-lg font-black">{t('sessions.saved.title')}</h3>
-        <p className="mt-1 text-sm leading-6 text-hoopnote-muted">
+        <p className="mt-1 text-sm leading-6 text-hoopjot-muted">
           {t('sessions.saved.description', {
             rating: sessionState.reflection.focusRating
           })}
@@ -451,9 +451,9 @@ function OptionalRatingControl({
 
   return (
     <fieldset className="space-y-2">
-      <legend className="text-sm font-bold text-hoopnote-ink">{label}</legend>
+      <legend className="text-sm font-bold text-hoopjot-ink">{label}</legend>
       <button
-        className="min-h-9 rounded-control px-3 text-xs font-black text-hoopnote-muted outline-none hover:bg-hoopnote-ink/8 focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+        className="min-h-9 rounded-control px-3 text-xs font-black text-hoopjot-muted outline-none hover:bg-hoopjot-ink/8 focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
         onClick={() => onChange(undefined)}
         type="button"
       >
@@ -477,10 +477,10 @@ function OptionalRatingControl({
               <span
                 className={cx(
                   'flex min-h-10 min-w-9 items-center justify-center rounded-control border text-xs font-black outline-none motion-safe:transition',
-                  'peer-focus-visible:ring-4 peer-focus-visible:ring-hoopnote-blue/30',
+                  'peer-focus-visible:ring-4 peer-focus-visible:ring-hoopjot-blue/30',
                   selected
-                    ? 'border-hoopnote-ink bg-hoopnote-ink text-white shadow-control'
-                    : 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink hover:border-hoopnote-blue',
+                    ? 'border-hoopjot-ink bg-hoopjot-ink text-white shadow-control'
+                    : 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink hover:border-hoopjot-blue',
                 )}
               >
                 {rating}
@@ -489,7 +489,7 @@ function OptionalRatingControl({
           );
         })}
       </div>
-      <div className="flex justify-between gap-4 text-xs font-bold text-hoopnote-muted">
+      <div className="flex justify-between gap-4 text-xs font-bold text-hoopjot-muted">
         <span>{minLabel}</span>
         <span className="text-right">{maxLabel}</span>
       </div>
@@ -512,9 +512,9 @@ function TextAreaField({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-bold text-hoopnote-ink">{label}</span>
+      <span className="text-sm font-bold text-hoopjot-ink">{label}</span>
       <textarea
-        className="min-h-20 w-full resize-y rounded-card border-2 border-hoopnote-line bg-hoopnote-surface px-4 py-3 text-sm leading-6 text-hoopnote-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+        className="min-h-20 w-full resize-y rounded-card border-2 border-hoopjot-line bg-hoopjot-surface px-4 py-3 text-sm leading-6 text-hoopjot-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
         maxLength={maxLength}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}

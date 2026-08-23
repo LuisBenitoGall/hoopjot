@@ -165,9 +165,9 @@ export function ProfileRoute({ service: injectedService }: ProfileRouteProps) {
     <AppShell activeItemId="profile">
       <div className="space-y-5 pb-3">
         <section className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopnote-purple">{t('profile.eyebrow')}</p>
+          <p className="text-sm font-bold text-hoopjot-purple">{t('profile.eyebrow')}</p>
           <h1 className="text-3xl font-black leading-tight">{t('profile.title')}</h1>
-          <p className="text-sm leading-6 text-hoopnote-muted">{t('profile.intro')}</p>
+          <p className="text-sm leading-6 text-hoopjot-muted">{t('profile.intro')}</p>
         </section>
 
         {routeState.status === 'loading' ? (
@@ -267,7 +267,7 @@ function ProfileForm({
     >
       {errorKey ? (
         <p
-          className="rounded-card border border-hoopnote-danger/40 bg-hoopnote-danger/10 px-4 py-3 text-sm font-bold"
+          className="rounded-card border border-hoopjot-danger/40 bg-hoopjot-danger/10 px-4 py-3 text-sm font-bold"
           role="alert"
         >
           {t(errorKey)}
@@ -276,7 +276,7 @@ function ProfileForm({
 
       {saveState === 'saved' ? (
         <p
-          className="rounded-card border border-hoopnote-success/40 bg-hoopnote-success/10 px-4 py-3 text-sm font-bold"
+          className="rounded-card border border-hoopjot-success/40 bg-hoopjot-success/10 px-4 py-3 text-sm font-bold"
           role="status"
         >
           {t('profile.saved')}
@@ -404,7 +404,7 @@ function ProfileForm({
 
       <Card className="space-y-4">
         <SectionHeading title={t('profile.sections.physical')} />
-        <p className="text-sm leading-6 text-hoopnote-muted">{t('profile.physicalDescription')}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{t('profile.physicalDescription')}</p>
         <SelectField
           label={t('onboarding.fields.physicalStatus')}
           name="physicalStatus"
@@ -418,11 +418,11 @@ function ProfileForm({
           value={draft.physicalContext?.status ?? ''}
         />
         <label className="block space-y-2">
-          <span className="text-sm font-bold text-hoopnote-ink">
+          <span className="text-sm font-bold text-hoopjot-ink">
             {t('onboarding.fields.physicalNote')}
           </span>
           <textarea
-            className="min-h-24 w-full resize-y rounded-card border-2 border-hoopnote-line bg-white px-4 py-3 text-sm leading-6 text-hoopnote-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30 disabled:opacity-60"
+            className="min-h-24 w-full resize-y rounded-card border-2 border-hoopjot-line bg-white px-4 py-3 text-sm leading-6 text-hoopjot-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30 disabled:opacity-60"
             disabled={!draft.physicalContext?.status}
             maxLength={500}
             name="physicalNote"
@@ -461,9 +461,9 @@ function SectionHeading({ title }: { title: string }) {
 
 function ReadOnlyField({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-card border border-hoopnote-line bg-white px-4 py-3">
-      <p className="text-xs font-bold text-hoopnote-muted">{label}</p>
-      <p className="mt-1 break-words text-sm font-black text-hoopnote-ink">{value}</p>
+    <div className="rounded-card border border-hoopjot-line bg-white px-4 py-3">
+      <p className="text-xs font-bold text-hoopjot-muted">{label}</p>
+      <p className="mt-1 break-words text-sm font-black text-hoopjot-ink">{value}</p>
     </div>
   );
 }
@@ -479,9 +479,9 @@ interface TextFieldProps {
 function TextField({ label, maxLength, name, onChange, value }: TextFieldProps) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-bold text-hoopnote-ink">{label}</span>
+      <span className="text-sm font-bold text-hoopjot-ink">{label}</span>
       <input
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold text-hoopnote-ink outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold text-hoopjot-ink outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         maxLength={maxLength}
         name={name}
         onChange={(event) => onChange(event.target.value)}
@@ -513,9 +513,9 @@ function NumberField({
 }: NumberFieldProps) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-bold text-hoopnote-ink">{label}</span>
+      <span className="text-sm font-bold text-hoopjot-ink">{label}</span>
       <input
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold text-hoopnote-ink outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold text-hoopjot-ink outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         max={max}
         min={min}
         name={name}
@@ -549,9 +549,9 @@ function SelectField({
 
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-bold text-hoopnote-ink">{label}</span>
+      <span className="text-sm font-bold text-hoopjot-ink">{label}</span>
       <select
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold text-hoopnote-ink outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold text-hoopjot-ink outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         name={name}
         onChange={(event: ChangeEvent<HTMLSelectElement>) => onChange(event.target.value)}
         required={required}

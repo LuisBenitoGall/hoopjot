@@ -3,6 +3,47 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return undefined;
+          }
+
+          if (id.includes('@supabase')) {
+            return 'supabase';
+          }
+
+          if (id.includes('dexie')) {
+            return 'dexie';
+          }
+
+          if (id.includes('i18next') || id.includes('react-i18next')) {
+            return 'i18n';
+          }
+
+          if (id.includes('react-router')) {
+            return 'router';
+          }
+
+          if (id.includes('react') || id.includes('scheduler')) {
+            return 'react';
+          }
+
+          if (id.includes('lucide-react')) {
+            return 'icons';
+          }
+
+          if (id.includes('zod')) {
+            return 'validation-vendor';
+          }
+
+          return 'vendor';
+        }
+      }
+    }
+  },
   plugins: [
     react(),
     VitePWA({

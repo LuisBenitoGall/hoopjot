@@ -234,22 +234,22 @@ export function OnboardingRoute() {
     <OnboardingFrame signOut={signOut}>
       <section className="space-y-5">
         <div className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopnote-purple">{t('onboarding.eyebrow')}</p>
+          <p className="text-sm font-bold text-hoopjot-purple">{t('onboarding.eyebrow')}</p>
           <h1 className="text-3xl font-black leading-tight">
             {t(`onboarding.steps.${draft.currentStep}.title`)}
           </h1>
-          <p className="text-base leading-7 text-hoopnote-muted">
+          <p className="text-base leading-7 text-hoopjot-muted">
             {t(`onboarding.steps.${draft.currentStep}.description`)}
           </p>
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between gap-3 text-xs font-bold text-hoopnote-muted">
+          <div className="flex items-center justify-between gap-3 text-xs font-bold text-hoopjot-muted">
             <span>{t('onboarding.progress', { current: currentStepNumber, total: onboardingSteps.length })}</span>
             <span>{progressPercentage}%</span>
           </div>
           <div
-            className="h-2 overflow-hidden rounded-full bg-hoopnote-line"
+            className="h-2 overflow-hidden rounded-full bg-hoopjot-line"
             aria-label={t('onboarding.progressLabel')}
             aria-valuemax={onboardingSteps.length}
             aria-valuemin={1}
@@ -257,7 +257,7 @@ export function OnboardingRoute() {
             role="progressbar"
           >
             <div
-              className="h-full rounded-full bg-hoopnote-orange"
+              className="h-full rounded-full bg-hoopjot-orange"
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
@@ -265,7 +265,7 @@ export function OnboardingRoute() {
 
         <Card className="space-y-5">
           {errorKey ? (
-            <p className="rounded-card border border-hoopnote-danger/40 bg-hoopnote-danger/10 px-4 py-3 text-sm font-bold">
+            <p className="rounded-card border border-hoopjot-danger/40 bg-hoopjot-danger/10 px-4 py-3 text-sm font-bold">
               {t(errorKey)}
             </p>
           ) : null}
@@ -316,7 +316,7 @@ function OnboardingFrame({
   const { t } = useTranslation('common');
 
   return (
-    <main className="court-background min-h-screen text-hoopnote-ink">
+    <main className="court-background min-h-screen text-hoopjot-ink">
       <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col px-5 py-6">
         <header className="flex items-center justify-between gap-3">
           <BrandLogo label={t('appName')} />
@@ -382,8 +382,8 @@ function LocaleStep({
           className={cx(
             'min-h-14 rounded-control border-2 px-4 text-left text-base font-black motion-safe:transition',
             draft.locale === locale
-              ? 'border-hoopnote-ink bg-hoopnote-ink text-white shadow-control'
-              : 'border-hoopnote-line bg-white hover:border-hoopnote-blue',
+              ? 'border-hoopjot-ink bg-hoopjot-ink text-white shadow-control'
+              : 'border-hoopjot-line bg-white hover:border-hoopjot-blue',
           )}
           key={locale}
           onClick={() => changeLocale(locale)}
@@ -548,14 +548,14 @@ function GoalsStep({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm font-bold text-hoopnote-muted">
+      <p className="text-sm font-bold text-hoopjot-muted">
         {t('onboarding.goalCount', {
           count: draft.goalTypes.length,
           max: MAX_ACTIVE_GOALS
         })}
       </p>
       {limitReached ? (
-        <p className="rounded-card border border-hoopnote-warning/50 bg-hoopnote-warning/10 px-4 py-3 text-sm font-bold">
+        <p className="rounded-card border border-hoopjot-warning/50 bg-hoopjot-warning/10 px-4 py-3 text-sm font-bold">
           {t('onboarding.errors.tooManyGoals')}
         </p>
       ) : null}
@@ -569,8 +569,8 @@ function GoalsStep({
               className={cx(
                 'min-h-12 rounded-control border-2 px-4 text-left text-sm font-black motion-safe:transition',
                 selected
-                  ? 'border-hoopnote-ink bg-hoopnote-ink text-white shadow-control'
-                  : 'border-hoopnote-line bg-white hover:border-hoopnote-blue',
+                  ? 'border-hoopjot-ink bg-hoopjot-ink text-white shadow-control'
+                  : 'border-hoopjot-line bg-white hover:border-hoopjot-blue',
               )}
               key={goalType}
               onClick={() => toggleGoal(goalType)}
@@ -662,7 +662,7 @@ function PhysicalStep({
       <label className="block space-y-2">
         <span className="text-sm font-bold">{t('onboarding.fields.physicalNote')}</span>
         <textarea
-          className="min-h-28 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 py-3 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+          className="min-h-28 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 py-3 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
           disabled={!draft.physicalContext?.status}
           maxLength={500}
           name="physicalNote"
@@ -704,8 +704,8 @@ function CompletionStep({ draft }: { draft: OnboardingDraft }) {
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-card border border-hoopnote-line bg-white px-4 py-3">
-      <dt className="text-xs font-bold text-hoopnote-muted">{label}</dt>
+    <div className="rounded-card border border-hoopjot-line bg-white px-4 py-3">
+      <dt className="text-xs font-bold text-hoopjot-muted">{label}</dt>
       <dd className="mt-1 font-black">{value}</dd>
     </div>
   );
@@ -723,7 +723,7 @@ function TextField({ label, name, onChange, value }: TextFieldProps) {
     <label className="block space-y-2">
       <span className="text-sm font-bold">{label}</span>
       <input
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         name={name}
         onChange={(event) => onChange(event.target.value)}
         type="text"
@@ -748,7 +748,7 @@ function NumberField({ label, max, min, name, onChange, required = false, value 
     <label className="block space-y-2">
       <span className="text-sm font-bold">{label}</span>
       <input
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         max={max}
         min={min}
         name={name}
@@ -777,7 +777,7 @@ function SelectField({ label, name, onChange, options, required = false, value }
     <label className="block space-y-2">
       <span className="text-sm font-bold">{label}</span>
       <select
-        className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+        className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
         name={name}
         onChange={(event: ChangeEvent<HTMLSelectElement>) => onChange(event.target.value)}
         required={required}

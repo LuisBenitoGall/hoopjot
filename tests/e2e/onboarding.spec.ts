@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 
 test('completes onboarding locally and unlocks app after reload', async ({ page }, testInfo) => {
-  const dbName = `hoopnote-e2e-onboarding-${testInfo.workerIndex}-${Date.now()}`;
+  const dbName = `hoopjot-e2e-onboarding-${testInfo.workerIndex}-${Date.now()}`;
 
   await page.addInitScript((name) => {
-    window.sessionStorage.setItem('hoopnote:e2e-auth', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
+    window.sessionStorage.setItem('hoopjot:e2e-auth', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
   }, dbName);
 
   await page.goto('/onboarding');
@@ -58,15 +58,15 @@ test('restores a remote completed profile before asking for onboarding again', a
 }, testInfo) => {
   const userId = '11111111-1111-4111-8111-111111111111';
   const timestamp = '2026-08-18T00:00:00.000Z';
-  const dbName = `hoopnote-e2e-remote-onboarding-${testInfo.workerIndex}-${Date.now()}`;
+  const dbName = `hoopjot-e2e-remote-onboarding-${testInfo.workerIndex}-${Date.now()}`;
 
   await page.addInitScript(
     ({ name, now, remoteUserId }) => {
-      window.sessionStorage.setItem('hoopnote:e2e-auth', '1');
-      window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
-      window.sessionStorage.setItem('hoopnote:e2e-remote-sync', '1');
+      window.sessionStorage.setItem('hoopjot:e2e-auth', '1');
+      window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
+      window.sessionStorage.setItem('hoopjot:e2e-remote-sync', '1');
       window.sessionStorage.setItem(
-        'hoopnote:e2e-remote-data',
+        'hoopjot:e2e-remote-data',
         JSON.stringify({
           checkIns: [],
           dailyFocuses: [],

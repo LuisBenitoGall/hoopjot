@@ -2,7 +2,7 @@
 
 ## Principle
 
-Hoopnote is **local-first**, not merely "offline-capable".
+Hoopjot is **local-first**, not merely "offline-capable".
 
 User interactions write to IndexedDB first and update the UI immediately.
 

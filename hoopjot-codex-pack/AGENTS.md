@@ -1,6 +1,6 @@
-# Hoopnote repository instructions
+# Hoopjot repository instructions
 
-Hoopnote is an offline-first basketball development PWA.
+Hoopjot is an offline-first basketball development PWA.
 
 ## Before coding
 

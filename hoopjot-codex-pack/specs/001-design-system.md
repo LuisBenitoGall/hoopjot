@@ -2,13 +2,13 @@
 
 ## Goal
 
-Implement Hoopnote's visual foundation and reusable mobile-first components.
+Implement Hoopjot's visual foundation and reusable mobile-first components.
 
 ## Read first
 
 - `docs/DESIGN_SYSTEM.md`
 - `docs/PRODUCT.md`
-- `assets/hoopnote-brand-board.png`
+- `assets/hoopjot-brand-board.png`
 
 ## Deliverables
 

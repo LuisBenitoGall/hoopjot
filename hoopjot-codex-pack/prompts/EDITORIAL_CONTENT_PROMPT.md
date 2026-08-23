@@ -1,9 +1,9 @@
 # Prompt for basketball content work
 
-Use this only when explicitly working on the Hoopnote curated basketball catalog.
+Use this only when explicitly working on the Hoopjot curated basketball catalog.
 
 ```text
-We are editing Hoopnote's curated basketball knowledge base.
+We are editing Hoopjot's curated basketball knowledge base.
 
 Read:
 - docs/PRODUCT.md

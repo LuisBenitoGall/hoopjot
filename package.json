@@ -16,6 +16,7 @@
     "test": "vitest run --config vitest.config.ts",
     "test:watch": "vitest --config vitest.config.ts",
     "test:e2e": "playwright test",
+    "test:e2e:remote": "playwright test --config=playwright.remote.config.ts",
     "format": "prettier --check .",
     "format:write": "prettier --write ."
   },

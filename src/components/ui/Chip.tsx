@@ -10,12 +10,12 @@ interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const toneClasses: Record<ChipTone, string> = {
-  attack: 'border-hoopnote-orange bg-hoopnote-orange/12 text-hoopnote-ink',
-  defense: 'border-hoopnote-purple bg-hoopnote-purple/12 text-hoopnote-ink',
-  transition: 'border-hoopnote-blue bg-hoopnote-blue/12 text-hoopnote-ink',
-  progress: 'border-hoopnote-success bg-hoopnote-success/12 text-hoopnote-ink',
-  reflection: 'border-hoopnote-ink bg-hoopnote-ink/8 text-hoopnote-ink',
-  neutral: 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-muted'
+  attack: 'border-hoopjot-orange bg-hoopjot-orange/12 text-hoopjot-ink',
+  defense: 'border-hoopjot-purple bg-hoopjot-purple/12 text-hoopjot-ink',
+  transition: 'border-hoopjot-blue bg-hoopjot-blue/12 text-hoopjot-ink',
+  progress: 'border-hoopjot-success bg-hoopjot-success/12 text-hoopjot-ink',
+  reflection: 'border-hoopjot-ink bg-hoopjot-ink/8 text-hoopjot-ink',
+  neutral: 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-muted'
 };
 
 export function Chip({ children, className, icon, tone = 'neutral', ...props }: ChipProps) {

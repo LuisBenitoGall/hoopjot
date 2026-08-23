@@ -13,14 +13,14 @@ export function WelcomeRoute() {
     <AuthScreenLayout description={t('auth.welcome.description')} title={t('auth.welcome.title')}>
       <div className="space-y-4">
         <Link
-          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control bg-hoopnote-orange px-5 py-3 text-sm font-bold text-hoopnote-ink shadow-control motion-safe:transition hover:-translate-y-0.5 hover:bg-[#ff8b1f]"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control bg-hoopjot-orange px-5 py-3 text-sm font-bold text-hoopjot-ink shadow-control motion-safe:transition hover:-translate-y-0.5 hover:bg-[#ff8b1f]"
           to="/sign-up"
         >
           {t('auth.welcome.primaryAction')}
           <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </Link>
         <Link
-          className="inline-flex min-h-12 w-full items-center justify-center rounded-control border-2 border-hoopnote-ink bg-hoopnote-surface px-5 py-3 text-sm font-bold text-hoopnote-ink motion-safe:transition hover:-translate-y-0.5 hover:bg-hoopnote-ink hover:text-white"
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-control border-2 border-hoopjot-ink bg-hoopjot-surface px-5 py-3 text-sm font-bold text-hoopjot-ink motion-safe:transition hover:-translate-y-0.5 hover:bg-hoopjot-ink hover:text-white"
           to="/sign-in"
         >
           {t('auth.welcome.secondaryAction')}

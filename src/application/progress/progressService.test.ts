@@ -7,16 +7,16 @@ import type {
   Session
 } from '../../domain';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../../persistence/local';
 import { ProgressService } from './progressService';
 
 const userId = '11111111-1111-4111-8111-111111111111';
 const localDate = '2026-08-18';
 const timestamp = '2026-08-18T12:00:00.000Z';
-const dbs: HoopnoteLocalDb[] = [];
+const dbs: HoopjotLocalDb[] = [];
 
 describe('ProgressService', () => {
   afterEach(async () => {
@@ -114,14 +114,14 @@ async function seedProgressData(
   await repositories.reflections.save(makeReflection());
 }
 
-function openDb(name: string, generateName = true): HoopnoteLocalDb {
-  const db = createHoopnoteLocalDb(generateName ? makeDbName(name) : name);
+function openDb(name: string, generateName = true): HoopjotLocalDb {
+  const db = createHoopjotLocalDb(generateName ? makeDbName(name) : name);
   dbs.push(db);
   return db;
 }
 
 function makeDbName(name: string): string {
-  return `hoopnote-progress-${name}-${crypto.randomUUID()}`;
+  return `hoopjot-progress-${name}-${crypto.randomUUID()}`;
 }
 
 function makeDailyFocus(): DailyFocus {

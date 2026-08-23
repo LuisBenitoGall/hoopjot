@@ -41,14 +41,14 @@ function AppErrorFallback() {
   const { t } = useTranslation('common');
 
   return (
-    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopnote-ink">
+    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopjot-ink">
       <Card className="w-full max-w-sm space-y-5 text-center">
         <div className="flex justify-center">
           <BrandLogo label={t('appName')} />
         </div>
         <div className="space-y-2">
           <h1 className="text-2xl font-black">{t('errors.app.title')}</h1>
-          <p className="text-sm leading-6 text-hoopnote-muted">{t('errors.app.description')}</p>
+          <p className="text-sm leading-6 text-hoopjot-muted">{t('errors.app.description')}</p>
         </div>
         <Button
           className="w-full"

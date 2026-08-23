@@ -115,9 +115,9 @@ export function JournalRoute({ service: injectedService }: JournalRouteProps) {
     <AppShell activeItemId="journal">
       <div className="space-y-5 pb-3">
         <section className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopnote-purple">{t('journal.eyebrow')}</p>
+          <p className="text-sm font-bold text-hoopjot-purple">{t('journal.eyebrow')}</p>
           <h1 className="text-3xl font-black leading-tight">{t('journal.title')}</h1>
-          <p className="text-sm leading-6 text-hoopnote-muted">{t('journal.intro')}</p>
+          <p className="text-sm leading-6 text-hoopjot-muted">{t('journal.intro')}</p>
         </section>
 
         <JournalFilterControls
@@ -262,7 +262,7 @@ function JournalFilterControls({
 
   return (
     <fieldset className="space-y-2">
-      <legend className="flex items-center gap-2 text-xs font-black uppercase text-hoopnote-muted">
+      <legend className="flex items-center gap-2 text-xs font-black uppercase text-hoopjot-muted">
         <Filter className="h-4 w-4" aria-hidden="true" />
         {t('journal.filters.label')}
       </legend>
@@ -275,10 +275,10 @@ function JournalFilterControls({
               aria-pressed={selected}
               className={cx(
                 'min-h-10 rounded-control border px-3 text-xs font-black outline-none motion-safe:transition sm:px-4 sm:text-sm',
-                'focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30',
+                'focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30',
                 selected
-                  ? 'border-hoopnote-ink bg-hoopnote-ink text-white'
-                  : 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink hover:border-hoopnote-purple',
+                  ? 'border-hoopjot-ink bg-hoopjot-ink text-white'
+                  : 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink hover:border-hoopjot-purple',
               )}
               key={filter}
               onClick={() => onChange(filter)}
@@ -314,13 +314,13 @@ function JournalTimelineContent({
 
   return (
     <section aria-live="polite" className="space-y-6">
-      <p className="text-sm font-black text-hoopnote-muted">
+      <p className="text-sm font-black text-hoopjot-muted">
         {t('journal.resultCount', { count: timeline.totalCount })}
       </p>
 
       {timeline.groups.map((group) => (
         <section className="space-y-3" key={group.localDate}>
-          <h2 className="flex items-center gap-2 text-sm font-black uppercase text-hoopnote-muted">
+          <h2 className="flex items-center gap-2 text-sm font-black uppercase text-hoopjot-muted">
             <CalendarDays className="h-4 w-4" aria-hidden="true" />
             {formatLocalDateLabel(group.localDate, locale)}
           </h2>
@@ -363,7 +363,7 @@ function JournalSessionCard({
 
         <div className="space-y-2">
           <h3 className="text-xl font-black leading-tight">{typeLabel}</h3>
-          <p className="flex items-center gap-2 text-sm font-bold text-hoopnote-muted">
+          <p className="flex items-center gap-2 text-sm font-bold text-hoopjot-muted">
             <Clock3 className="h-4 w-4" aria-hidden="true" />
             {formatDateTime(entry.occurredAt, locale)}
           </p>
@@ -371,11 +371,11 @@ function JournalSessionCard({
 
         <dl className="grid gap-3 text-sm sm:grid-cols-2">
           <div>
-            <dt className="font-black text-hoopnote-muted">{t('journal.card.focusLabel')}</dt>
+            <dt className="font-black text-hoopjot-muted">{t('journal.card.focusLabel')}</dt>
             <dd className="mt-1 font-bold leading-6">{focusTitle}</dd>
           </div>
           <div>
-            <dt className="font-black text-hoopnote-muted">{t('journal.card.reflectionLabel')}</dt>
+            <dt className="font-black text-hoopjot-muted">{t('journal.card.reflectionLabel')}</dt>
             <dd className="mt-1 font-bold leading-6">{t(status.descriptionKey)}</dd>
           </div>
         </dl>
@@ -385,7 +385,7 @@ function JournalSessionCard({
             date: formatDateTime(entry.occurredAt, locale),
             type: typeLabel
           })}
-          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-control border-2 border-hoopnote-ink bg-hoopnote-surface px-4 text-sm font-black text-hoopnote-ink shadow-control outline-none hover:bg-hoopnote-ink hover:text-white focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-control border-2 border-hoopjot-ink bg-hoopjot-surface px-4 text-sm font-black text-hoopjot-ink shadow-control outline-none hover:bg-hoopjot-ink hover:text-white focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
           to={`/journal/${entry.session.id}`}
         >
           {t('journal.actions.openDetail')}
@@ -415,7 +415,7 @@ function SessionDetail({
           <Chip tone={status.tone}>{t(status.labelKey)}</Chip>
         </div>
         <h1 className="text-3xl font-black leading-tight">{typeLabel}</h1>
-        <p className="flex items-center gap-2 text-sm font-bold text-hoopnote-muted">
+        <p className="flex items-center gap-2 text-sm font-bold text-hoopjot-muted">
           <Clock3 className="h-4 w-4" aria-hidden="true" />
           {formatDateTime(entry.occurredAt, locale)}
         </p>
@@ -435,10 +435,10 @@ function FocusDetail({ entry }: { entry: JournalEntry }) {
     return (
       <Card className="space-y-2">
         <h2 className="flex items-center gap-2 text-lg font-black">
-          <Target className="h-5 w-5 text-hoopnote-purple" aria-hidden="true" />
+          <Target className="h-5 w-5 text-hoopjot-purple" aria-hidden="true" />
           {t('journal.focus.title')}
         </h2>
-        <p className="text-sm leading-6 text-hoopnote-muted">{t('journal.focus.none')}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{t('journal.focus.none')}</p>
       </Card>
     );
   }
@@ -456,14 +456,14 @@ function FocusDetail({ entry }: { entry: JournalEntry }) {
 
       <section className="space-y-2">
         <h2 className="flex items-center gap-2 text-lg font-black">
-          <Target className="h-5 w-5 text-hoopnote-purple" aria-hidden="true" />
+          <Target className="h-5 w-5 text-hoopjot-purple" aria-hidden="true" />
           {t('journal.focus.title')}
         </h2>
         <h3 className="text-2xl font-black leading-tight">{copy.title}</h3>
-        <p className="text-sm leading-6 text-hoopnote-muted">{copy.instruction}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{copy.instruction}</p>
       </section>
 
-      <div className="rounded-card border-2 border-dashed border-hoopnote-purple/40 bg-hoopnote-purple/10 p-4">
+      <div className="rounded-card border-2 border-dashed border-hoopjot-purple/40 bg-hoopjot-purple/10 p-4">
         <p className="text-lg font-black leading-tight">{copy.cue}</p>
       </div>
     </Card>
@@ -493,7 +493,7 @@ function CheckInDetail({ entry }: { entry: JournalEntry }) {
           />
         </div>
       ) : (
-        <p className="text-sm leading-6 text-hoopnote-muted">{t('journal.checkIn.none')}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{t('journal.checkIn.none')}</p>
       )}
     </Card>
   );
@@ -526,7 +526,7 @@ function ReflectionDetail({ entry }: { entry: JournalEntry }) {
           />
         </>
       ) : (
-        <p className="text-sm leading-6 text-hoopnote-muted">{t('journal.reflection.none')}</p>
+        <p className="text-sm leading-6 text-hoopjot-muted">{t('journal.reflection.none')}</p>
       )}
     </Card>
   );
@@ -537,7 +537,7 @@ function BackToJournalLink() {
 
   return (
     <Link
-      className="inline-flex min-h-11 items-center gap-2 rounded-control px-1 text-sm font-black text-hoopnote-ink outline-none hover:text-hoopnote-purple focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+      className="inline-flex min-h-11 items-center gap-2 rounded-control px-1 text-sm font-black text-hoopjot-ink outline-none hover:text-hoopjot-purple focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
       to="/journal"
     >
       <ArrowLeft className="h-5 w-5" aria-hidden="true" />
@@ -549,7 +549,7 @@ function BackToJournalLink() {
 function DetailMetric({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs font-black uppercase text-hoopnote-muted">{label}</p>
+      <p className="text-xs font-black uppercase text-hoopjot-muted">{label}</p>
       <p className="mt-1 text-sm font-bold leading-6">{value}</p>
     </div>
   );
@@ -568,7 +568,7 @@ function OptionalReflectionText({
 
   return (
     <section className="space-y-1">
-      <h3 className="text-xs font-black uppercase text-hoopnote-muted">{label}</h3>
+      <h3 className="text-xs font-black uppercase text-hoopjot-muted">{label}</h3>
       <p className="text-sm leading-6">{value}</p>
     </section>
   );

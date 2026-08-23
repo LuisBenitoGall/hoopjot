@@ -2,10 +2,10 @@ import 'fake-indexeddb/auto';
 
 import type { DailyFocus } from '../../domain';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../../persistence/local';
 import { SessionReflectionService } from './sessionReflectionService';
 
@@ -18,7 +18,7 @@ const localDate = '2026-08-18';
 const startedAt = '2026-08-18T10:00:00.000Z';
 const completedAt = '2026-08-18T11:00:00.000Z';
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('SessionReflectionService', () => {
   afterEach(async () => {
@@ -119,7 +119,7 @@ describe('SessionReflectionService', () => {
 });
 
 function makeRepositories() {
-  const db = createHoopnoteLocalDb(`hoopnote-session-service-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-session-service-${crypto.randomUUID()}`);
   openedDbs.push(db);
 
   return { db, repositories: createLocalRepositories(db) };

@@ -97,7 +97,7 @@ export function GameKnowledgeBaseRoute({
       <div className="space-y-5 pb-3">
         <section className="space-y-3 pt-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-bold text-hoopnote-purple">{t('game.eyebrow')}</p>
+            <p className="text-sm font-bold text-hoopjot-purple">{t('game.eyebrow')}</p>
             <Chip tone="neutral">{t('game.catalogVersion', { version: basketballCatalogVersion })}</Chip>
           </div>
           <h1 className="text-3xl font-black leading-tight">{t('game.title')}</h1>
@@ -105,7 +105,7 @@ export function GameKnowledgeBaseRoute({
 
         <section aria-label={t('game.categoryFilterLabel')} className="space-y-4">
           <fieldset className="space-y-2">
-            <legend className="flex items-center gap-2 text-xs font-black uppercase text-hoopnote-muted">
+            <legend className="flex items-center gap-2 text-xs font-black uppercase text-hoopjot-muted">
               <Filter className="h-4 w-4" aria-hidden="true" />
               {t('game.categoryFilterLabel')}
             </legend>
@@ -115,10 +115,10 @@ export function GameKnowledgeBaseRoute({
                   aria-pressed={selectedCategory === category}
                   className={cx(
                     'min-h-10 rounded-control border px-3 text-xs font-black outline-none motion-safe:transition sm:px-4 sm:text-sm',
-                    'focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30',
+                    'focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30',
                     selectedCategory === category
-                      ? 'border-hoopnote-ink bg-hoopnote-ink text-white'
-                      : 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink hover:border-hoopnote-purple',
+                      ? 'border-hoopjot-ink bg-hoopjot-ink text-white'
+                      : 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink hover:border-hoopjot-purple',
                   )}
                   key={category}
                   onClick={() => chooseCategory(category as CategoryFilter)}
@@ -131,11 +131,11 @@ export function GameKnowledgeBaseRoute({
           </fieldset>
 
           <label className="block space-y-2" htmlFor="game-subcategory">
-            <span className="text-xs font-black uppercase text-hoopnote-muted">
+            <span className="text-xs font-black uppercase text-hoopjot-muted">
               {t('game.subcategoryFilterLabel')}
             </span>
             <select
-              className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-hoopnote-surface px-4 text-sm font-bold text-hoopnote-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+              className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-hoopjot-surface px-4 text-sm font-bold text-hoopjot-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
               id="game-subcategory"
               onChange={(event) => setSelectedSubcategory(event.target.value)}
               value={selectedSubcategory}
@@ -165,7 +165,7 @@ export function GameKnowledgeBaseRoute({
 
         {contentState.status === 'ready' ? (
           <section aria-live="polite" className="space-y-3">
-            <p className="text-sm font-black text-hoopnote-muted">
+            <p className="text-sm font-black text-hoopjot-muted">
               {t('game.resultCount', { count: filteredGuidelines.length })}
             </p>
 
@@ -225,7 +225,7 @@ export function GuidelineDetailRoute({
     <AppShell activeItemId="game">
       <div className="space-y-5 pb-3 pt-2">
         <Link
-          className="inline-flex min-h-11 items-center gap-2 rounded-control px-1 text-sm font-black text-hoopnote-ink outline-none hover:text-hoopnote-purple focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+          className="inline-flex min-h-11 items-center gap-2 rounded-control px-1 text-sm font-black text-hoopjot-ink outline-none hover:text-hoopjot-purple focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
           to="/game"
         >
           <ArrowLeft className="h-5 w-5" aria-hidden="true" />
@@ -268,16 +268,16 @@ function GuidelineCard({ guideline }: { guideline: Guideline }) {
 
         <div className="space-y-2">
           <h2 className="text-2xl font-black leading-tight">{copy.title}</h2>
-          <p className="text-sm leading-6 text-hoopnote-muted">{copy.instruction}</p>
+          <p className="text-sm leading-6 text-hoopjot-muted">{copy.instruction}</p>
         </div>
 
-        <div className="rounded-card border-2 border-dashed border-hoopnote-purple/40 bg-hoopnote-purple/10 p-4">
+        <div className="rounded-card border-2 border-dashed border-hoopjot-purple/40 bg-hoopjot-purple/10 p-4">
           <p className="text-lg font-black leading-tight">{copy.cue}</p>
         </div>
 
         <Link
           aria-label={t('game.openGuidelineLabel', { title: copy.title })}
-          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-control bg-hoopnote-orange px-4 text-sm font-black text-hoopnote-ink shadow-control outline-none hover:bg-[#ff8b1f] focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-control bg-hoopjot-orange px-4 text-sm font-black text-hoopjot-ink shadow-control outline-none hover:bg-[#ff8b1f] focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
           data-testid={`guideline-link-${guideline.id}`}
           to={`/game/${guideline.id}`}
         >
@@ -307,18 +307,18 @@ function GuidelineDetail({ guideline }: { guideline: Guideline }) {
 
       <Card className="space-y-5">
         <section className="space-y-2">
-          <h2 className="text-sm font-black uppercase text-hoopnote-muted">
+          <h2 className="text-sm font-black uppercase text-hoopjot-muted">
             {t('game.instructionLabel')}
           </h2>
           <p className="text-base leading-7">{copy.instruction}</p>
         </section>
 
         <section className="space-y-2">
-          <h2 className="flex items-center gap-2 text-sm font-black uppercase text-hoopnote-muted">
+          <h2 className="flex items-center gap-2 text-sm font-black uppercase text-hoopjot-muted">
             <Target className="h-4 w-4" aria-hidden="true" />
             {t('game.cueLabel')}
           </h2>
-          <div className="rounded-card border-2 border-dashed border-hoopnote-purple/40 bg-hoopnote-purple/10 p-4">
+          <div className="rounded-card border-2 border-dashed border-hoopjot-purple/40 bg-hoopjot-purple/10 p-4">
             <p className="text-xl font-black leading-tight">{copy.cue}</p>
           </div>
         </section>
@@ -346,7 +346,7 @@ function GuidelineDetail({ guideline }: { guideline: Guideline }) {
 function MetadataItem({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs font-black uppercase text-hoopnote-muted">{label}</p>
+      <p className="text-xs font-black uppercase text-hoopjot-muted">{label}</p>
       <p className="mt-1 text-sm font-bold leading-6">{value}</p>
     </div>
   );

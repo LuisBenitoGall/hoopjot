@@ -11,7 +11,7 @@ export function AuthErrorMessage({ code, getMessage }: AuthErrorMessageProps) {
   }
 
   return (
-    <p className="rounded-card border border-hoopnote-danger/40 bg-hoopnote-danger/10 px-4 py-3 text-sm font-bold text-hoopnote-ink">
+    <p className="rounded-card border border-hoopjot-danger/40 bg-hoopjot-danger/10 px-4 py-3 text-sm font-bold text-hoopjot-ink">
       {getMessage(code)}
     </p>
   );
@@ -27,7 +27,7 @@ export function AuthSuccessMessage({ message }: AuthSuccessMessageProps) {
   }
 
   return (
-    <p className="rounded-card border border-hoopnote-success/40 bg-hoopnote-success/10 px-4 py-3 text-sm font-bold text-hoopnote-ink">
+    <p className="rounded-card border border-hoopjot-success/40 bg-hoopjot-success/10 px-4 py-3 text-sm font-bold text-hoopjot-ink">
       {message}
     </p>
   );

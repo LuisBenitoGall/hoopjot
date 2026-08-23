@@ -7,11 +7,11 @@ import type {
   SkillState,
   WeeklyReview
 } from '../domain';
-import type { HoopnoteLocalDb } from '../persistence/local';
+import type { HoopjotLocalDb } from '../persistence/local';
 import type { RemoteUserData } from './types';
 
 export async function mergeRemoteUserData(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteData: RemoteUserData,
 ): Promise<void> {
   await db.transaction(
@@ -68,7 +68,7 @@ export async function mergeRemoteUserData(
 }
 
 async function putProfileIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteProfile: PlayerProfile,
 ): Promise<void> {
   const localProfile = await db.profiles.where('userId').equals(remoteProfile.userId).first();
@@ -83,7 +83,7 @@ async function putProfileIfRemoteWins(
 }
 
 async function putDailyFocusIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteDailyFocus: DailyFocus,
 ): Promise<void> {
   const localDailyFocus = await db.dailyFocus
@@ -101,7 +101,7 @@ async function putDailyFocusIfRemoteWins(
 }
 
 async function putCheckInIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteCheckIn: CheckIn,
 ): Promise<void> {
   const localCheckIn = await db.checkIns.where('sessionId').equals(remoteCheckIn.sessionId).first();
@@ -116,7 +116,7 @@ async function putCheckInIfRemoteWins(
 }
 
 async function putReflectionIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteReflection: Reflection,
 ): Promise<void> {
   const localReflection = await db.reflections
@@ -137,7 +137,7 @@ async function putReflectionIfRemoteWins(
 }
 
 async function putObservationIfMissing(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteObservation: Observation,
 ): Promise<void> {
   const localObservation = await db.observations.get(remoteObservation.id);
@@ -148,7 +148,7 @@ async function putObservationIfMissing(
 }
 
 async function putSkillStateIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteSkillState: SkillState,
 ): Promise<void> {
   const localSkillState = await db.skillState.get([
@@ -165,7 +165,7 @@ async function putSkillStateIfRemoteWins(
 }
 
 async function putWeeklyReviewIfRemoteWins(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   remoteWeeklyReview: WeeklyReview,
 ): Promise<void> {
   const localWeeklyReview = await db.weeklyReviews

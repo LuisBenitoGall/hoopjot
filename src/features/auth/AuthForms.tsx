@@ -72,7 +72,7 @@ export function AuthForm({ mode }: AuthFormProps) {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       {state.status === 'configuration_error' ? (
-        <p className="rounded-card border border-hoopnote-warning/50 bg-hoopnote-warning/10 px-4 py-3 text-sm font-bold text-hoopnote-ink">
+        <p className="rounded-card border border-hoopjot-warning/50 bg-hoopjot-warning/10 px-4 py-3 text-sm font-bold text-hoopjot-ink">
           {t('auth.errors.configuration_missing')}
         </p>
       ) : null}
@@ -85,7 +85,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           <span className="text-sm font-bold">{t('auth.emailLabel')}</span>
           <input
             autoComplete="email"
-            className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
             name="email"
             onChange={(event) => setEmail(event.target.value)}
             required
@@ -102,7 +102,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           </span>
           <input
             autoComplete={mode === 'signIn' ? 'current-password' : 'new-password'}
-            className="min-h-12 w-full rounded-card border-2 border-hoopnote-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopnote-blue focus:ring-4 focus:ring-hoopnote-blue/20"
+            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
             minLength={8}
             name="password"
             onChange={(event) => setPassword(event.target.value)}
@@ -127,14 +127,14 @@ function AuthFormLinks({ mode }: { mode: AuthFormMode }) {
 
   if (mode === 'signIn') {
     return (
-      <div className="space-y-3 text-sm font-bold text-hoopnote-muted">
+      <div className="space-y-3 text-sm font-bold text-hoopjot-muted">
         <p>
           {t('auth.signIn.noAccount')}{' '}
-          <Link className="text-hoopnote-blue underline" to="/sign-up">
+          <Link className="text-hoopjot-blue underline" to="/sign-up">
             {t('auth.signIn.createAccount')}
           </Link>
         </p>
-        <Link className="inline-flex text-hoopnote-blue underline" to="/recovery">
+        <Link className="inline-flex text-hoopjot-blue underline" to="/recovery">
           {t('auth.signIn.forgotPassword')}
         </Link>
       </div>
@@ -146,9 +146,9 @@ function AuthFormLinks({ mode }: { mode: AuthFormMode }) {
   }
 
   return (
-    <p className="text-sm font-bold text-hoopnote-muted">
+    <p className="text-sm font-bold text-hoopjot-muted">
       {mode === 'signUp' ? t('auth.signUp.hasAccount') : t('auth.recovery.remembered')}{' '}
-      <Link className="text-hoopnote-blue underline" to="/sign-in">
+      <Link className="text-hoopjot-blue underline" to="/sign-in">
         {t('auth.signIn.submit')}
       </Link>
     </p>

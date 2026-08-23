@@ -98,16 +98,16 @@ async function signIn(client: SupabaseClient, email: string, password: string): 
 }
 
 function getRlsTestEnvironment(): RlsTestEnvironment | null {
-  if (process.env.HOOPNOTE_RUN_SUPABASE_RLS_TESTS !== 'true') {
+  if (process.env.HOOPJOT_RUN_SUPABASE_RLS_TESTS !== 'true') {
     return null;
   }
 
   const environment = {
     anonKey: process.env.VITE_SUPABASE_ANON_KEY,
-    emailA: process.env.HOOPNOTE_RLS_TEST_EMAIL_A,
-    emailB: process.env.HOOPNOTE_RLS_TEST_EMAIL_B,
-    passwordA: process.env.HOOPNOTE_RLS_TEST_PASSWORD_A,
-    passwordB: process.env.HOOPNOTE_RLS_TEST_PASSWORD_B,
+    emailA: process.env.HOOPJOT_RLS_TEST_EMAIL_A,
+    emailB: process.env.HOOPJOT_RLS_TEST_EMAIL_B,
+    passwordA: process.env.HOOPJOT_RLS_TEST_PASSWORD_A,
+    passwordB: process.env.HOOPJOT_RLS_TEST_PASSWORD_B,
     url: process.env.VITE_SUPABASE_URL
   };
 

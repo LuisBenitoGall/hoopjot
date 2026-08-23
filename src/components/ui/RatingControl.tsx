@@ -23,7 +23,7 @@ export function RatingControl({
 }: RatingControlProps) {
   return (
     <fieldset className="space-y-3">
-      <legend className="text-sm font-bold text-hoopnote-ink">{label}</legend>
+      <legend className="text-sm font-bold text-hoopjot-ink">{label}</legend>
       <div className="flex items-center justify-between gap-2">
         {ratingValues.map((rating) => {
           const selected = rating === value;
@@ -42,10 +42,10 @@ export function RatingControl({
               <span
                 className={cx(
                   'flex min-h-12 min-w-11 items-center justify-center rounded-control border-2 text-sm font-black outline-none motion-safe:transition',
-                  'peer-focus-visible:ring-4 peer-focus-visible:ring-hoopnote-blue/30',
+                  'peer-focus-visible:ring-4 peer-focus-visible:ring-hoopjot-blue/30',
                   selected
-                    ? 'border-hoopnote-ink bg-hoopnote-ink text-white shadow-control'
-                    : 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink hover:border-hoopnote-blue',
+                    ? 'border-hoopjot-ink bg-hoopjot-ink text-white shadow-control'
+                    : 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink hover:border-hoopjot-blue',
                 )}
               >
                 {rating}
@@ -54,7 +54,7 @@ export function RatingControl({
           );
         })}
       </div>
-      <div className="flex justify-between gap-4 text-xs font-bold text-hoopnote-muted">
+      <div className="flex justify-between gap-4 text-xs font-bold text-hoopjot-muted">
         <span>{minLabel}</span>
         <span className="text-right">{maxLabel}</span>
       </div>

@@ -1,6 +1,6 @@
 AGENTS.md
 README.md
-assets/hoopnote-brand-board.png
+assets/hoopjot-brand-board.png
 docs/ARCHITECTURE.md
 docs/AUTHENTICATION.md
 docs/CONTENT_MODEL.md

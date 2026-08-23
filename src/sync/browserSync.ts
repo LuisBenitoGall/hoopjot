@@ -1,4 +1,4 @@
-import type { HoopnoteLocalDb } from '../persistence/local';
+import type { HoopjotLocalDb } from '../persistence/local';
 import {
   createSupabaseBrowserClient,
   getSupabaseBrowserConfig
@@ -11,7 +11,7 @@ import { SupabaseRemoteSyncAdapter } from './remoteSupabaseAdapter';
 import { SyncService } from './syncService';
 import type { RemoteSyncAdapter } from './types';
 
-export function createBrowserSyncService(db: HoopnoteLocalDb): SyncService | null {
+export function createBrowserSyncService(db: HoopjotLocalDb): SyncService | null {
   const remote = createBrowserRemoteSyncAdapter();
 
   return remote ? new SyncService({ db, remote }) : null;

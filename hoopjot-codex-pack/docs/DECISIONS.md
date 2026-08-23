@@ -1,7 +1,7 @@
 # Decision log
 
 ## D001 — Product name
-**Decision:** Hoopnote.
+**Decision:** Hoopjot.
 
 ## D002 — Client framework
 **Decision:** React + TypeScript + Vite, not Next.js.

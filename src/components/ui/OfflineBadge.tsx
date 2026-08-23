@@ -10,9 +10,9 @@ interface OfflineBadgeProps {
 }
 
 const statusClasses: Record<OfflineBadgeStatus, string> = {
-  online: 'border-hoopnote-success/40 bg-hoopnote-success/12 text-hoopnote-ink',
-  offline: 'border-hoopnote-ink/20 bg-hoopnote-surface text-hoopnote-ink',
-  syncing: 'border-hoopnote-blue/40 bg-hoopnote-blue/12 text-hoopnote-ink'
+  online: 'border-hoopjot-success/40 bg-hoopjot-success/12 text-hoopjot-ink',
+  offline: 'border-hoopjot-ink/20 bg-hoopjot-surface text-hoopjot-ink',
+  syncing: 'border-hoopjot-blue/40 bg-hoopjot-blue/12 text-hoopjot-ink'
 };
 
 const statusIcons = {

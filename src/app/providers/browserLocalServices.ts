@@ -1,5 +1,5 @@
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   type LocalRepositories
 } from '../../persistence/local';
@@ -11,7 +11,7 @@ export interface BrowserLocalServices {
 }
 
 export function createBrowserLocalServices(): BrowserLocalServices {
-  const db = createHoopnoteLocalDb(getLocalDatabaseName());
+  const db = createHoopjotLocalDb(getLocalDatabaseName());
 
   return {
     repositories: createLocalRepositories(db),
@@ -31,5 +31,5 @@ function getLocalDatabaseName(): string | undefined {
     return undefined;
   }
 
-  return globalThis.sessionStorage.getItem('hoopnote:e2e-db-name') ?? undefined;
+  return globalThis.sessionStorage.getItem('hoopjot:e2e-db-name') ?? undefined;
 }

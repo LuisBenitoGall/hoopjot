@@ -8,10 +8,10 @@ import { AuthProvider } from '../../app/providers/AuthProvider';
 import { LocalRepositoriesProvider } from '../../app/providers/LocalRepositoriesProvider';
 import i18n from '../../i18n/config';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb,
+  type HoopjotLocalDb,
   type LocalRepositories
 } from '../../persistence/local';
 import type { AuthService, AuthUser } from '../../services/auth';
@@ -24,7 +24,7 @@ const authUser: AuthUser = {
   onboardingCompleted: false
 };
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('OnboardingRoute', () => {
   beforeEach(async () => {
@@ -182,7 +182,7 @@ function renderOnboarding(existingRepositories?: LocalRepositories): {
 }
 
 function makeRepositories(): LocalRepositories {
-  const db = createHoopnoteLocalDb(`hoopnote-onboarding-route-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-onboarding-route-${crypto.randomUUID()}`);
   openedDbs.push(db);
 
   return createLocalRepositories(db);

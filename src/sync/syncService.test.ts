@@ -2,9 +2,9 @@ import 'fake-indexeddb/auto';
 
 import type { PlayerProfile, Session } from '../domain';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../persistence/local';
 import { SyncService } from './syncService';
 import type {
@@ -19,7 +19,7 @@ const timestamp = '2026-08-18T00:00:00.000Z';
 const laterTimestamp = '2026-08-18T00:00:01.000Z';
 const sessionId = '22222222-2222-4222-8222-222222222222';
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('SyncService', () => {
   afterEach(async () => {
@@ -180,8 +180,8 @@ class FakeRemoteSyncAdapter implements RemoteSyncAdapter {
   }
 }
 
-function openDb(name: string): HoopnoteLocalDb {
-  const db = createHoopnoteLocalDb(`hoopnote-sync-test-${name}-${crypto.randomUUID()}`);
+function openDb(name: string): HoopjotLocalDb {
+  const db = createHoopjotLocalDb(`hoopjot-sync-test-${name}-${crypto.randomUUID()}`);
   openedDbs.push(db);
   return db;
 }

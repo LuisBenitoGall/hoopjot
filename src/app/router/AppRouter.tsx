@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { lazy, Suspense, useMemo } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { CookieConsentProvider } from '../CookieConsent';
 import { AuthProvider } from '../providers/AuthProvider';
 import { AppErrorBoundary } from '../providers/AppErrorBoundary';
 import { LocalRepositoriesProvider } from '../providers/LocalRepositoriesProvider';
@@ -8,33 +9,92 @@ import { PwaProvider } from '../providers/PwaProvider';
 import { SyncProvider } from '../providers/SyncProvider';
 import { createBrowserLocalServices } from '../providers/browserLocalServices';
 import {
+  AuthLoadingRoute,
   DefaultRoute,
   PublicAuthRoute,
   RequireAuthenticatedApp,
   RequireOnboardingState
 } from './authGuards';
-import { SmokeRoute } from '../shell/SmokeRoute';
-import {
-  RecoveryRoute,
-  SignInRoute,
-  SignUpRoute,
-  WelcomeRoute
-} from '../../features/auth/AuthRoutes';
-import {
-  GameKnowledgeBaseRoute,
-  GuidelineDetailRoute
-} from '../../features/knowledge/GameKnowledgeBaseRoute';
-import {
-  JournalRoute,
-  SessionDetailRoute
-} from '../../features/journal/JournalRoutes';
-import { OnboardingRoute } from '../../features/onboarding/OnboardingRoute';
-import { ProfileRoute } from '../../features/profile/ProfileRoute';
-import { ProgressRoute } from '../../features/progress/ProgressRoute';
-import { TodayRoute } from '../../features/today/TodayRoute';
 import type { LocalRepositories } from '../../persistence/local';
 import type { AuthService } from '../../services/auth';
 import type { SyncService } from '../../sync';
+
+const WelcomeRoute = lazy(() =>
+  import('../../features/auth/AuthRoutes').then(({ WelcomeRoute }) => ({ default: WelcomeRoute })),
+);
+const SignInRoute = lazy(() =>
+  import('../../features/auth/AuthRoutes').then(({ SignInRoute }) => ({ default: SignInRoute })),
+);
+const SignUpRoute = lazy(() =>
+  import('../../features/auth/AuthRoutes').then(({ SignUpRoute }) => ({ default: SignUpRoute })),
+);
+const RecoveryRoute = lazy(() =>
+  import('../../features/auth/AuthRoutes').then(({ RecoveryRoute }) => ({ default: RecoveryRoute })),
+);
+const LegalIndexRoute = lazy(() =>
+  import('../../features/auth/LegalRoutes').then(({ LegalIndexRoute }) => ({
+    default: LegalIndexRoute
+  })),
+);
+const LegalNoticeRoute = lazy(() =>
+  import('../../features/auth/LegalRoutes').then(({ LegalNoticeRoute }) => ({
+    default: LegalNoticeRoute
+  })),
+);
+const PrivacyPolicyRoute = lazy(() =>
+  import('../../features/auth/LegalRoutes').then(({ PrivacyPolicyRoute }) => ({
+    default: PrivacyPolicyRoute
+  })),
+);
+const CookiePolicyRoute = lazy(() =>
+  import('../../features/auth/LegalRoutes').then(({ CookiePolicyRoute }) => ({
+    default: CookiePolicyRoute
+  })),
+);
+const TermsRoute = lazy(() =>
+  import('../../features/auth/LegalRoutes').then(({ TermsRoute }) => ({ default: TermsRoute })),
+);
+const OnboardingRoute = lazy(() =>
+  import('../../features/onboarding/OnboardingRoute').then(({ OnboardingRoute }) => ({
+    default: OnboardingRoute
+  })),
+);
+const TodayRoute = lazy(() =>
+  import('../../features/today/TodayRoute').then(({ TodayRoute }) => ({ default: TodayRoute })),
+);
+const GameKnowledgeBaseRoute = lazy(() =>
+  import('../../features/knowledge/GameKnowledgeBaseRoute').then(({ GameKnowledgeBaseRoute }) => ({
+    default: GameKnowledgeBaseRoute
+  })),
+);
+const GuidelineDetailRoute = lazy(() =>
+  import('../../features/knowledge/GameKnowledgeBaseRoute').then(({ GuidelineDetailRoute }) => ({
+    default: GuidelineDetailRoute
+  })),
+);
+const JournalRoute = lazy(() =>
+  import('../../features/journal/JournalRoutes').then(({ JournalRoute }) => ({
+    default: JournalRoute
+  })),
+);
+const SessionDetailRoute = lazy(() =>
+  import('../../features/journal/JournalRoutes').then(({ SessionDetailRoute }) => ({
+    default: SessionDetailRoute
+  })),
+);
+const ProgressRoute = lazy(() =>
+  import('../../features/progress/ProgressRoute').then(({ ProgressRoute }) => ({
+    default: ProgressRoute
+  })),
+);
+const ProfileRoute = lazy(() =>
+  import('../../features/profile/ProfileRoute').then(({ ProfileRoute }) => ({
+    default: ProfileRoute
+  })),
+);
+const SmokeRoute = lazy(() =>
+  import('../shell/SmokeRoute').then(({ SmokeRoute }) => ({ default: SmokeRoute })),
+);
 
 function createAppRouter() {
   return createBrowserRouter([
@@ -69,6 +129,42 @@ function createAppRouter() {
           <RecoveryRoute />
         </PublicAuthRoute>
       )
+    },
+    {
+      path: '/legal',
+      element: <LegalIndexRoute />
+    },
+    {
+      path: '/legal/notice',
+      element: <LegalNoticeRoute />
+    },
+    {
+      path: '/legal/privacy',
+      element: <PrivacyPolicyRoute />
+    },
+    {
+      path: '/legal/cookies',
+      element: <CookiePolicyRoute />
+    },
+    {
+      path: '/legal/terms',
+      element: <TermsRoute />
+    },
+    {
+      path: '/privacy',
+      element: <PrivacyPolicyRoute />
+    },
+    {
+      path: '/cookies',
+      element: <CookiePolicyRoute />
+    },
+    {
+      path: '/terms',
+      element: <TermsRoute />
+    },
+    {
+      path: '/legal-notice',
+      element: <LegalNoticeRoute />
     },
     {
       path: '/onboarding',
@@ -168,7 +264,11 @@ export function AppRouter({
         <PwaProvider>
           <AuthProvider authService={authService} playerProfileRepository={repositories.profiles}>
             <SyncProvider syncService={syncService}>
-              <RouterProvider router={router} />
+              <CookieConsentProvider>
+                <Suspense fallback={<AuthLoadingRoute />}>
+                  <RouterProvider router={router} />
+                </Suspense>
+              </CookieConsentProvider>
             </SyncProvider>
           </AuthProvider>
         </PwaProvider>

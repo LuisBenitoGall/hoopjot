@@ -9,9 +9,9 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const toneClasses: Record<CardTone, string> = {
-  surface: 'border-hoopnote-line bg-hoopnote-surface text-hoopnote-ink',
-  warm: 'border-hoopnote-orange/40 bg-[#fff3e8] text-hoopnote-ink',
-  ink: 'border-hoopnote-ink bg-hoopnote-ink text-white'
+  surface: 'border-hoopjot-line bg-hoopjot-surface text-hoopjot-ink',
+  warm: 'border-hoopjot-orange/40 bg-[#fff3e8] text-hoopjot-ink',
+  ink: 'border-hoopjot-ink bg-hoopjot-ink text-white'
 };
 
 export function Card({ className, tone = 'surface', ...props }: CardProps) {

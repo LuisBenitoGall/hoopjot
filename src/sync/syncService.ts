@@ -10,7 +10,7 @@ import {
   parseWeeklyReview
 } from '../domain';
 import type {
-  HoopnoteLocalDb,
+  HoopjotLocalDb,
   SyncEntityType,
   SyncOperation
 } from '../persistence/local';
@@ -22,7 +22,7 @@ import type {
 } from './types';
 
 interface SyncServiceDependencies {
-  db: HoopnoteLocalDb;
+  db: HoopjotLocalDb;
   getNow?: () => Date;
   getOnlineStatus?: () => boolean;
   remote: RemoteSyncAdapter;

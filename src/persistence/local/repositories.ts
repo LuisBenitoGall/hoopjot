@@ -33,7 +33,7 @@ import {
   type WeeklyReview,
   type WeeklyReviewRepository
 } from '../../domain';
-import type { HoopnoteLocalDb } from './db';
+import type { HoopjotLocalDb } from './db';
 import { createSyncOperation, type SyncEntityType, type SyncOperation } from './syncQueue';
 
 interface SyncableEntity {
@@ -42,7 +42,7 @@ interface SyncableEntity {
 }
 
 export class LocalPlayerProfileRepository implements PlayerProfileRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async deleteByUserId(userId: string): Promise<void> {
     const profile = await this.getByUserId(userId);
@@ -64,7 +64,7 @@ export class LocalPlayerProfileRepository implements PlayerProfileRepository {
 }
 
 export class LocalPlayerGoalRepository implements PlayerGoalRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const goal = await this.db.playerGoals.get(id);
@@ -93,7 +93,7 @@ export class LocalPlayerGoalRepository implements PlayerGoalRepository {
 }
 
 export class LocalOnboardingDraftRepository implements OnboardingDraftRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async deleteByUserId(userId: string): Promise<void> {
     await this.db.onboardingDrafts.delete(userId);
@@ -109,7 +109,7 @@ export class LocalOnboardingDraftRepository implements OnboardingDraftRepository
 }
 
 export class LocalSessionRepository implements SessionRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string, deletedAt: string): Promise<void> {
     const session = await this.db.sessions.get(id);
@@ -150,7 +150,7 @@ export class LocalSessionRepository implements SessionRepository {
 }
 
 export class LocalCheckInRepository implements CheckInRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const checkIn = await this.db.checkIns.get(id);
@@ -172,7 +172,7 @@ export class LocalCheckInRepository implements CheckInRepository {
 }
 
 export class LocalReflectionRepository implements ReflectionRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const reflection = await this.db.reflections.get(id);
@@ -194,7 +194,7 @@ export class LocalReflectionRepository implements ReflectionRepository {
 }
 
 export class LocalObservationRepository implements ObservationRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const observation = await this.db.observations.get(id);
@@ -216,7 +216,7 @@ export class LocalObservationRepository implements ObservationRepository {
 }
 
 export class LocalSkillStateRepository implements SkillStateRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(userId: string, skillId: string): Promise<void> {
     const skillState = await this.getBySkillId(userId, skillId);
@@ -250,7 +250,7 @@ export class LocalSkillStateRepository implements SkillStateRepository {
 }
 
 export class LocalDailyFocusRepository implements DailyFocusRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const dailyFocus = await this.db.dailyFocus.get(id);
@@ -283,7 +283,7 @@ export class LocalDailyFocusRepository implements DailyFocusRepository {
 }
 
 export class LocalWeeklyReviewRepository implements WeeklyReviewRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async delete(id: string): Promise<void> {
     const weeklyReview = await this.db.weeklyReviews.get(id);
@@ -310,7 +310,7 @@ export class LocalWeeklyReviewRepository implements WeeklyReviewRepository {
 }
 
 export class LocalSyncQueueRepository {
-  constructor(private readonly db: HoopnoteLocalDb) {}
+  constructor(private readonly db: HoopjotLocalDb) {}
 
   async clear(operationId: string): Promise<void> {
     await this.db.syncQueue.delete(operationId);
@@ -321,7 +321,7 @@ export class LocalSyncQueueRepository {
   }
 }
 
-export function createLocalRepositories(db: HoopnoteLocalDb) {
+export function createLocalRepositories(db: HoopjotLocalDb) {
   return {
     checkIns: new LocalCheckInRepository(db),
     dailyFocus: new LocalDailyFocusRepository(db),
@@ -340,7 +340,7 @@ export function createLocalRepositories(db: HoopnoteLocalDb) {
 export type LocalRepositories = ReturnType<typeof createLocalRepositories>;
 
 async function saveById<T extends SyncableEntity>(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   table: Table<T, string>,
   entity: T,
   entityType: SyncEntityType,
@@ -352,7 +352,7 @@ async function saveById<T extends SyncableEntity>(
 }
 
 async function deleteById<T extends SyncableEntity>(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   table: Table<T, string>,
   entity: T,
   entityType: SyncEntityType,
@@ -364,7 +364,7 @@ async function deleteById<T extends SyncableEntity>(
 }
 
 async function enqueueSyncOperation(
-  db: HoopnoteLocalDb,
+  db: HoopjotLocalDb,
   entityType: SyncEntityType,
   entity: SyncableEntity | SkillState,
   operation: 'upsert' | 'delete',

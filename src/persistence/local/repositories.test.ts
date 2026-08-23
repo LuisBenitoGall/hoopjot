@@ -15,10 +15,10 @@ import {
 } from '../../domain';
 import {
   createClientId,
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from './index';
 
 const userId = '11111111-1111-4111-8111-111111111111';
@@ -27,7 +27,7 @@ const updatedTimestamp = '2026-08-18T01:00:00.000Z';
 const sessionId = '22222222-2222-4222-8222-222222222222';
 const focusId = '44444444-4444-4444-8444-444444444444';
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('local Dexie repositories', () => {
   afterEach(async () => {
@@ -202,14 +202,14 @@ describe('local Dexie repositories', () => {
   });
 });
 
-function openDb(name: string): HoopnoteLocalDb {
-  const db = createHoopnoteLocalDb(name);
+function openDb(name: string): HoopjotLocalDb {
+  const db = createHoopjotLocalDb(name);
   openedDbs.push(db);
   return db;
 }
 
 function makeDbName(name: string): string {
-  return `hoopnote-test-${name}-${crypto.randomUUID()}`;
+  return `hoopjot-test-${name}-${crypto.randomUUID()}`;
 }
 
 function validPlayerProfile(overrides: Partial<PlayerProfile> = {}): PlayerProfile {

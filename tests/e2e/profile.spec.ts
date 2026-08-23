@@ -4,7 +4,7 @@ test('opens Profile from the bottom nav and persists editable profile fields', a
   page
 }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await enableE2EAuthService(page, `hoopnote-e2e-profile-${testInfo.workerIndex}-${Date.now()}`);
+  await enableE2EAuthService(page, `hoopjot-e2e-profile-${testInfo.workerIndex}-${Date.now()}`);
 
   await page.goto('/sign-up');
   await page.getByLabel('Email').fill('player@example.com');
@@ -49,7 +49,7 @@ test('opens Profile from the bottom nav and persists editable profile fields', a
 
 async function enableE2EAuthService(page: Page, dbName: string): Promise<void> {
   await page.addInitScript((name) => {
-    window.sessionStorage.setItem('hoopnote:e2e-auth-service', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
+    window.sessionStorage.setItem('hoopjot:e2e-auth-service', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
   }, dbName);
 }

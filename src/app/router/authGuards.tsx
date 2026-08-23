@@ -13,7 +13,7 @@ export function AuthLoadingRoute() {
   const { t } = useTranslation('common');
 
   return (
-    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopnote-ink">
+    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopjot-ink">
       <Card className="w-full max-w-sm text-center">
         <p className="text-sm font-black">{t('auth.loading')}</p>
       </Card>
@@ -162,9 +162,9 @@ function AuthBootstrapBlockedRoute({
   const isOffline = status === 'offline';
 
   return (
-    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopnote-ink">
+    <main className="court-background flex min-h-screen items-center justify-center px-5 text-hoopjot-ink">
       <Card className="w-full max-w-sm space-y-4 text-left">
-        <p className="text-sm font-bold text-hoopnote-purple">{t('sync.bootstrap.eyebrow')}</p>
+        <p className="text-sm font-bold text-hoopjot-purple">{t('sync.bootstrap.eyebrow')}</p>
         <div className="space-y-2">
           <h1 className="text-2xl font-black leading-tight">
             {t(
@@ -173,7 +173,7 @@ function AuthBootstrapBlockedRoute({
                 : 'sync.bootstrap.needsAttentionTitle',
             )}
           </h1>
-          <p className="text-sm leading-6 text-hoopnote-muted">
+          <p className="text-sm leading-6 text-hoopjot-muted">
             {t(
               isOffline
                 ? 'sync.bootstrap.offlineDescription'

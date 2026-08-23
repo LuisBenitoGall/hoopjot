@@ -1,0 +1,280 @@
+{
+  "cookies": {
+    "actions": {
+      "accept": "Aceptar todas",
+      "close": "Cerrar panel de cookies",
+      "configure": "Configurar",
+      "manage": "Gestionar cookies",
+      "reject": "Rechazar no necesarias",
+      "save": "Guardar elección"
+    },
+    "banner": {
+      "description": "Usamos almacenamiento técnico para iniciar sesión, guardar tus preferencias de consentimiento y mantener la PWA disponible sin conexión. Ahora mismo no usamos analítica, publicidad ni seguimiento.",
+      "label": "Aviso de cookies",
+      "title": "Cookies y almacenamiento"
+    },
+    "categories": {
+      "analytics": {
+        "description": "Serviría para medir uso agregado del producto. No está activa actualmente.",
+        "title": "Analítica"
+      },
+      "marketing": {
+        "description": "Serviría para publicidad, atribución o medición comercial. No está activa actualmente.",
+        "title": "Marketing"
+      },
+      "preferences": {
+        "description": "Serviría para recordar preferencias no esenciales. No está activa actualmente fuera de las preferencias técnicas de consentimiento.",
+        "title": "Preferencias"
+      },
+      "technical": {
+        "description": "Necesaria para autenticación, seguridad, consentimiento, datos locales offline, sincronización y cache PWA.",
+        "title": "Técnicas necesarias"
+      }
+    },
+    "dialog": {
+      "description": "Puedes cambiar tu elección cuando quieras. Las categorías no activas quedan preparadas para futuras integraciones, pero no instalan nada ahora.",
+      "eyebrow": "Privacidad",
+      "inactive": "No activa ahora",
+      "required": "Siempre activa",
+      "title": "Preferencias de cookies"
+    }
+  },
+  "documents": {
+    "cookies": "Política de cookies",
+    "notice": "Aviso legal",
+    "privacy": "Política de privacidad",
+    "terms": "Condiciones de uso"
+  },
+  "facts": {
+    "contact": "Contacto",
+    "nif": "NIF/CIF",
+    "owner": "Responsable",
+    "site": "Sitio web"
+  },
+  "footer": {
+    "label": "Enlaces legales"
+  },
+  "index": {
+    "description": "Información administrativa y de privacidad de Hoopjot, preparada para una PWA privada, offline-first y con sincronización segura.",
+    "eyebrow": "Legal",
+    "title": "Centro legal"
+  },
+  "layout": {
+    "aepd": "Autoridad de control: AEPD",
+    "backToApp": "Volver a Hoopjot",
+    "effectiveDate": "Última actualización: {{effectiveDate}}",
+    "navigationLabel": "Documentos legales"
+  },
+  "pages": {
+    "cookies": {
+      "description": "Explicamos qué cookies y tecnologías similares usa Hoopjot y cómo puedes gestionarlas.",
+      "sections": [
+        {
+          "body": [
+            "Esta política se aplica a cookies, localStorage, sessionStorage, IndexedDB, Cache Storage, service workers y tecnologías similares que almacenan o recuperan información en tu dispositivo.",
+            "Hoopjot no usa actualmente cookies de analítica, publicidad comportamental, píxeles de terceros ni perfiles comerciales."
+          ],
+          "title": "Alcance"
+        },
+        {
+          "items": [
+            "Autenticación y seguridad: Supabase Auth puede conservar tokens de sesión en almacenamiento local del navegador para mantener la cuenta abierta y refrescar la sesión.",
+            "Consentimiento: guardamos tu elección en localStorage con la clave hoopjot:privacy-preferences.",
+            "Datos offline: la app usa IndexedDB mediante Dexie para guardar perfil, objetivos, sesiones, check-ins, reflexiones, focos diarios, cola de sincronización y revisiones semanales.",
+            "PWA y rendimiento: el service worker y Cache Storage guardan archivos estáticos de la app para que pueda abrirse sin conexión."
+          ],
+          "title": "Almacenamiento técnico necesario"
+        },
+        {
+          "body": [
+            "Las categorías de preferencias, analítica y marketing aparecen en el panel para que el sistema esté preparado, pero no están activas ahora mismo. Si se activan en el futuro, no se cargarán sin información previa y, cuando sea necesario, sin tu consentimiento."
+          ],
+          "title": "Categorías no necesarias"
+        },
+        {
+          "body": [
+            "Puedes aceptar, rechazar las categorías no necesarias o abrir el panel de configuración. También puedes borrar el almacenamiento desde las opciones del navegador, aunque eso puede cerrar sesión o eliminar datos locales pendientes de sincronizar."
+          ],
+          "title": "Cómo gestionar tu elección"
+        }
+      ],
+      "title": "Política de cookies"
+    },
+    "notice": {
+      "description": "Información identificativa del titular de Hoopjot y condiciones básicas de acceso al sitio.",
+      "sections": [
+        {
+          "items": [
+            "Titular: {{ownerName}}.",
+            "NIF/CIF: {{ownerNif}}.",
+            "Domicilio: {{ownerAddress}}.",
+            "Email de contacto: {{ownerEmail}}.",
+            "Teléfono: {{ownerPhone}}.",
+            "Registro mercantil u otro registro público: {{tradeRegister}}.",
+            "Sitio web: {{siteUrl}}."
+          ],
+          "title": "Datos identificativos"
+        },
+        {
+          "body": [
+            "Hoopjot es una PWA privada para jugadores de baloncesto de 16 años o más. Permite registrar focos diarios, sesiones, check-ins, reflexiones y señales de progreso.",
+            "La app no es un entrenador virtual, no sustituye a entrenadores, profesionales sanitarios ni criterio médico, y no debe usarse para diagnosticar lesiones, decidir cargas de entrenamiento o progresiones de rehabilitación."
+          ],
+          "title": "Objeto del servicio"
+        },
+        {
+          "body": [
+            "El acceso al sitio y a la app debe hacerse de forma lícita, respetando la seguridad del servicio, la privacidad de otros usuarios y la propiedad intelectual de Hoopjot y de terceros."
+          ],
+          "title": "Uso del sitio"
+        },
+        {
+          "body": [
+            "Los contenidos, marca, diseño, software y catálogo editorial de Hoopjot pertenecen a su titular o a sus licenciantes. No se concede ninguna licencia salvo el uso normal de la app."
+          ],
+          "title": "Propiedad intelectual"
+        },
+        {
+          "body": [
+            "Para comunicaciones administrativas o legales puedes escribir a {{ownerEmail}}."
+          ],
+          "title": "Contacto"
+        }
+      ],
+      "title": "Aviso legal"
+    },
+    "privacy": {
+      "description": "Información sobre cómo Hoopjot trata datos personales en una cuenta privada, con funcionamiento offline y sincronización en Supabase.",
+      "sections": [
+        {
+          "body": [
+            "El responsable del tratamiento es {{ownerName}}, con NIF/CIF {{ownerNif}} y domicilio en {{ownerAddress}}. Puedes contactar en {{privacyEmail}}. Delegado de protección de datos: {{dpoEmail}}."
+          ],
+          "title": "Responsable"
+        },
+        {
+          "items": [
+            "Datos de cuenta: email, identificador de usuario y datos de autenticación gestionados por Supabase.",
+            "Perfil de jugador: alias opcional, año de nacimiento, idioma, posición, mano dominante, altura opcional, experiencia, nivel competitivo y actividad semanal.",
+            "Objetivos y actividad deportiva: objetivos activos, focos diarios, sesiones, check-ins, reflexiones, feedback del entrenador, notas, valoraciones y revisiones semanales.",
+            "Contexto físico opcional: estado físico declarado y nota libre. Esta información puede ser sensible y nunca es obligatoria para usar el núcleo de la app.",
+            "Datos técnicos: dispositivo, navegador, eventos de autenticación, estado de conexión, registros técnicos imprescindibles, almacenamiento local y cola de sincronización."
+          ],
+          "title": "Datos tratados"
+        },
+        {
+          "items": [
+            "Crear y mantener tu cuenta privada.",
+            "Guardar y sincronizar tu diario de baloncesto entre dispositivo local y backend.",
+            "Generar focos diarios y señales de progreso desde datos estructurados de la app.",
+            "Mantener la PWA disponible sin conexión y resolver conflictos de sincronización.",
+            "Atender solicitudes de soporte, privacidad, seguridad y cumplimiento legal."
+          ],
+          "title": "Finalidades"
+        },
+        {
+          "items": [
+            "Ejecución del servicio solicitado para cuenta, autenticación, diario, sincronización y funcionalidades principales.",
+            "Consentimiento para datos opcionales, como contexto físico libre, y para categorías no necesarias de cookies si se activan en el futuro.",
+            "Interés legítimo en mantener seguridad, continuidad del servicio, prevención de abuso y diagnóstico técnico.",
+            "Obligación legal cuando sea necesario atender requerimientos, responsabilidades o derechos de usuarios."
+          ],
+          "title": "Bases jurídicas"
+        },
+        {
+          "body": [
+            "Hoopjot está dirigido a jugadores de 16 años o más. El onboarding impide completar el registro si el año de nacimiento no alcanza esa edad mínima."
+          ],
+          "title": "Edad mínima"
+        },
+        {
+          "body": [
+            "Los datos se alojan localmente en tu dispositivo y se sincronizan con {{backendProvider}} cuando existe configuración y conexión. La región configurada para Supabase es: {{backendRegion}}. El frontend se aloja en {{hostingProvider}}.",
+            "Estos proveedores actúan como encargados o prestadores tecnológicos. Si implican transferencias internacionales, deberán cubrirse mediante las garantías aplicables del RGPD, como cláusulas contractuales tipo u otros mecanismos válidos."
+          ],
+          "title": "Destinatarios y proveedores"
+        },
+        {
+          "body": [
+            "Conservamos los datos mientras mantengas la cuenta o sean necesarios para prestar el servicio. Los datos locales pueden permanecer en tu dispositivo hasta que cierres sesión, borres la app, limpies el navegador o solicites supresión. Determinados registros pueden conservarse durante plazos legales de responsabilidad."
+          ],
+          "title": "Conservación"
+        },
+        {
+          "body": [
+            "Puedes solicitar acceso, rectificación, supresión, oposición, limitación, portabilidad y retirada del consentimiento escribiendo a {{privacyEmail}}. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos."
+          ],
+          "title": "Derechos"
+        },
+        {
+          "body": [
+            "Hoopjot aplica minimización, privacidad por defecto, autenticación, reglas RLS en Supabase y almacenamiento local estructurado. Ninguna medida es infalible, pero el diseño evita perfiles públicos, venta de datos y publicidad comportamental."
+          ],
+          "title": "Seguridad y privacidad por diseño"
+        }
+      ],
+      "title": "Política de privacidad"
+    },
+    "terms": {
+      "description": "Condiciones básicas para usar Hoopjot durante la fase gratuita/piloto y preparación para funcionalidades de pago futuras.",
+      "sections": [
+        {
+          "body": [
+            "Hoopjot permite crear una cuenta privada y registrar información deportiva personal para organizar focos, sesiones, reflexiones y progreso cualitativo.",
+            "El servicio es gratuito por ahora. Si se incorporan planes de pago, precios o suscripciones, se informará antes de contratar y se aplicarán las condiciones comerciales correspondientes."
+          ],
+          "title": "Servicio"
+        },
+        {
+          "body": [
+            "Debes proporcionar información veraz, mantener la confidencialidad de tus credenciales y avisar si detectas un acceso no autorizado. La app está destinada a usuarios de 16 años o más."
+          ],
+          "title": "Cuenta"
+        },
+        {
+          "items": [
+            "No intentes acceder a datos de otros usuarios ni eludir controles de seguridad.",
+            "No introduzcas contenido ilícito, ofensivo, que vulnere derechos de terceros o que contenga datos personales de otras personas sin base legítima.",
+            "No uses Hoopjot para tomar decisiones médicas, entrenar con dolor, diagnosticar lesiones o sustituir a profesionales cualificados."
+          ],
+          "title": "Uso aceptable"
+        },
+        {
+          "body": [
+            "Tus notas, reflexiones y datos de jugador son tuyos. Concedes a Hoopjot la autorización técnica necesaria para alojarlos, procesarlos, sincronizarlos y mostrarlos dentro del servicio."
+          ],
+          "title": "Contenido del usuario"
+        },
+        {
+          "body": [
+            "La PWA está diseñada para funcionar offline, pero algunas acciones requieren red: crear cuenta, iniciar sesión por primera vez en un dispositivo, recuperar contraseña y sincronizar datos. Pueden existir interrupciones, actualizaciones o limitaciones técnicas."
+          ],
+          "title": "Disponibilidad"
+        },
+        {
+          "body": [
+            "Puedes dejar de usar la app y solicitar la eliminación de datos personales escribiendo a {{privacyEmail}}. Hoopjot podrá suspender cuentas que incumplan estas condiciones o comprometan la seguridad del servicio."
+          ],
+          "title": "Baja y suspensión"
+        },
+        {
+          "body": [
+            "Estas condiciones se rigen por la legislación española, sin perjuicio de los derechos imperativos que puedan corresponder a consumidores y usuarios."
+          ],
+          "title": "Ley aplicable"
+        }
+      ],
+      "title": "Condiciones de uso"
+    }
+  },
+  "summaries": {
+    "cookies": "Cookies y tecnologías similares, panel de consentimiento y almacenamiento offline.",
+    "notice": "Identificación del titular, contacto, propiedad intelectual y objeto del servicio.",
+    "privacy": "Datos tratados, bases jurídicas, proveedores, derechos y límites del producto.",
+    "terms": "Reglas de uso, cuenta, disponibilidad, contenido del usuario y futura capa de pago."
+  },
+  "values": {
+    "missing": "Pendiente de configurar",
+    "notApplicable": "No aplica"
+  }
+}

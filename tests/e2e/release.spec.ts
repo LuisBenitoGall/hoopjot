@@ -4,7 +4,7 @@ test('pilot user can sign up, onboard in Spanish and complete the daily loop on 
   page
 }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await enableE2EAuthService(page, `hoopnote-e2e-release-es-${testInfo.workerIndex}-${Date.now()}`);
+  await enableE2EAuthService(page, `hoopjot-e2e-release-es-${testInfo.workerIndex}-${Date.now()}`);
 
   await page.goto('/sign-up');
   await page.getByLabel('Email').fill('player@example.com');
@@ -62,7 +62,7 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
   await page.setViewportSize({ width: 360, height: 820 });
   await enableAuthenticatedE2EUser(
     page,
-    `hoopnote-e2e-release-responsive-${testInfo.workerIndex}-${Date.now()}`,
+    `hoopjot-e2e-release-responsive-${testInfo.workerIndex}-${Date.now()}`,
   );
 
   const screens = [
@@ -75,7 +75,7 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
 
   for (const screen of screens) {
     await page.goto(screen.path);
-    await expect(page.getByRole('heading', { name: screen.heading })).toBeVisible();
+    await expect(page.getByRole('heading', { exact: true, level: 1, name: screen.heading })).toBeVisible();
     await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible();
     await expectAccessiblePrimarySurface(page);
   }
@@ -87,7 +87,7 @@ test('queued local changes sync after reconnect with the controlled remote adapt
 }, testInfo) => {
   await enableAuthenticatedE2EUser(
     page,
-    `hoopnote-e2e-release-sync-${testInfo.workerIndex}-${Date.now()}`,
+    `hoopjot-e2e-release-sync-${testInfo.workerIndex}-${Date.now()}`,
     { remoteSync: true },
   );
 
@@ -109,7 +109,7 @@ test('queued local changes sync after reconnect with the controlled remote adapt
   await expect
     .poll(async () =>
       page.evaluate(() => {
-        const rawValue = window.sessionStorage.getItem('hoopnote:e2e-remote-data');
+        const rawValue = window.sessionStorage.getItem('hoopjot:e2e-remote-data');
         const data = rawValue ? JSON.parse(rawValue) : null;
 
         return {
@@ -124,8 +124,8 @@ test('queued local changes sync after reconnect with the controlled remote adapt
 
 async function enableE2EAuthService(page: Page, dbName: string): Promise<void> {
   await page.addInitScript((name) => {
-    window.sessionStorage.setItem('hoopnote:e2e-auth-service', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
+    window.sessionStorage.setItem('hoopjot:e2e-auth-service', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
   }, dbName);
 }
 
@@ -136,12 +136,12 @@ async function enableAuthenticatedE2EUser(
 ): Promise<void> {
   await page.addInitScript(
     ({ name, remoteSync }) => {
-      window.sessionStorage.setItem('hoopnote:e2e-auth', '1');
-      window.sessionStorage.setItem('hoopnote:e2e-onboarded', '1');
-      window.sessionStorage.setItem('hoopnote:e2e-db-name', name);
+      window.sessionStorage.setItem('hoopjot:e2e-auth', '1');
+      window.sessionStorage.setItem('hoopjot:e2e-onboarded', '1');
+      window.sessionStorage.setItem('hoopjot:e2e-db-name', name);
 
       if (remoteSync) {
-        window.sessionStorage.setItem('hoopnote:e2e-remote-sync', '1');
+        window.sessionStorage.setItem('hoopjot:e2e-remote-sync', '1');
       }
     },
     { name: dbName, remoteSync: Boolean(options.remoteSync) },

@@ -181,9 +181,9 @@ export function ProgressRoute({ service: injectedService }: ProgressRouteProps) 
     <AppShell activeItemId="progress">
       <div className="space-y-5 pb-3">
         <section className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopnote-purple">{t('progress.eyebrow')}</p>
+          <p className="text-sm font-bold text-hoopjot-purple">{t('progress.eyebrow')}</p>
           <h1 className="text-3xl font-black leading-tight">{t('progress.title')}</h1>
-          <p className="text-sm leading-6 text-hoopnote-muted">{t('progress.intro')}</p>
+          <p className="text-sm leading-6 text-hoopjot-muted">{t('progress.intro')}</p>
         </section>
 
         {routeState.status === 'loading' ? (
@@ -275,7 +275,7 @@ function ProgressContent({
       {dashboard.overview.learningState === 'building' ? (
         <Card className="space-y-2" tone="warm">
           <h2 className="text-lg font-black">{t('progress.building.title')}</h2>
-          <p className="text-sm leading-6 text-hoopnote-muted">
+          <p className="text-sm leading-6 text-hoopjot-muted">
             {t('progress.building.description')}
           </p>
         </Card>
@@ -316,7 +316,7 @@ function RecentSessionsSection({
       />
 
       {sessions.length === 0 ? (
-        <p className="text-sm leading-6 text-hoopnote-muted">
+        <p className="text-sm leading-6 text-hoopjot-muted">
           {t('progress.recentSessions.emptyDescription')}
         </p>
       ) : (
@@ -337,12 +337,12 @@ function RecentSessionsSection({
                       ? getGuidelineCopy(t, session.guideline).title
                       : t('progress.recentSessions.noFocus')}
                   </h3>
-                  <p className="text-sm font-bold text-hoopnote-muted">
+                  <p className="text-sm font-bold text-hoopjot-muted">
                     {formatDateTime(session.occurredAt, locale)}
                   </p>
                 </div>
 
-                <p className="text-sm leading-6 text-hoopnote-muted">
+                <p className="text-sm leading-6 text-hoopjot-muted">
                   {session.reflection
                     ? t('progress.recentSessions.reflectionSaved')
                     : t('progress.recentSessions.noReflection')}
@@ -373,7 +373,7 @@ function FocusAreasSection({
       />
 
       {focusAreas.length === 0 ? (
-        <p className="text-sm leading-6 text-hoopnote-muted">
+        <p className="text-sm leading-6 text-hoopjot-muted">
           {t('progress.focusAreas.emptyDescription')}
         </p>
       ) : (
@@ -381,7 +381,7 @@ function FocusAreasSection({
           <ul className="space-y-4">
             {focusAreas.map((focusArea) => (
               <li
-                className="border-b border-hoopnote-line pb-4 last:border-0 last:pb-0"
+                className="border-b border-hoopjot-line pb-4 last:border-0 last:pb-0"
                 key={focusArea.skillId}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -389,7 +389,7 @@ function FocusAreasSection({
                     <p className="text-base font-black">
                       {getSkillLabel(t, focusArea.skill, focusArea.skillId)}
                     </p>
-                    <p className="text-sm font-bold text-hoopnote-muted">
+                    <p className="text-sm font-bold text-hoopjot-muted">
                       {t('progress.focusAreas.lastFocused', {
                         date: formatLocalDateLabel(focusArea.lastFocusedAt, locale)
                       })}
@@ -417,7 +417,7 @@ function SignalsSection({ signals }: { signals: ProgressSignal[] }) {
       />
 
       {signals.length === 0 ? (
-        <p className="text-sm leading-6 text-hoopnote-muted">
+        <p className="text-sm leading-6 text-hoopjot-muted">
           {t('progress.signals.emptyDescription')}
         </p>
       ) : (
@@ -425,7 +425,7 @@ function SignalsSection({ signals }: { signals: ProgressSignal[] }) {
           <ul className="space-y-4">
             {signals.map((signal) => (
               <li
-                className="border-b border-hoopnote-line pb-4 last:border-0 last:pb-0"
+                className="border-b border-hoopjot-line pb-4 last:border-0 last:pb-0"
                 key={signal.skillId}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -433,7 +433,7 @@ function SignalsSection({ signals }: { signals: ProgressSignal[] }) {
                     <p className="text-base font-black">
                       {getSkillLabel(t, signal.skill, signal.skillId)}
                     </p>
-                    <p className="text-sm font-bold text-hoopnote-muted">
+                    <p className="text-sm font-bold text-hoopjot-muted">
                       {t('progress.signals.evidenceLabel')}
                     </p>
                   </div>
@@ -485,7 +485,7 @@ function WeeklyReviewPanel({
               date: formatLocalDateLabel(weekStart, locale)
             })}
           </Chip>
-          <p className="text-sm leading-6 text-hoopnote-muted">
+          <p className="text-sm leading-6 text-hoopjot-muted">
             {t('progress.weeklyReview.description')}
           </p>
         </div>
@@ -561,7 +561,7 @@ function WeeklyReviewPanel({
                   : t('progress.actions.saveNotes')}
               </Button>
               {reviewActionState === 'saved' ? (
-                <p className="flex items-center gap-2 text-sm font-bold text-hoopnote-success">
+                <p className="flex items-center gap-2 text-sm font-bold text-hoopjot-success">
                   <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
                   {t('progress.weeklyReview.saved')}
                 </p>
@@ -587,9 +587,9 @@ function WeeklyReviewSkillGroup({
 
   return (
     <section className="space-y-2">
-      <h3 className="text-xs font-black uppercase text-hoopnote-muted">{label}</h3>
+      <h3 className="text-xs font-black uppercase text-hoopjot-muted">{label}</h3>
       {skillIds.length === 0 ? (
-        <p className="text-sm leading-6 text-hoopnote-muted">
+        <p className="text-sm leading-6 text-hoopjot-muted">
           {t('progress.weeklyReview.noItems')}
         </p>
       ) : (
@@ -620,9 +620,9 @@ function WeeklyReviewTextField({
 }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-bold text-hoopnote-ink">{label}</span>
+      <span className="text-sm font-bold text-hoopjot-ink">{label}</span>
       <textarea
-        className="min-h-24 w-full resize-y rounded-card border-2 border-hoopnote-line bg-hoopnote-surface px-4 py-3 text-sm leading-6 text-hoopnote-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30"
+        className="min-h-24 w-full resize-y rounded-card border-2 border-hoopjot-line bg-hoopjot-surface px-4 py-3 text-sm leading-6 text-hoopjot-ink outline-none focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
         maxLength={maxLength}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
@@ -645,7 +645,7 @@ function TrendChip({ trend }: { trend: ProgressSignalTrend }) {
 function SectionHeading({ icon, title }: { icon: ReactNode; title: string }) {
   return (
     <h2 className="flex items-center gap-2 text-xl font-black leading-tight">
-      <span className="text-hoopnote-purple">{icon}</span>
+      <span className="text-hoopjot-purple">{icon}</span>
       {title}
     </h2>
   );

@@ -7,9 +7,9 @@ import type {
 } from './types';
 
 const defaultE2eUserId = '11111111-1111-4111-8111-111111111111';
-const e2eAuthEnabledKey = 'hoopnote:e2e-auth-service';
-const e2eAuthenticatedKey = 'hoopnote:e2e-auth';
-const e2eOnboardedKey = 'hoopnote:e2e-onboarded';
+const e2eAuthEnabledKey = 'hoopjot:e2e-auth-service';
+const e2eAuthenticatedKey = 'hoopjot:e2e-auth';
+const e2eOnboardedKey = 'hoopjot:e2e-onboarded';
 
 export function createE2EAuthService(): AuthService | null {
   if (

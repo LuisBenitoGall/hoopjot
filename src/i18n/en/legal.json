@@ -1,0 +1,280 @@
+{
+  "cookies": {
+    "actions": {
+      "accept": "Accept all",
+      "close": "Close cookie panel",
+      "configure": "Configure",
+      "manage": "Manage cookies",
+      "reject": "Reject non-essential",
+      "save": "Save choice"
+    },
+    "banner": {
+      "description": "We use technical storage to keep you signed in, remember your consent choice and keep the PWA available offline. We do not currently use analytics, ads or tracking.",
+      "label": "Cookie notice",
+      "title": "Cookies and storage"
+    },
+    "categories": {
+      "analytics": {
+        "description": "Would be used to measure aggregated product usage. It is not active right now.",
+        "title": "Analytics"
+      },
+      "marketing": {
+        "description": "Would be used for advertising, attribution or commercial measurement. It is not active right now.",
+        "title": "Marketing"
+      },
+      "preferences": {
+        "description": "Would be used to remember non-essential preferences. It is not active right now beyond technical consent preferences.",
+        "title": "Preferences"
+      },
+      "technical": {
+        "description": "Required for authentication, security, consent, offline local data, sync and PWA caching.",
+        "title": "Strictly necessary"
+      }
+    },
+    "dialog": {
+      "description": "You can change your choice at any time. Inactive categories are ready for future integrations, but they do not install anything now.",
+      "eyebrow": "Privacy",
+      "inactive": "Not active now",
+      "required": "Always active",
+      "title": "Cookie preferences"
+    }
+  },
+  "documents": {
+    "cookies": "Cookie policy",
+    "notice": "Legal notice",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use"
+  },
+  "facts": {
+    "contact": "Contact",
+    "nif": "Tax ID",
+    "owner": "Controller",
+    "site": "Website"
+  },
+  "footer": {
+    "label": "Legal links"
+  },
+  "index": {
+    "description": "Administrative and privacy information for Hoopjot, prepared for a private offline-first PWA with secure sync.",
+    "eyebrow": "Legal",
+    "title": "Legal center"
+  },
+  "layout": {
+    "aepd": "Supervisory authority: AEPD",
+    "backToApp": "Back to Hoopjot",
+    "effectiveDate": "Last updated: {{effectiveDate}}",
+    "navigationLabel": "Legal documents"
+  },
+  "pages": {
+    "cookies": {
+      "description": "This page explains which cookies and similar technologies Hoopjot uses and how you can manage them.",
+      "sections": [
+        {
+          "body": [
+            "This policy covers cookies, localStorage, sessionStorage, IndexedDB, Cache Storage, service workers and similar technologies that store or retrieve information on your device.",
+            "Hoopjot does not currently use analytics cookies, behavioural advertising, third-party pixels or commercial profiling."
+          ],
+          "title": "Scope"
+        },
+        {
+          "items": [
+            "Authentication and security: Supabase Auth may keep session tokens in browser local storage to keep your account signed in and refresh the session.",
+            "Consent: we store your choice in localStorage under the key hoopjot:privacy-preferences.",
+            "Offline data: the app uses IndexedDB through Dexie to store profile, goals, sessions, check-ins, reflections, daily focuses, sync queue and weekly reviews.",
+            "PWA and performance: the service worker and Cache Storage keep static app files so the app can open offline."
+          ],
+          "title": "Strictly necessary technical storage"
+        },
+        {
+          "body": [
+            "Preferences, analytics and marketing appear in the panel so the system is ready for future use, but they are not active right now. If they are enabled later, they will not load without prior information and, where required, your consent."
+          ],
+          "title": "Non-essential categories"
+        },
+        {
+          "body": [
+            "You can accept, reject non-essential categories or open the settings panel. You can also clear storage from your browser settings, although doing so may sign you out or remove local data waiting to sync."
+          ],
+          "title": "Managing your choice"
+        }
+      ],
+      "title": "Cookie policy"
+    },
+    "notice": {
+      "description": "Identification details for the Hoopjot owner and basic access information for the site.",
+      "sections": [
+        {
+          "items": [
+            "Owner: {{ownerName}}.",
+            "Tax ID: {{ownerNif}}.",
+            "Address: {{ownerAddress}}.",
+            "Contact email: {{ownerEmail}}.",
+            "Phone: {{ownerPhone}}.",
+            "Commercial registry or other public registry: {{tradeRegister}}.",
+            "Website: {{siteUrl}}."
+          ],
+          "title": "Identification"
+        },
+        {
+          "body": [
+            "Hoopjot is a private PWA for basketball players aged 16 and older. It lets players log daily focuses, sessions, check-ins, reflections and progress signals.",
+            "The app is not a virtual coach, does not replace coaches, healthcare professionals or medical judgment, and must not be used to diagnose injuries, decide training load or manage rehabilitation progression."
+          ],
+          "title": "Service purpose"
+        },
+        {
+          "body": [
+            "The site and app must be accessed lawfully, respecting service security, other users' privacy and Hoopjot's and third parties' intellectual property."
+          ],
+          "title": "Site use"
+        },
+        {
+          "body": [
+            "Hoopjot content, brand, design, software and editorial catalogue belong to its owner or licensors. No licence is granted beyond ordinary app use."
+          ],
+          "title": "Intellectual property"
+        },
+        {
+          "body": [
+            "For administrative or legal communications, write to {{ownerEmail}}."
+          ],
+          "title": "Contact"
+        }
+      ],
+      "title": "Legal notice"
+    },
+    "privacy": {
+      "description": "How Hoopjot processes personal data in a private account with offline operation and Supabase sync.",
+      "sections": [
+        {
+          "body": [
+            "The controller is {{ownerName}}, with tax ID {{ownerNif}} and address at {{ownerAddress}}. You can contact us at {{privacyEmail}}. Data protection officer: {{dpoEmail}}."
+          ],
+          "title": "Controller"
+        },
+        {
+          "items": [
+            "Account data: email, user identifier and authentication data handled by Supabase.",
+            "Player profile: optional alias, birth year, language, position, dominant hand, optional height, experience, competitive level and weekly activity.",
+            "Goals and sports activity: active goals, daily focuses, sessions, check-ins, reflections, coach feedback, notes, ratings and weekly reviews.",
+            "Optional physical context: declared physical status and free-text note. This information may be sensitive and is never required for core app use.",
+            "Technical data: device, browser, authentication events, connection state, strictly necessary technical logs, local storage and sync queue."
+          ],
+          "title": "Data we process"
+        },
+        {
+          "items": [
+            "Create and maintain your private account.",
+            "Store and sync your basketball journal between local device and backend.",
+            "Generate daily focuses and progress signals from structured app data.",
+            "Keep the PWA available offline and resolve sync conflicts.",
+            "Handle support, privacy, security and legal requests."
+          ],
+          "title": "Purposes"
+        },
+        {
+          "items": [
+            "Performance of the requested service for account, authentication, journal, sync and main features.",
+            "Consent for optional data, such as free-text physical context, and for non-essential cookie categories if activated in the future.",
+            "Legitimate interest in security, service continuity, abuse prevention and technical diagnosis.",
+            "Legal obligation where required for requests, responsibilities or user rights."
+          ],
+          "title": "Legal bases"
+        },
+        {
+          "body": [
+            "Hoopjot is intended for players aged 16 and older. Onboarding prevents completion if the birth year does not meet that minimum age."
+          ],
+          "title": "Minimum age"
+        },
+        {
+          "body": [
+            "Data is stored locally on your device and synced with {{backendProvider}} when configured and connected. The configured Supabase region is: {{backendRegion}}. The frontend is hosted by {{hostingProvider}}.",
+            "These providers act as processors or technology providers. If international transfers are involved, they must be covered by applicable GDPR safeguards such as standard contractual clauses or other valid mechanisms."
+          ],
+          "title": "Recipients and providers"
+        },
+        {
+          "body": [
+            "We keep data while you maintain the account or while it is needed to provide the service. Local data may remain on your device until you sign out, uninstall the app, clear browser storage or request deletion. Some records may be retained for legal limitation periods."
+          ],
+          "title": "Retention"
+        },
+        {
+          "body": [
+            "You can request access, rectification, erasure, objection, restriction, portability and withdrawal of consent by writing to {{privacyEmail}}. You may also lodge a complaint with the Spanish Data Protection Agency."
+          ],
+          "title": "Rights"
+        },
+        {
+          "body": [
+            "Hoopjot applies minimisation, privacy by default, authentication, Supabase RLS rules and structured local storage. No measure is perfect, but the design avoids public profiles, data sales and behavioural advertising."
+          ],
+          "title": "Security and privacy by design"
+        }
+      ],
+      "title": "Privacy policy"
+    },
+    "terms": {
+      "description": "Basic terms for using Hoopjot during the free/pilot phase, with preparation for future paid functionality.",
+      "sections": [
+        {
+          "body": [
+            "Hoopjot lets you create a private account and log personal sports information to organise focuses, sessions, reflections and qualitative progress.",
+            "The service is free for now. If paid plans, pricing or subscriptions are added, you will be informed before contracting and the corresponding commercial terms will apply."
+          ],
+          "title": "Service"
+        },
+        {
+          "body": [
+            "You must provide truthful information, keep your credentials confidential and notify us if you detect unauthorised access. The app is intended for users aged 16 and older."
+          ],
+          "title": "Account"
+        },
+        {
+          "items": [
+            "Do not try to access other users' data or bypass security controls.",
+            "Do not enter unlawful or offensive content, content that infringes third-party rights, or personal data about other people without a valid basis.",
+            "Do not use Hoopjot to make medical decisions, train through pain, diagnose injuries or replace qualified professionals."
+          ],
+          "title": "Acceptable use"
+        },
+        {
+          "body": [
+            "Your notes, reflections and player data are yours. You grant Hoopjot the technical permission needed to host, process, sync and display them within the service."
+          ],
+          "title": "User content"
+        },
+        {
+          "body": [
+            "The PWA is designed to work offline, but some actions need network access: creating an account, first sign-in on a device, password recovery and data sync. Interruptions, updates or technical limitations may occur."
+          ],
+          "title": "Availability"
+        },
+        {
+          "body": [
+            "You can stop using the app and request personal data deletion by writing to {{privacyEmail}}. Hoopjot may suspend accounts that breach these terms or compromise service security."
+          ],
+          "title": "Termination and suspension"
+        },
+        {
+          "body": [
+            "These terms are governed by Spanish law, without prejudice to mandatory consumer rights that may apply."
+          ],
+          "title": "Applicable law"
+        }
+      ],
+      "title": "Terms of use"
+    }
+  },
+  "summaries": {
+    "cookies": "Cookies and similar technologies, consent panel and offline storage.",
+    "notice": "Owner identification, contact, intellectual property and service purpose.",
+    "privacy": "Data, legal bases, providers, rights and product boundaries.",
+    "terms": "Use rules, account, availability, user content and future paid layer."
+  },
+  "values": {
+    "missing": "Pending configuration",
+    "notApplicable": "Not applicable"
+  }
+}

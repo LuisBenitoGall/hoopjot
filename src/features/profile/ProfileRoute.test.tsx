@@ -11,10 +11,10 @@ import { SyncContext } from '../../app/providers/syncContext';
 import type { PlayerProfile } from '../../domain';
 import i18n from '../../i18n/config';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb,
+  type HoopjotLocalDb,
   type LocalRepositories
 } from '../../persistence/local';
 import type { AuthService, AuthUser } from '../../services/auth';
@@ -23,7 +23,7 @@ import { ProfileRoute } from './ProfileRoute';
 const userId = '11111111-1111-4111-8111-111111111111';
 const timestamp = '2026-08-18T16:00:00.000Z';
 const updatedAt = '2026-08-19T10:00:00.000Z';
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('ProfileRoute', () => {
   beforeEach(() => {
@@ -97,7 +97,7 @@ describe('ProfileRoute', () => {
 async function createProfileFixture(): Promise<{
   repositories: LocalRepositories;
 }> {
-  const db = createHoopnoteLocalDb(`hoopnote-profile-route-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-profile-route-${crypto.randomUUID()}`);
   openedDbs.push(db);
 
   const repositories = createLocalRepositories(db);

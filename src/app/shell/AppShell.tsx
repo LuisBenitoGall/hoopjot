@@ -84,14 +84,14 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
     >
       {isUpdateAvailable ? (
         <section
-          className="mb-4 rounded-card border-2 border-hoopnote-blue/35 bg-hoopnote-blue/10 p-4"
+          className="mb-4 rounded-card border-2 border-hoopjot-blue/35 bg-hoopjot-blue/10 p-4"
           role="status"
           aria-label={t('pwa.update.label')}
         >
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <p className="text-sm font-black">{t('pwa.update.title')}</p>
-              <p className="text-sm leading-6 text-hoopnote-muted">
+              <p className="text-sm leading-6 text-hoopjot-muted">
                 {t('pwa.update.description')}
               </p>
             </div>
@@ -113,9 +113,9 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
       {children ?? (
         <div className="space-y-5" id="today">
           <section className="space-y-3 pt-2">
-            <p className="text-sm font-bold text-hoopnote-purple">{t('shellEyebrow')}</p>
+            <p className="text-sm font-bold text-hoopjot-purple">{t('shellEyebrow')}</p>
             <h1 className="text-4xl font-black leading-none">{t('designSystem.title')}</h1>
-            <p className="text-base leading-7 text-hoopnote-muted">{t('designSystem.intro')}</p>
+            <p className="text-base leading-7 text-hoopjot-muted">{t('designSystem.intro')}</p>
           </section>
 
           <DailyFocusCard
@@ -150,7 +150,7 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
 
             <Card className="space-y-4" tone="warm">
               <div className="flex items-center gap-2">
-                <Languages className="h-5 w-5 text-hoopnote-purple" aria-hidden="true" />
+                <Languages className="h-5 w-5 text-hoopjot-purple" aria-hidden="true" />
                 <h2 className="text-lg font-black">{t('languageLabel')}</h2>
               </div>
               <div className="flex flex-wrap gap-2">

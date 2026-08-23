@@ -5,8 +5,8 @@ test('browses bundled Game content and opens detail after going offline', async 
   page
 }) => {
   await page.addInitScript(() => {
-    window.sessionStorage.setItem('hoopnote:e2e-auth', '1');
-    window.sessionStorage.setItem('hoopnote:e2e-onboarded', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-auth', '1');
+    window.sessionStorage.setItem('hoopjot:e2e-onboarded', '1');
   });
 
   await page.goto('/game');

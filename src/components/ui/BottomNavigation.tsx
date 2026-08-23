@@ -20,7 +20,7 @@ export function BottomNavigation({ activeItemId, ariaLabel, items }: BottomNavig
   return (
     <nav
       aria-label={ariaLabel}
-      className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-[480px] border-t-2 border-hoopnote-line bg-hoopnote-surface/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-[480px] border-t-2 border-hoopjot-line bg-hoopjot-surface/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur"
     >
       <ul className="grid grid-cols-5 gap-1">
         {items.map((item) => {
@@ -33,10 +33,10 @@ export function BottomNavigation({ activeItemId, ariaLabel, items }: BottomNavig
                 aria-current={active ? 'page' : undefined}
                 className={cx(
                   'flex min-h-16 flex-col items-center justify-center gap-1 rounded-card px-1 text-[0.7rem] font-bold leading-none outline-none motion-safe:transition',
-                  'focus-visible:ring-4 focus-visible:ring-hoopnote-blue/30',
+                  'focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30',
                   active
-                    ? 'bg-hoopnote-ink text-white shadow-control'
-                    : 'text-hoopnote-muted hover:bg-hoopnote-ink/8 hover:text-hoopnote-ink',
+                    ? 'bg-hoopjot-ink text-white shadow-control'
+                    : 'text-hoopjot-muted hover:bg-hoopjot-ink/8 hover:text-hoopjot-ink',
                 )}
                 to={item.href}
               >

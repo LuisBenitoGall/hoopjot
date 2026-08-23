@@ -54,7 +54,7 @@ Do not start the next spec.
 Implement `specs/001-design-system.md`.
 
 Follow AGENTS.md and the referenced documentation.
-Use `assets/hoopnote-brand-board.png` as visual direction, not as a pixel-perfect screen mockup.
+Use `assets/hoopjot-brand-board.png` as visual direction, not as a pixel-perfect screen mockup.
 
 Keep the implementation mobile-first, accessible and reusable.
 Implement only this spec.

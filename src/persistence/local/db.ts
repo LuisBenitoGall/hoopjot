@@ -14,7 +14,7 @@ import type {
 } from '../../domain';
 import type { SyncOperation } from './syncQueue';
 
-export class HoopnoteLocalDb extends Dexie {
+export class HoopjotLocalDb extends Dexie {
   checkIns!: Table<CheckIn, string>;
   dailyFocus!: Table<DailyFocus, string>;
   observations!: Table<Observation, string>;
@@ -27,7 +27,7 @@ export class HoopnoteLocalDb extends Dexie {
   syncQueue!: Table<SyncOperation, string>;
   weeklyReviews!: Table<WeeklyReview, string>;
 
-  constructor(name = 'hoopnote-local') {
+  constructor(name = 'hoopjot-local') {
     super(name);
 
     this.version(1).stores({
@@ -49,11 +49,11 @@ export class HoopnoteLocalDb extends Dexie {
   }
 }
 
-export function createHoopnoteLocalDb(name?: string): HoopnoteLocalDb {
-  return new HoopnoteLocalDb(name);
+export function createHoopjotLocalDb(name?: string): HoopjotLocalDb {
+  return new HoopjotLocalDb(name);
 }
 
-export async function resetLocalDatabase(db: HoopnoteLocalDb): Promise<void> {
+export async function resetLocalDatabase(db: HoopjotLocalDb): Promise<void> {
   await db.transaction(
     'rw',
     db.tables,

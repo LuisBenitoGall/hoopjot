@@ -1,10 +1,10 @@
-# Hoopnote — Codex Handoff Pack
+# Hoopjot — Codex Handoff Pack
 
-Este paquete contiene la documentación de producto, arquitectura y ejecución para desarrollar **Hoopnote**, una PWA mobile-first para ayudar a jugadores y jugadoras de baloncesto a mejorar mediante focos diarios, reflexión y seguimiento de progreso.
+Este paquete contiene la documentación de producto, arquitectura y ejecución para desarrollar **Hoopjot**, una PWA mobile-first para ayudar a jugadores y jugadoras de baloncesto a mejorar mediante focos diarios, reflexión y seguimiento de progreso.
 
 ## Cómo usar este paquete
 
-1. Crea un repositorio Git vacío para Hoopnote.
+1. Crea un repositorio Git vacío para Hoopjot.
 2. Copia **todo el contenido de este paquete en la raíz del repositorio**.
 3. Haz el primer commit solo con documentación y assets.
 4. Abre Codex en ese repositorio.
@@ -39,7 +39,7 @@ Codex debe leer `AGENTS.md` antes de trabajar y la spec correspondiente antes de
 
 ## Decisiones de producto cerradas
 
-- Nombre: **Hoopnote**
+- Nombre: **Hoopjot**
 - Idiomas iniciales: **English + Spanish**
 - Preparado para N idiomas
 - Público: neutral en género

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Make Hoopnote reliably installable and useful offline.
+Make Hoopjot reliably installable and useful offline.
 
 ## Read first
 
@@ -12,7 +12,7 @@ Make Hoopnote reliably installable and useful offline.
 
 ## Deliverables
 
-- Production manifest with Hoopnote metadata/icons.
+- Production manifest with Hoopjot metadata/icons.
 - Service worker caching strategy.
 - App shell and curated content available offline.
 - Clear app update strategy.

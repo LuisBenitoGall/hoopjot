@@ -9,10 +9,10 @@ import type {
   Skill
 } from '../../domain';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../../persistence/local';
 import { JournalService } from './journalService';
 
@@ -29,7 +29,7 @@ const sameDayAt = '2026-08-18T12:00:00.000Z';
 const olderAt = '2026-08-17T12:00:00.000Z';
 const oldestAt = '2026-08-16T12:00:00.000Z';
 
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('JournalService', () => {
   afterEach(async () => {
@@ -146,7 +146,7 @@ describe('JournalService', () => {
 });
 
 function makeRepositories() {
-  const db = createHoopnoteLocalDb(`hoopnote-journal-service-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-journal-service-${crypto.randomUUID()}`);
   openedDbs.push(db);
 
   return { db, repositories: createLocalRepositories(db) };

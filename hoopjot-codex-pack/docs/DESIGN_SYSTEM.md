@@ -2,10 +2,10 @@
 
 ## Brand
 
-**Hoopnote** combines a personal basketball journal with the visual energy of the court.
+**Hoopjot** combines a personal basketball journal with the visual energy of the court.
 
 Reference asset:
-`assets/hoopnote-brand-board.png`
+`assets/hoopjot-brand-board.png`
 
 The asset is visual direction, not a pixel-perfect implementation contract.
 

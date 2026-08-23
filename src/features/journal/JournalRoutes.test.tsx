@@ -19,10 +19,10 @@ import { LocalRepositoriesProvider } from '../../app/providers/LocalRepositories
 import type { Guideline, Reflection, Session } from '../../domain';
 import i18n from '../../i18n/config';
 import {
-  createHoopnoteLocalDb,
+  createHoopjotLocalDb,
   createLocalRepositories,
   resetLocalDatabase,
-  type HoopnoteLocalDb
+  type HoopjotLocalDb
 } from '../../persistence/local';
 import type { AuthService, AuthUser } from '../../services/auth';
 import {
@@ -33,7 +33,7 @@ import {
 const userId = '11111111-1111-4111-8111-111111111111';
 const sessionId = '33333333-3333-4333-8333-333333333333';
 const timestamp = '2026-08-18T16:00:00.000Z';
-const openedDbs: HoopnoteLocalDb[] = [];
+const openedDbs: HoopjotLocalDb[] = [];
 
 describe('Journal routes', () => {
   beforeEach(() => {
@@ -104,7 +104,7 @@ class FakeJournalService implements JournalServicePort {
 }
 
 function renderJournalRoutes(initialPath: string, service: JournalServicePort) {
-  const db = createHoopnoteLocalDb(`hoopnote-journal-route-${crypto.randomUUID()}`);
+  const db = createHoopjotLocalDb(`hoopjot-journal-route-${crypto.randomUUID()}`);
   openedDbs.push(db);
 
   return render(
