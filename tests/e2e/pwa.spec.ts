@@ -40,7 +40,7 @@ test('publishes an installable manifest and active service worker', async ({ pag
   expect(cacheNames.some((name) => name.toLowerCase().includes('supabase'))).toBe(false);
 });
 
-test('keeps core local flows and curated content usable after connectivity is disabled', async ({
+test('keeps core local flows and shell navigation usable after connectivity is disabled', async ({
   context,
   page
 }, testInfo) => {
@@ -56,14 +56,13 @@ test('keeps core local flows and curated content usable after connectivity is di
   await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
   await activateServiceWorker(page);
 
-  await page.getByRole('link', { name: 'Game' }).click();
-  await expect(page.getByRole('heading', { name: 'Basketball knowledge base' })).toBeVisible();
-  await expect(page.getByText('12 guidelines')).toBeVisible();
+  await page.getByRole('link', { name: 'Plan' }).click();
+  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
 
   await context.setOffline(true);
   await page.reload();
 
-  await expect(page.getByRole('heading', { name: 'Basketball knowledge base' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
   await expect(page.getByText('Offline ready')).toBeVisible();
 
   await page.getByRole('link', { name: 'Today' }).click();

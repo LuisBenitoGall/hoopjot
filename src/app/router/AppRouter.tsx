@@ -1,5 +1,5 @@
 import { lazy, Suspense, useMemo } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider, useParams } from 'react-router-dom';
 
 import { CookieConsentProvider } from '../CookieConsent';
 import { AuthProvider } from '../providers/AuthProvider';
@@ -62,14 +62,9 @@ const OnboardingRoute = lazy(() =>
 const TodayRoute = lazy(() =>
   import('../../features/today/TodayRoute').then(({ TodayRoute }) => ({ default: TodayRoute })),
 );
-const GameKnowledgeBaseRoute = lazy(() =>
-  import('../../features/knowledge/GameKnowledgeBaseRoute').then(({ GameKnowledgeBaseRoute }) => ({
-    default: GameKnowledgeBaseRoute
-  })),
-);
-const GuidelineDetailRoute = lazy(() =>
-  import('../../features/knowledge/GameKnowledgeBaseRoute').then(({ GuidelineDetailRoute }) => ({
-    default: GuidelineDetailRoute
+const PlanRoute = lazy(() =>
+  import('../../features/plan/PlanRoute').then(({ PlanRoute }) => ({
+    default: PlanRoute
   })),
 );
 const JournalRoute = lazy(() =>
@@ -82,11 +77,6 @@ const SessionDetailRoute = lazy(() =>
     default: SessionDetailRoute
   })),
 );
-const ProgressRoute = lazy(() =>
-  import('../../features/progress/ProgressRoute').then(({ ProgressRoute }) => ({
-    default: ProgressRoute
-  })),
-);
 const ProfileRoute = lazy(() =>
   import('../../features/profile/ProfileRoute').then(({ ProfileRoute }) => ({
     default: ProfileRoute
@@ -95,6 +85,12 @@ const ProfileRoute = lazy(() =>
 const SmokeRoute = lazy(() =>
   import('../shell/SmokeRoute').then(({ SmokeRoute }) => ({ default: SmokeRoute })),
 );
+
+function LegacyGuidelineRedirect() {
+  const { guidelineId } = useParams();
+
+  return <Navigate replace to={`/plan/${guidelineId ?? ''}`} />;
+}
 
 function createAppRouter() {
   return createBrowserRouter([
@@ -184,17 +180,25 @@ function createAppRouter() {
     },
     {
       path: '/game',
+      element: <Navigate replace to="/plan" />
+    },
+    {
+      path: '/game/:guidelineId',
+      element: <LegacyGuidelineRedirect />
+    },
+    {
+      path: '/plan',
       element: (
         <RequireAuthenticatedApp>
-          <GameKnowledgeBaseRoute />
+          <PlanRoute />
         </RequireAuthenticatedApp>
       )
     },
     {
-      path: '/game/:guidelineId',
+      path: '/plan/:guidelineId',
       element: (
         <RequireAuthenticatedApp>
-          <GuidelineDetailRoute />
+          <PlanRoute />
         </RequireAuthenticatedApp>
       )
     },
@@ -216,11 +220,7 @@ function createAppRouter() {
     },
     {
       path: '/progress',
-      element: (
-        <RequireAuthenticatedApp>
-          <ProgressRoute />
-        </RequireAuthenticatedApp>
-      )
+      element: <Navigate replace to="/journal" />
     },
     {
       path: '/profile',

@@ -1,14 +1,13 @@
 import {
-  BarChart3,
   BookOpen,
   ClipboardList,
   Home,
   Languages,
-  LogOut,
   UserCircle
 } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { DailyFocusCard } from '../../components/basketball/DailyFocusCard';
 import { BrandLogo } from '../../components/brand/BrandLogo';
@@ -21,13 +20,12 @@ import { MobileShell } from '../../components/ui/MobileShell';
 import { OfflineBadge } from '../../components/ui/OfflineBadge';
 import { RatingControl } from '../../components/ui/RatingControl';
 import { supportedLocales, type SupportedLocale } from '../../i18n/locales';
-import { useAuth } from '../providers/authContext';
 import { usePwaStatus, type PwaConnectionStatus } from '../providers/pwaContext';
 import { useSyncStatus } from '../providers/syncContext';
 import type { OfflineBadgeStatus } from '../../components/ui/OfflineBadge';
 import type { SyncIndicatorStatus } from '../../sync';
 
-type PrimaryNavigationItemId = 'today' | 'game' | 'journal' | 'progress' | 'profile';
+type PrimaryNavigationItemId = 'today' | 'plan' | 'journal' | 'game' | 'progress' | 'profile';
 
 interface AppShellProps {
   activeItemId?: PrimaryNavigationItemId;
@@ -35,13 +33,12 @@ interface AppShellProps {
 }
 
 export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
-  const { signOut } = useAuth();
   const { connectionStatus, isApplyingUpdate, isUpdateAvailable, refreshApp } = usePwaStatus();
   const { status: syncStatus } = useSyncStatus();
   const [rating, setRating] = useState(3);
   const { i18n, t } = useTranslation('common');
   const activeLocale = getSupportedLocale(i18n.resolvedLanguage);
-  const offlineBadge = getOfflineBadge(connectionStatus, syncStatus, t);
+  const connectionBadge = getConnectionBadge(connectionStatus, syncStatus, t);
 
   const changeLanguage = (locale: SupportedLocale) => {
     void i18n.changeLanguage(locale);
@@ -49,10 +46,8 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
 
   const navigationItems: BottomNavigationItem[] = [
     { href: '/app', icon: Home, id: 'today', label: t('nav.today') },
-    { href: '/game', icon: ClipboardList, id: 'game', label: t('nav.game') },
-    { href: '/journal', icon: BookOpen, id: 'journal', label: t('nav.journal') },
-    { href: '/progress', icon: BarChart3, id: 'progress', label: t('nav.progress') },
-    { href: '/profile', icon: UserCircle, id: 'profile', label: t('nav.profile') }
+    { href: '/plan', icon: ClipboardList, id: 'plan', label: t('nav.plan') },
+    { href: '/journal', icon: BookOpen, id: 'journal', label: t('nav.journal') }
   ];
 
   return (
@@ -68,16 +63,16 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
         <div className="flex items-center justify-between gap-3">
           <BrandLogo label={t('appName')} size="compact" />
           <div className="flex items-center gap-2">
-            <OfflineBadge label={offlineBadge.label} status={offlineBadge.status} />
-            <Button
-              aria-label={t('auth.signOut')}
-              icon={<LogOut className="h-4 w-4" aria-hidden="true" />}
-              onClick={() => {
-                void signOut();
-              }}
-              size="icon"
-              variant="quiet"
-            />
+            {connectionBadge ? (
+              <OfflineBadge label={connectionBadge.label} status={connectionBadge.status} />
+            ) : null}
+            <Link
+              aria-label={t('nav.profile')}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-control text-hoopjot-ink outline-none hover:bg-hoopjot-ink/8 focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
+              to="/profile"
+            >
+              <UserCircle className="h-5 w-5" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       }
@@ -183,11 +178,11 @@ function getSupportedLocale(locale: string | undefined): SupportedLocale {
   return locale?.startsWith('es') ? 'es' : 'en';
 }
 
-function getOfflineBadge(
+function getConnectionBadge(
   connectionStatus: PwaConnectionStatus,
   syncStatus: SyncIndicatorStatus,
   t: ReturnType<typeof useTranslation>['t'],
-): { label: string; status: OfflineBadgeStatus } {
+): { label: string; status: OfflineBadgeStatus } | null {
   if (connectionStatus === 'offline' || syncStatus === 'offline') {
     return { label: t('offlineBadge.offline'), status: 'offline' };
   }
@@ -204,5 +199,5 @@ function getOfflineBadge(
     return { label: t('offlineBadge.needsAttention'), status: 'offline' };
   }
 
-  return { label: t('offlineBadge.online'), status: 'online' };
+  return null;
 }

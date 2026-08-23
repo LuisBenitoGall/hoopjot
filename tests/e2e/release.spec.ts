@@ -67,9 +67,8 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
 
   const screens = [
     { heading: "Today's focus", path: '/app' },
-    { heading: 'Basketball knowledge base', path: '/game' },
+    { heading: 'Plan', path: '/plan' },
     { heading: 'Journal', path: '/journal' },
-    { heading: 'Progress', path: '/progress' },
     { heading: 'Profile', path: '/profile' }
   ];
 

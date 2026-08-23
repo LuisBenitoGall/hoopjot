@@ -11,7 +11,6 @@ const emailLabel = /^Email$/;
 const passwordLabel = /^(Password|Contraseña)$/;
 const signInButton = /^(Sign in|Iniciar sesión)$/;
 const primaryNavigation = /^(Primary|Principal)$/;
-const onlineStatus = /^(Online|Con conexión)$/;
 const loadingStatus =
   /^(Checking session|Comprobando sesión|Loading .+|Cargando .+|Syncing|Sincronizando|Reconnecting|Reconectando)$/;
 
@@ -55,14 +54,9 @@ const authenticatedScreens: Array<{
   screenshot: string;
 }> = [
   { heading: /^(Today's focus|Foco de hoy)$/, path: '/app', screenshot: '02-today.png' },
-  {
-    heading: /^(Basketball knowledge base|Base de conocimiento de baloncesto)$/,
-    path: '/game',
-    screenshot: '03-game.png',
-  },
+  { heading: /^Plan$/, path: '/plan', screenshot: '03-plan.png' },
   { heading: /^(Journal|Diario)$/, path: '/journal', screenshot: '04-journal.png' },
-  { heading: /^(Progress|Progreso)$/, path: '/progress', screenshot: '05-progress.png' },
-  { heading: /^(Profile|Perfil)$/, path: '/profile', screenshot: '06-profile.png' },
+  { heading: /^(Profile|Perfil)$/, path: '/profile', screenshot: '05-profile.png' },
 ];
 
 interface DiagnosticEvent {
@@ -190,7 +184,6 @@ async function expectStableAuthenticatedApp(
 ): Promise<void> {
   await waitForSettledPage(page);
   await expect(page.getByText(loadingStatus)).toHaveCount(0, { timeout: 20_000 });
-  await expect(page.getByText(onlineStatus)).toBeVisible({ timeout: 20_000 });
   await assertNoFatalText(page, diagnostics);
 }
 

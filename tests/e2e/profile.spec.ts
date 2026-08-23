@@ -1,6 +1,6 @@
 import { expect, type Page, test } from '@playwright/test';
 
-test('opens Profile from the bottom nav and persists editable profile fields', async ({
+test('opens Profile from the authenticated header and persists editable profile fields', async ({
   page
 }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });

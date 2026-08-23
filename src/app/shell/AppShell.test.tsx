@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
@@ -20,9 +20,30 @@ describe('AppShell', () => {
 
     expect(await screen.findByRole('link', { name: 'Hoopjot' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: "Ready for today's reps" })).toBeInTheDocument();
-    expect(screen.getByRole('navigation', { name: 'Primary' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Sign out' })).toBeInTheDocument();
-    expect(screen.getByText('Online')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Profile' })).toHaveAttribute('href', '/profile');
+    expect(screen.queryByRole('button', { name: 'Sign out' })).not.toBeInTheDocument();
+    expect(screen.queryByText('Online')).not.toBeInTheDocument();
+
+    const primaryNavigation = screen.getByRole('navigation', { name: 'Primary' });
+    const primaryLinks = within(primaryNavigation).getAllByRole('link');
+
+    expect(primaryLinks.map((link) => link.textContent)).toEqual(['Today', 'Plan', 'Journal']);
+    expect(primaryLinks.map((link) => link.getAttribute('href'))).toEqual([
+      '/app',
+      '/plan',
+      '/journal'
+    ]);
+  });
+
+  it('shows the connection indicator only for non-online states', async () => {
+    render(<AppShell />, {
+      wrapper: createAppWrapper({
+        ...defaultPwaContextValue,
+        connectionStatus: 'offline'
+      })
+    });
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Offline ready');
   });
 
   it('can switch the shell language', async () => {

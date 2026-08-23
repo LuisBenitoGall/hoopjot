@@ -1,4 +1,5 @@
 import {
+  LogOut,
   RotateCcw,
   Save,
   UserCircle
@@ -74,7 +75,7 @@ interface ProfileRouteProps {
 }
 
 export function ProfileRoute({ service: injectedService }: ProfileRouteProps) {
-  const { state: authState } = useAuth();
+  const { signOut, state: authState } = useAuth();
   const repositories = useLocalRepositories();
   const { retryNow } = useSyncStatus();
   const { i18n, t } = useTranslation('common');
@@ -213,6 +214,9 @@ export function ProfileRoute({ service: injectedService }: ProfileRouteProps) {
             onSave={() => {
               void saveProfile();
             }}
+            onSignOut={() => {
+              void signOut();
+            }}
             saveState={saveState}
           />
         ) : null}
@@ -228,6 +232,7 @@ function ProfileForm({
   onDraftChange,
   onReset,
   onSave,
+  onSignOut,
   saveState
 }: {
   draft: ProfileDraft;
@@ -236,6 +241,7 @@ function ProfileForm({
   onDraftChange: (patch: Partial<ProfileDraft>) => void;
   onReset: () => void;
   onSave: () => void;
+  onSignOut: () => void;
   saveState: SaveState;
 }) {
   const { t } = useTranslation('common');
@@ -297,6 +303,13 @@ function ProfileForm({
           required
           value={draft.locale}
         />
+        <Button
+          icon={<LogOut className="h-5 w-5" aria-hidden="true" />}
+          onClick={onSignOut}
+          variant="secondary"
+        >
+          {t('auth.signOut')}
+        </Button>
       </Card>
 
       <Card className="space-y-4">

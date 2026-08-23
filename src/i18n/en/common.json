@@ -211,6 +211,7 @@
     "game": "Game",
     "journal": "Journal",
     "label": "Primary",
+    "plan": "Plan",
     "profile": "Profile",
     "progress": "Progress",
     "today": "Today"

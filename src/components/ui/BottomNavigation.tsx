@@ -22,7 +22,10 @@ export function BottomNavigation({ activeItemId, ariaLabel, items }: BottomNavig
       aria-label={ariaLabel}
       className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-[480px] border-t-2 border-hoopjot-line bg-hoopjot-surface/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur"
     >
-      <ul className="grid grid-cols-5 gap-1">
+      <ul
+        className="grid gap-1"
+        style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
+      >
         {items.map((item) => {
           const Icon = item.icon;
           const active = item.id === activeItemId;
