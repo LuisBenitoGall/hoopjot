@@ -14,13 +14,22 @@ interface BottomNavigationProps {
   activeItemId: string;
   ariaLabel: string;
   items: BottomNavigationItem[];
+  maxWidthClassName?: string;
 }
 
-export function BottomNavigation({ activeItemId, ariaLabel, items }: BottomNavigationProps) {
+export function BottomNavigation({
+  activeItemId,
+  ariaLabel,
+  items,
+  maxWidthClassName = 'max-w-[480px]',
+}: BottomNavigationProps) {
   return (
     <nav
       aria-label={ariaLabel}
-      className="fixed inset-x-0 bottom-0 z-20 mx-auto max-w-[480px] border-t-2 border-hoopjot-line bg-hoopjot-surface/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur"
+      className={cx(
+        'fixed inset-x-0 bottom-0 z-20 mx-auto border-t-2 border-hoopjot-line bg-hoopjot-surface/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur',
+        maxWidthClassName,
+      )}
     >
       <ul
         className="grid gap-1"

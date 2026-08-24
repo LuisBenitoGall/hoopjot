@@ -1,7 +1,7 @@
 import { expect, type Page, test } from '@playwright/test';
 
 test('pilot user can sign up, onboard in Spanish and complete the daily loop on mobile', async ({
-  page
+  page,
 }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await enableE2EAuthService(page, `hoopjot-e2e-release-es-${testInfo.workerIndex}-${Date.now()}`);
@@ -67,14 +67,16 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
 
   const screens = [
     { heading: "Today's focus", path: '/app' },
-    { heading: 'Plan', path: '/plan' },
+    { heading: 'Your game plan', path: '/plan' },
     { heading: 'Journal', path: '/journal' },
-    { heading: 'Profile', path: '/profile' }
+    { heading: 'Profile', path: '/profile' },
   ];
 
   for (const screen of screens) {
     await page.goto(screen.path);
-    await expect(page.getByRole('heading', { exact: true, level: 1, name: screen.heading })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { exact: true, level: 1, name: screen.heading }),
+    ).toBeVisible();
     await expect(page.getByRole('navigation', { name: 'Primary' })).toBeVisible();
     await expectAccessiblePrimarySurface(page);
   }
@@ -82,7 +84,7 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
 
 test('queued local changes sync after reconnect with the controlled remote adapter', async ({
   context,
-  page
+  page,
 }, testInfo) => {
   await enableAuthenticatedE2EUser(
     page,
@@ -114,7 +116,7 @@ test('queued local changes sync after reconnect with the controlled remote adapt
         return {
           checkIns: data?.checkIns?.length ?? 0,
           reflections: data?.reflections?.length ?? 0,
-          sessions: data?.sessions?.length ?? 0
+          sessions: data?.sessions?.length ?? 0,
         };
       }),
     )
@@ -150,7 +152,9 @@ async function enableAuthenticatedE2EUser(
 async function expectNoHorizontalOverflow(page: Page): Promise<void> {
   await expect
     .poll(() =>
-      page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth),
+      page.evaluate(
+        () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+      ),
     )
     .toBe(true);
 }
@@ -222,7 +226,10 @@ async function expectNamedInteractiveControls(page: Page): Promise<void> {
         element instanceof HTMLSelectElement ||
         element instanceof HTMLTextAreaElement
       ) {
-        if (element.labels && Array.from(element.labels).some((label) => label.textContent?.trim())) {
+        if (
+          element.labels &&
+          Array.from(element.labels).some((label) => label.textContent?.trim())
+        ) {
           return true;
         }
       }
@@ -260,7 +267,7 @@ async function expectUsableTapTargets(page: Page): Promise<void> {
       ...Array.from(document.querySelectorAll<HTMLElement>('button, a[href], select, textarea')),
       ...Array.from(document.querySelectorAll<HTMLElement>('label')).filter((label) =>
         label.querySelector('input[type="radio"]'),
-      )
+      ),
     ];
 
     return controls
@@ -271,7 +278,7 @@ async function expectUsableTapTargets(page: Page): Promise<void> {
         return {
           description: describeElement(element),
           height: Math.round(rect.height),
-          width: Math.round(rect.width)
+          width: Math.round(rect.width),
         };
       })
       .filter((target) => target.height < 36 || target.width < 32)
@@ -420,9 +427,7 @@ async function expectReadableTextContrast(page: Page): Promise<void> {
       const [red, green, blue] = [color.red, color.green, color.blue].map((channel) => {
         const normalized = channel / 255;
 
-        return normalized <= 0.03928
-          ? normalized / 12.92
-          : ((normalized + 0.055) / 1.055) ** 2.4;
+        return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
       });
 
       return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
@@ -435,15 +440,13 @@ async function expectReadableTextContrast(page: Page): Promise<void> {
         return null;
       }
 
-      const [red, green, blue, alpha = '1'] = match[1]
-        .split(',')
-        .map((part) => part.trim());
+      const [red, green, blue, alpha = '1'] = match[1].split(',').map((part) => part.trim());
 
       return {
         alpha: Number.parseFloat(alpha),
         blue: Number.parseFloat(blue),
         green: Number.parseFloat(green),
-        red: Number.parseFloat(red)
+        red: Number.parseFloat(red),
       };
     }
 

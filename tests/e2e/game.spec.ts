@@ -8,9 +8,9 @@ test('redirects legacy Game routes to Plan routes', async ({ page }) => {
 
   await page.goto('/game');
   await expect(page).toHaveURL(/\/plan$/);
-  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your game plan' })).toBeVisible();
 
   await page.goto('/game/def.rebound.find-player-first');
   await expect(page).toHaveURL(/\/plan\/def\.rebound\.find-player-first$/);
-  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Find your player first' })).toBeVisible();
 });

@@ -1,10 +1,4 @@
-import {
-  BookOpen,
-  ClipboardList,
-  Home,
-  Languages,
-  UserCircle
-} from 'lucide-react';
+import { BookOpen, ClipboardList, Home, Languages, UserCircle } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -30,9 +24,14 @@ type PrimaryNavigationItemId = 'today' | 'plan' | 'journal' | 'game' | 'progress
 interface AppShellProps {
   activeItemId?: PrimaryNavigationItemId;
   children?: ReactNode;
+  contentWidth?: 'mobile' | 'readable';
 }
 
-export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
+export function AppShell({
+  activeItemId = 'today',
+  children,
+  contentWidth = 'mobile',
+}: AppShellProps) {
   const { connectionStatus, isApplyingUpdate, isUpdateAvailable, refreshApp } = usePwaStatus();
   const { status: syncStatus } = useSyncStatus();
   const [rating, setRating] = useState(3);
@@ -47,8 +46,9 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
   const navigationItems: BottomNavigationItem[] = [
     { href: '/app', icon: Home, id: 'today', label: t('nav.today') },
     { href: '/plan', icon: ClipboardList, id: 'plan', label: t('nav.plan') },
-    { href: '/journal', icon: BookOpen, id: 'journal', label: t('nav.journal') }
+    { href: '/journal', icon: BookOpen, id: 'journal', label: t('nav.journal') },
   ];
+  const shellMaxWidthClassName = contentWidth === 'readable' ? 'max-w-[900px]' : 'max-w-[480px]';
 
   return (
     <MobileShell
@@ -57,8 +57,10 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
           activeItemId={activeItemId}
           ariaLabel={t('nav.label')}
           items={navigationItems}
+          maxWidthClassName={shellMaxWidthClassName}
         />
       }
+      contentWidth={contentWidth}
       header={
         <div className="flex items-center justify-between gap-3">
           <BrandLogo label={t('appName')} size="compact" />
@@ -86,9 +88,7 @@ export function AppShell({ activeItemId = 'today', children }: AppShellProps) {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <p className="text-sm font-black">{t('pwa.update.title')}</p>
-              <p className="text-sm leading-6 text-hoopjot-muted">
-                {t('pwa.update.description')}
-              </p>
+              <p className="text-sm leading-6 text-hoopjot-muted">{t('pwa.update.description')}</p>
             </div>
             <Button
               className="w-full sm:w-auto"

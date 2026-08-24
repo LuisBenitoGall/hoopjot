@@ -216,6 +216,29 @@
     "progress": "Progreso",
     "today": "Hoy"
   },
+  "plan": {
+    "coreIdeaLabel": "Idea central:",
+    "developmentMapLabel": "Mapa de desarrollo",
+    "guideline": {
+      "backToPlan": "Volver al Plan",
+      "loading": "Cargando pauta",
+      "notFoundDescription": "Esta pauta no está disponible en el catálogo incluido.",
+      "notFoundTitle": "Pauta no encontrada"
+    },
+    "guidelineLinksLabel": "Pautas vinculadas",
+    "howHoopjotWorksLabel": "Cómo funciona Hoopjot",
+    "todayChip": "HOY",
+    "profileSnapshot": {
+      "fields": {
+        "activeGoals": "Objetivos activos",
+        "competitiveLevel": "Nivel competitivo",
+        "heightCm": "Altura",
+        "primaryPosition": "Posición principal",
+        "secondaryPosition": "Posición secundaria"
+      },
+      "heightValue": "{{value}} cm"
+    }
+  },
   "offlineBadge": {
     "needsAttention": "Sync necesita atención",
     "offline": "Listo sin conexión",

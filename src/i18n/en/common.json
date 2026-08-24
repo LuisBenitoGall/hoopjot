@@ -216,6 +216,29 @@
     "progress": "Progress",
     "today": "Today"
   },
+  "plan": {
+    "coreIdeaLabel": "Core idea:",
+    "developmentMapLabel": "Development map",
+    "guideline": {
+      "backToPlan": "Back to Plan",
+      "loading": "Loading guideline",
+      "notFoundDescription": "This guideline is not available in the bundled catalog.",
+      "notFoundTitle": "Guideline not found"
+    },
+    "guidelineLinksLabel": "Linked guidelines",
+    "howHoopjotWorksLabel": "How Hoopjot works",
+    "todayChip": "TODAY",
+    "profileSnapshot": {
+      "fields": {
+        "activeGoals": "Active goals",
+        "competitiveLevel": "Competitive level",
+        "heightCm": "Height",
+        "primaryPosition": "Primary position",
+        "secondaryPosition": "Secondary position"
+      },
+      "heightValue": "{{value}} cm"
+    }
+  },
   "offlineBadge": {
     "needsAttention": "Sync needs attention",
     "offline": "Offline ready",

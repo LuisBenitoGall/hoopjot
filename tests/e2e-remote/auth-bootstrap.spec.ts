@@ -54,7 +54,7 @@ const authenticatedScreens: Array<{
   screenshot: string;
 }> = [
   { heading: /^(Today's focus|Foco de hoy)$/, path: '/app', screenshot: '02-today.png' },
-  { heading: /^Plan$/, path: '/plan', screenshot: '03-plan.png' },
+  { heading: /^Your game plan$/, path: '/plan', screenshot: '03-plan.png' },
   { heading: /^(Journal|Diario)$/, path: '/journal', screenshot: '04-journal.png' },
   { heading: /^(Profile|Perfil)$/, path: '/profile', screenshot: '05-profile.png' },
 ];

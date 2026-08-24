@@ -6,7 +6,9 @@ test('publishes an installable manifest and active service worker', async ({ pag
   const manifestHref = await page.locator('link[rel="manifest"]').getAttribute('href');
   expect(manifestHref).toBeTruthy();
 
-  const manifestResponse = await page.request.get(new URL(manifestHref ?? '', page.url()).toString());
+  const manifestResponse = await page.request.get(
+    new URL(manifestHref ?? '', page.url()).toString(),
+  );
   expect(manifestResponse.ok()).toBe(true);
 
   const manifest = (await manifestResponse.json()) as {
@@ -42,7 +44,7 @@ test('publishes an installable manifest and active service worker', async ({ pag
 
 test('keeps core local flows and shell navigation usable after connectivity is disabled', async ({
   context,
-  page
+  page,
 }, testInfo) => {
   const dbName = `hoopjot-e2e-pwa-${testInfo.workerIndex}-${Date.now()}`;
 
@@ -57,12 +59,14 @@ test('keeps core local flows and shell navigation usable after connectivity is d
   await activateServiceWorker(page);
 
   await page.getByRole('link', { name: 'Plan' }).click();
-  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your game plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Attack' })).toBeVisible();
 
   await context.setOffline(true);
   await page.reload();
 
-  await expect(page.getByRole('heading', { name: 'Plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your game plan' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Habits & attention' })).toBeVisible();
   await expect(page.getByText('Offline ready')).toBeVisible();
 
   await page.getByRole('link', { name: 'Today' }).click();
@@ -108,9 +112,7 @@ test('requires network for a new unauthenticated sign-in', async ({ context, pag
 });
 
 async function activateServiceWorker(page: Page): Promise<void> {
-  await expect
-    .poll(() => page.evaluate(() => 'serviceWorker' in navigator))
-    .toBe(true);
+  await expect.poll(() => page.evaluate(() => 'serviceWorker' in navigator)).toBe(true);
 
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
