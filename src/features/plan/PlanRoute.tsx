@@ -135,10 +135,6 @@ export function ProfileSnapshot({
   const facts = getProfileFacts(t, profile);
   const activeGoalLabels = activeGoals.map((goal) => getGoalLabel(t, goal));
 
-  if (facts.length === 0 && activeGoalLabels.length === 0) {
-    return null;
-  }
-
   return (
     <section className="space-y-4 border-y border-hoopjot-line py-5">
       <h2 className="text-2xl font-black leading-tight">{content.title}</h2>

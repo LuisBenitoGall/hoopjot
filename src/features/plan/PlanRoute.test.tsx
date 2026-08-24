@@ -159,11 +159,45 @@ describe('PlanRoute', () => {
     renderPlanRoute('/plan', repositories);
 
     expect(await screen.findByText('Your starting point')).toBeInTheDocument();
-    expect(screen.getByText('Primary position')).toBeInTheDocument();
+    expect(await screen.findByText('Primary position')).toBeInTheDocument();
     expect(screen.getByText('Competitive level')).toBeInTheDocument();
     expect(screen.queryByText('Secondary position')).not.toBeInTheDocument();
     expect(screen.queryByText('Height')).not.toBeInTheDocument();
     expect(screen.queryByText('Active goals')).not.toBeInTheDocument();
+  });
+
+  it('keeps ProfileSnapshot in the fixed Plan section order when profile facts and goals are absent', async () => {
+    const { repositories } = await createPlanFixture({ profile: null });
+
+    const { container } = renderPlanRoute('/plan', repositories);
+
+    await screen.findByRole('heading', { level: 1, name: 'Your game plan' });
+    const article = container.querySelector('main > article');
+
+    if (!article) {
+      throw new Error('Plan article not found');
+    }
+
+    const sections = Array.from(article.children) as HTMLElement[];
+
+    expect(sections).toHaveLength(5);
+    expect(
+      within(sections[0]).getByRole('heading', { level: 1, name: 'Your game plan' }),
+    ).toBeInTheDocument();
+    expect(
+      within(sections[1]).getByRole('heading', { level: 2, name: 'Your starting point' }),
+    ).toBeInTheDocument();
+    expect(within(sections[2]).getByText('See the whole map')).toBeInTheDocument();
+    expect(sections[3]).toHaveAttribute('data-testid', 'development-map');
+    expect(
+      within(sections[4]).getByRole('heading', {
+        level: 2,
+        name: 'How we will work this plan',
+      }),
+    ).toBeInTheDocument();
+    expect(within(sections[1]).queryByText('Primary position')).not.toBeInTheDocument();
+    expect(within(sections[1]).queryByText('Competitive level')).not.toBeInTheDocument();
+    expect(within(sections[1]).queryByText('Active goals')).not.toBeInTheDocument();
   });
 
   it('renders guideline detail from the existing catalog and returns to Plan', async () => {
@@ -199,7 +233,7 @@ async function createPlanFixture({
 }: {
   currentFocus?: DailyFocus;
   goals?: PlayerGoal[];
-  profile?: PlayerProfile;
+  profile?: PlayerProfile | null;
 } = {}): Promise<{ repositories: LocalRepositories }> {
   const db = createHoopjotLocalDb(`hoopjot-plan-route-${crypto.randomUUID()}`);
   openedDbs.push(db);
