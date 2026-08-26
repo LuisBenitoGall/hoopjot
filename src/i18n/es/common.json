@@ -162,9 +162,10 @@
       "emptyTitle": "Sesión no encontrada"
     },
     "empty": {
-      "description": "Inicia una sesión y guarda una reflexión para revisarla aquí.",
-      "title": "Aún no hay sesiones"
+      "description": "Aún no hay nada en tu diario.",
+      "title": "Aún no hay nada en tu diario."
     },
+    "entriesLabel": "Entradas del diario",
     "errors": {
       "detailDescription": "No se pudo cargar el detalle de esta sesión desde este dispositivo.",
       "detailTitle": "Detalle de sesión no disponible",
@@ -181,7 +182,7 @@
       "none": "Sin foco asociado",
       "title": "Foco diario"
     },
-    "intro": "Tus sesiones, focos y reflexiones rápidas en un solo lugar.",
+    "intro": "Tus notas de entrenamientos y partidos, sin convertirlas en un informe.",
     "loading": "Cargando diario",
     "loadingDetail": "Cargando detalle de sesión",
     "notLogged": "Sin registrar",
@@ -317,11 +318,14 @@
     "goalCount": "{{count}} de {{max}} objetivos seleccionados",
     "goals": {
       "confidence": "Confianza",
+      "custom": "Personalizado",
       "decision_making": "Toma de decisiones",
       "defense": "Defensa",
       "finishing": "Finalizaciones",
       "fundamentals": "Fundamentos",
       "game_understanding": "Lectura del juego",
+      "inside_game": "Juego interior",
+      "more_minutes": "Más minutos",
       "rebounding": "Rebote",
       "rebuild_game_confidence": "Recuperar confianza de juego"
     },
@@ -534,6 +538,7 @@
   "smokeTitle": "Ruta de prueba de humo",
   "today": {
     "actions": {
+      "logHowItWent": "Registrar cómo ha ido",
       "markCompleted": "Completar",
       "markSkipped": "Omitir",
       "markViewed": "Marcar visto",
@@ -544,7 +549,7 @@
       "loadDescription": "No se pudo cargar tu foco local. Inténtalo de nuevo desde este dispositivo.",
       "loadTitle": "Foco no disponible"
     },
-    "eyebrow": "Hoy",
+    "eyebrow": "FOCO DE HOY",
     "focusSectionLabel": "Foco diario",
     "intro": "Una señal de cancha para la siguiente sesión. Se guarda localmente y queda disponible sin conexión.",
     "loading": "Cargando el foco de hoy",
@@ -554,7 +559,16 @@
       "recoveryDescription": "Las sesiones de recuperación quedan en tu diario, pero Hoopjot no genera recomendaciones MVP de pautas de baloncesto para días de recuperación.",
       "recoveryTitle": "Hoy no hay foco de baloncesto"
     },
-    "reasonLabel": "Por qué este foco",
+    "quickReflection": {
+      "coachFeedbackToggle": "Añadir comentario del entrenador",
+      "mainNoteLabel": "¿Qué has notado o quieres recordar?",
+      "ratingLabel": "¿Cómo te ha salido el foco?",
+      "ratingMax": "5",
+      "ratingMin": "1",
+      "save": "Guardar",
+      "sessionTypeLabel": "¿Qué ha sido hoy?"
+    },
+    "reasonLabel": "Por qué hoy",
     "reasons": {
       "coach_feedback": "Este foco se conecta con una nota estructurada reciente de feedback del entrenador.",
       "development_path": "Este foco encaja con el siguiente paso del camino de desarrollo actual.",
@@ -569,6 +583,7 @@
       "skipped": "Omitido",
       "viewed": "Visto"
     },
+    "savedConfirmation": "Guardado. Lo tendremos en cuenta para los próximos focos.",
     "title": "Foco de hoy"
   },
   "profile": {

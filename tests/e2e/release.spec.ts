@@ -32,30 +32,31 @@ test('pilot user can sign up, onboard in Spanish and complete the daily loop on 
   await expect(page.getByRole('heading', { name: 'Listo para empezar' })).toBeVisible();
   await page.getByRole('button', { name: 'Terminar' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Foco de hoy' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'FOCO DE HOY' })).toBeVisible();
   await expectNoHorizontalOverflow(page);
 
-  await page.locator('input[name="energy"][value="4"] + span').click();
-  await page.locator('input[name="confidence"][value="3"] + span').click();
-  await page.locator('input[name="physical-feeling"][value="5"] + span').click();
-  await page.getByRole('button', { name: 'Iniciar sesión' }).click();
-  await expect(page.getByText('En curso')).toBeVisible();
+  await page.getByRole('button', { name: 'Registrar cómo ha ido' }).click();
   await page.locator('input[name="focus-rating"][value="4"] + span').click();
-  await page.getByLabel('¿Qué pasó?').fill('Cerré el espacio y recordé la señal.');
-  await page.getByRole('button', { name: 'Completar y guardar reflexión' }).click();
+  await page.getByLabel('¿Qué has notado o quieres recordar?').fill('Cerré el espacio y recordé la señal.');
+  await page.getByRole('button', { name: 'Guardar' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Reflexión guardada' })).toBeVisible();
+  await expect(
+    page.getByText('Guardado. Lo tendremos en cuenta para los próximos focos.'),
+  ).toBeVisible();
   await page.getByRole('link', { name: 'Diario' }).click();
   await expect(page.getByRole('heading', { name: 'Diario' })).toBeVisible();
-  await expect(page.getByText('Hay una reflexión guardada para esta sesión.')).toBeVisible();
-  await page.getByRole('link', { name: /Abrir detalle de sesión: Entrenamiento/ }).click();
-  await expect(page.getByRole('heading', { name: 'Check-in previo' })).toBeVisible();
-  await expect(page.getByText('Energía')).toBeVisible();
-  await expect(page.getByText('Confianza')).toBeVisible();
-  await expect(page.getByText('Sensación corporal')).toBeVisible();
-  await expect(page.getByText('3 de 5')).toBeVisible();
-  await expect(page.getByText('4 de 5').first()).toBeVisible();
-  await expect(page.getByText('5 de 5')).toBeVisible();
+  await expect(
+    page.getByText('Tus notas de entrenamientos y partidos, sin convertirlas en un informe.'),
+  ).toBeVisible();
+  const journalEntry = page.getByRole('link', { name: /Abrir detalle de sesión: Entrenamiento/ });
+  await expect(journalEntry).toBeVisible();
+  const focusTitle = (await journalEntry.locator('h2').textContent())?.trim();
+  expect(focusTitle).toBeTruthy();
+  await expect(page.getByText('4 de 5')).toBeVisible();
+  await journalEntry.click();
+  await expect(page.getByRole('heading', { name: focusTitle! })).toBeVisible();
+  await expect(page.getByText('4 de 5')).toBeVisible();
+  await expect(page.getByText('Cerré el espacio y recordé la señal.')).toBeVisible();
 });
 
 test('authenticated primary screens stay responsive on mobile', async ({ page }, testInfo) => {
@@ -66,7 +67,7 @@ test('authenticated primary screens stay responsive on mobile', async ({ page },
   );
 
   const screens = [
-    { heading: "Today's focus", path: '/app' },
+    { heading: "TODAY'S FOCUS", path: '/app' },
     { heading: 'Your game plan', path: '/plan' },
     { heading: 'Journal', path: '/journal' },
     { heading: 'Profile', path: '/profile' },
@@ -93,16 +94,18 @@ test('queued local changes sync after reconnect with the controlled remote adapt
   );
 
   await page.goto('/app');
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
 
   await context.setOffline(true);
-  await page.locator('input[name="energy"][value="4"] + span').click();
-  await page.locator('input[name="confidence"][value="4"] + span').click();
-  await page.getByRole('button', { name: 'Start session' }).click();
+  await page.getByRole('button', { name: 'Log how it went' }).click();
   await page.locator('input[name="focus-rating"][value="4"] + span').click();
-  await page.getByLabel('What happened?').fill('Queued offline release sync note.');
-  await page.getByRole('button', { name: 'Complete + save reflection' }).click();
-  await expect(page.getByRole('heading', { name: 'Reflection saved' })).toBeVisible();
+  await page
+    .getByLabel('What did you notice or want to remember?')
+    .fill('Queued offline release sync note.');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(
+    page.getByText('Saved. We will take it into account for the next focuses.'),
+  ).toBeVisible();
 
   await context.setOffline(false);
   await page.evaluate(() => window.dispatchEvent(new Event('online')));
@@ -120,7 +123,7 @@ test('queued local changes sync after reconnect with the controlled remote adapt
         };
       }),
     )
-    .toEqual({ checkIns: 1, reflections: 1, sessions: 1 });
+    .toEqual({ checkIns: 0, reflections: 1, sessions: 1 });
 });
 
 async function enableE2EAuthService(page: Page, dbName: string): Promise<void> {

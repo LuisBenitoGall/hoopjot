@@ -55,7 +55,7 @@ test('keeps core local flows and shell navigation usable after connectivity is d
   }, dbName);
 
   await page.goto('/app');
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
   await activateServiceWorker(page);
 
   await page.getByRole('link', { name: 'Plan' }).click();
@@ -70,21 +70,28 @@ test('keeps core local flows and shell navigation usable after connectivity is d
   await expect(page.getByText('Offline ready')).toBeVisible();
 
   await page.getByRole('link', { name: 'Today' }).click();
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Start session' }).click();
-  await expect(page.getByText('In progress')).toBeVisible();
+  await page.getByRole('button', { name: 'Log how it went' }).click();
   await page.locator('input[name="focus-rating"][value="4"] + span').click();
-  await page.getByLabel('What happened?').fill('Offline shell still lets local reflection work.');
-  await page.getByRole('button', { name: 'Complete + save reflection' }).click();
+  await page
+    .getByLabel('What did you notice or want to remember?')
+    .fill('Offline shell still lets local reflection work.');
+  await page.getByRole('button', { name: 'Save' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Reflection saved' })).toBeVisible();
+  await expect(
+    page.getByText('Saved. We will take it into account for the next focuses.'),
+  ).toBeVisible();
 
   await page.getByRole('link', { name: 'Journal' }).click();
   await expect(page.getByRole('heading', { name: 'Journal' })).toBeVisible();
-  await expect(page.getByText('A reflection is saved for this session.')).toBeVisible();
-  await page.getByRole('link', { name: /Open session detail: Practice/ }).click();
-  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible();
+  await expect(page.getByText('Offline shell still lets local reflection work.')).toBeVisible();
+  const journalEntry = page.getByRole('link', { name: /Open session detail: Practice/ });
+  const focusTitle = (await journalEntry.locator('h2').textContent())?.trim();
+
+  expect(focusTitle).toBeTruthy();
+  await journalEntry.click();
+  await expect(page.getByRole('heading', { name: focusTitle! })).toBeVisible();
   await expect(page.getByText('Offline shell still lets local reflection work.')).toBeVisible();
 
   await context.setOffline(false);

@@ -251,6 +251,9 @@ Do not display three simultaneous fields for:
 - coachFeedback;
 - rememberNextTime.
 
+The remodeled Quick Reflection flow does not collect `rememberNextTime`.
+The field remains part of the legacy domain/schema for compatibility, but this flow must leave it omitted/undefined.
+
 ## 5.4 Exact persistence mapping
 
 ```text
@@ -261,14 +264,8 @@ coach textarea → Reflection.coachFeedback
 Reflection.rememberNextTime → omitted / undefined
 ```
 
-The remodeled Quick Reflection flow does not collect rememberNextTime.
-rememberNextTime remains part of the legacy domain/schema for compatibility.
-Quick Reflection must leave rememberNextTime omitted/undefined.
-Quick Reflection must not persist rememberNextTime as an empty string.
-Quick Reflection must not persist null solely for this flow.
-The existing domain validation must remain unchanged.
-The existing Supabase constraint must remain unchanged.
-No database migration is required for this behavior.
+Do not persist `rememberNextTime` as an empty string or `null` solely for this flow.
+Do not change the existing domain validation or database constraint for this field.
 
 On Save:
 

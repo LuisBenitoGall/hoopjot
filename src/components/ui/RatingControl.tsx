@@ -7,7 +7,8 @@ interface RatingControlProps {
   minLabel: string;
   name: string;
   onChange: (value: number) => void;
-  value: number;
+  required?: boolean;
+  value: number | null;
 }
 
 const ratingValues = [1, 2, 3, 4, 5] as const;
@@ -19,6 +20,7 @@ export function RatingControl({
   minLabel,
   name,
   onChange,
+  required = false,
   value
 }: RatingControlProps) {
   return (
@@ -36,6 +38,7 @@ export function RatingControl({
                 className="peer sr-only"
                 name={name}
                 onChange={() => onChange(rating)}
+                required={required}
                 type="radio"
                 value={rating}
               />
@@ -61,4 +64,3 @@ export function RatingControl({
     </fieldset>
   );
 }
-

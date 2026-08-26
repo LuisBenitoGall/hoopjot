@@ -8,10 +8,10 @@ export default mergeConfig(
     test: {
       css: true,
       environment: 'jsdom',
+      fileParallelism: false,
       globals: true,
       include: ['src/**/*.test.{ts,tsx}'],
       setupFiles: ['./src/test/setup.ts']
     }
   }),
 );
-

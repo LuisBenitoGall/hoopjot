@@ -1,7 +1,6 @@
 import 'fake-indexeddb/auto';
 
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, within } from '@testing-library/react';
 import {
   MemoryRouter,
   Route,
@@ -10,7 +9,6 @@ import {
 
 import {
   type JournalEntry,
-  type JournalFilter,
   type JournalServicePort,
   type JournalTimeline
 } from '../../application/journal';
@@ -31,8 +29,15 @@ import {
 } from './JournalRoutes';
 
 const userId = '11111111-1111-4111-8111-111111111111';
-const sessionId = '33333333-3333-4333-8333-333333333333';
-const timestamp = '2026-08-18T16:00:00.000Z';
+const practiceSessionId = '33333333-3333-4333-8333-333333333333';
+const gameSessionId = '44444444-4444-4444-8444-444444444444';
+const learningSessionId = '55555555-5555-4555-8555-555555555555';
+const recoverySessionId = '66666666-6666-4666-8666-666666666666';
+const missingGuidelineSessionId = '77777777-7777-4777-8777-777777777777';
+const practiceAt = '2026-08-18T16:00:00.000Z';
+const gameAt = '2026-08-20T16:00:00.000Z';
+const learningAt = '2026-08-17T16:00:00.000Z';
+const recoveryAt = '2026-08-16T16:00:00.000Z';
 const openedDbs: HoopjotLocalDb[] = [];
 
 describe('Journal routes', () => {
@@ -51,33 +56,126 @@ describe('Journal routes', () => {
     }
   });
 
-  it('renders a locale-aware timeline and filters by session type', async () => {
-    const user = userEvent.setup();
-    const service = new FakeJournalService([makeJournalEntry()]);
+  it('renders the exact Journal page intro and a chronological notebook list', async () => {
+    const service = new FakeJournalService([
+      makeJournalEntry({
+        note: 'Game note that should stay short in the list.',
+        sessionId: gameSessionId,
+        timestamp: gameAt,
+        type: 'game'
+      }),
+      makeJournalEntry({
+        note: 'Practice note that should be clamped to two lines.',
+        sessionId: practiceSessionId,
+        timestamp: practiceAt,
+        type: 'practice'
+      }),
+      makeJournalEntry({
+        note: undefined,
+        sessionId: learningSessionId,
+        timestamp: learningAt,
+        type: 'learning'
+      }),
+      makeJournalEntry({
+        note: undefined,
+        sessionId: recoverySessionId,
+        timestamp: recoveryAt,
+        type: 'recovery'
+      })
+    ]);
 
     renderJournalRoutes('/journal', service);
 
     expect(await screen.findByRole('heading', { name: 'Journal' })).toBeInTheDocument();
-    expect(await screen.findByText('Find your player first')).toBeInTheDocument();
-    expect(screen.getByText(formatExpectedGroupDate())).toBeInTheDocument();
-    expect(screen.getByText('Reflection saved')).toBeInTheDocument();
+    expect(
+      screen.getByText('Your practice and game notes, without turning them into a report.'),
+    ).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'Game' }));
+    const list = await screen.findByLabelText('Journal entries');
+    const entries = within(list).getAllByRole('link');
 
-    expect(await screen.findByRole('heading', { name: 'No sessions yet' })).toBeInTheDocument();
-    expect(service.listTimeline).toHaveBeenLastCalledWith(userId, 'game');
+    expect(entries).toHaveLength(4);
+    expect(entries.map((entry) => entry.textContent)).toEqual([
+      expect.stringContaining('Game'),
+      expect.stringContaining('Practice'),
+      expect.stringContaining('Learning'),
+      expect.stringContaining('Recovery')
+    ]);
+    expect(entries[0]).toHaveTextContent(formatExpectedDate('2026-08-20'));
+    expect(entries[0]).toHaveTextContent('Find your player first');
+    expect(entries[0]).toHaveTextContent('5 of 5');
+    expect(entries[0]).toHaveTextContent('Game note that should stay short in the list.');
+    expect(screen.getByText('Game note that should stay short in the list.').getAttribute('style')).toContain(
+      '-webkit-line-clamp: 2',
+    );
+    expect(screen.queryByText('Coach said stay low.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Locate matchup early.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Energy')).not.toBeInTheDocument();
+    expect(screen.queryByText('Confidence')).not.toBeInTheDocument();
+    expect(screen.queryByText('Physical feeling')).not.toBeInTheDocument();
+    expect(screen.queryByText('Reflection saved')).not.toBeInTheDocument();
+    expect(screen.queryByText('Session type')).not.toBeInTheDocument();
+    expect(screen.queryByText('Weekly review')).not.toBeInTheDocument();
+    expect(screen.queryByText('Signals')).not.toBeInTheDocument();
+    expect(screen.queryByText('Progress signals')).not.toBeInTheDocument();
+    expect(service.listTimeline).toHaveBeenLastCalledWith(userId);
   });
 
-  it('shows the selected session focus and reflection detail', async () => {
+  it('shows only the allowed session detail fields', async () => {
     const service = new FakeJournalService([makeJournalEntry()]);
 
-    renderJournalRoutes(`/journal/${sessionId}`, service);
+    renderJournalRoutes(`/journal/${practiceSessionId}`, service);
 
-    expect(await screen.findByRole('heading', { name: 'Practice' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Daily focus' })).toBeInTheDocument();
-    expect(screen.getByText('Find your player first')).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Find your player first' })).toBeInTheDocument();
+    expect(screen.getByText(formatExpectedDate('2026-08-18'))).toBeInTheDocument();
+    expect(screen.getByText('Practice')).toBeInTheDocument();
+    expect(screen.getByText('SHOT / PLAYER / CONTACT / BALL')).toBeInTheDocument();
     expect(screen.getByText('5 of 5')).toBeInTheDocument();
     expect(screen.getByText('Closed out before watching the ball.')).toBeInTheDocument();
+    expect(screen.getByText('Coach said stay low.')).toBeInTheDocument();
+    expect(screen.queryByText('Energy')).not.toBeInTheDocument();
+    expect(screen.queryByText('Confidence')).not.toBeInTheDocument();
+    expect(screen.queryByText('Physical feeling')).not.toBeInTheDocument();
+    expect(screen.queryByText('Pre-session check-in')).not.toBeInTheDocument();
+    expect(screen.queryByText('Locate matchup early.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Remember next time')).not.toBeInTheDocument();
+    expect(screen.queryByText('Reflection saved')).not.toBeInTheDocument();
+  });
+
+  it('omits empty reflection text fields and survives missing guideline content', async () => {
+    const service = new FakeJournalService([
+      makeJournalEntry({
+        coachFeedback: '',
+        guideline: null,
+        note: '',
+        sessionId: missingGuidelineSessionId
+      })
+    ]);
+
+    renderJournalRoutes(`/journal/${missingGuidelineSessionId}`, service);
+
+    expect(await screen.findByText('Practice')).toBeInTheDocument();
+    expect(screen.getByText('5 of 5')).toBeInTheDocument();
+    expect(screen.queryByText('Find your player first')).not.toBeInTheDocument();
+    expect(screen.queryByText('SHOT / PLAYER / CONTACT / BALL')).not.toBeInTheDocument();
+    expect(screen.queryByText('What happened?')).not.toBeInTheDocument();
+    expect(screen.queryByText('Coach feedback')).not.toBeInTheDocument();
+    expect(screen.queryByText('Remember next time')).not.toBeInTheDocument();
+  });
+
+  it('renders the Spanish title and exact intro', async () => {
+    await i18n.changeLanguage('es');
+    const service = new FakeJournalService([]);
+
+    renderJournalRoutes('/journal', service);
+
+    expect(await screen.findByRole('heading', { name: 'Diario' })).toBeInTheDocument();
+    expect(
+      screen.getByText('Tus notas de entrenamientos y partidos, sin convertirlas en un informe.'),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Aún no hay nada en tu diario.' }),
+    ).toBeInTheDocument();
   });
 });
 
@@ -89,17 +187,11 @@ class FakeJournalService implements JournalServicePort {
   );
 
   readonly listTimeline = vi.fn(
-    async (_userId: string, filter: JournalFilter = 'all'): Promise<JournalTimeline> => {
-      const entries = this.entries.filter(
-        (entry) => filter === 'all' || entry.session.type === filter,
-      );
-
-      return {
-        filter,
-        groups: entries.length > 0 ? [{ entries, localDate: entries[0]?.localDate ?? '' }] : [],
-        totalCount: entries.length
-      };
-    },
+    async (): Promise<JournalTimeline> => ({
+      filter: 'all',
+      groups: groupEntriesByLocalDate(this.entries),
+      totalCount: this.entries.length
+    }),
   );
 }
 
@@ -124,21 +216,51 @@ function renderJournalRoutes(initialPath: string, service: JournalServicePort) {
   );
 }
 
-function formatExpectedGroupDate(): string {
+function formatExpectedDate(localDate: string): string {
+  const [year, month, day] = localDate.split('-').map(Number);
+
   return new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     month: 'long',
     weekday: 'long',
     year: 'numeric'
-  }).format(new Date(2026, 7, 18));
+  }).format(new Date(year, month - 1, day));
 }
 
-function makeJournalEntry(): JournalEntry {
-  const session = makeSession();
+function groupEntriesByLocalDate(entries: JournalEntry[]): JournalTimeline['groups'] {
+  const groups = new Map<string, JournalEntry[]>();
+
+  for (const entry of entries) {
+    groups.set(entry.localDate, [...(groups.get(entry.localDate) ?? []), entry]);
+  }
+
+  return Array.from(groups.entries()).map(([localDate, groupEntries]) => ({
+    entries: groupEntries,
+    localDate
+  }));
+}
+
+function makeJournalEntry({
+  coachFeedback = 'Coach said stay low.',
+  guideline = makeGuideline(),
+  note = 'Closed out before watching the ball.',
+  sessionId = practiceSessionId,
+  timestamp = practiceAt,
+  type = 'practice'
+}: {
+  coachFeedback?: string;
+  guideline?: Guideline | null;
+  note?: string;
+  sessionId?: string;
+  timestamp?: string;
+  type?: Session['type'];
+} = {}): JournalEntry {
+  const session = makeSession({ id: sessionId, timestamp, type });
+  const localDate = timestamp.slice(0, 10);
 
   return {
     checkIn: {
-      id: '44444444-4444-4444-8444-444444444444',
+      id: '88888888-8888-4888-8888-888888888888',
       userId,
       sessionId,
       energy: 4,
@@ -148,28 +270,36 @@ function makeJournalEntry(): JournalEntry {
       updatedAt: timestamp
     },
     dailyFocus: {
-      id: '55555555-5555-4555-8555-555555555555',
+      id: '99999999-9999-4999-8999-999999999999',
       userId,
-      localDate: '2026-08-18',
+      localDate,
       guidelineId: 'def.rebound.find-player-first',
       reasonCode: 'rotation',
       status: 'completed',
       createdAt: timestamp,
       updatedAt: timestamp
     },
-    guideline: makeGuideline(),
-    localDate: '2026-08-18',
+    guideline,
+    localDate,
     occurredAt: timestamp,
-    reflection: makeReflection(),
+    reflection: makeReflection({ coachFeedback, note, sessionId, timestamp }),
     session
   };
 }
 
-function makeSession(): Session {
+function makeSession({
+  id,
+  timestamp,
+  type
+}: {
+  id: string;
+  timestamp: string;
+  type: Session['type'];
+}): Session {
   return {
-    id: sessionId,
+    id,
     userId,
-    type: 'practice',
+    type,
     startedAt: timestamp,
     completedAt: '2026-08-18T17:00:00.000Z',
     createdAt: timestamp,
@@ -177,14 +307,26 @@ function makeSession(): Session {
   };
 }
 
-function makeReflection(): Reflection {
+function makeReflection({
+  coachFeedback,
+  note,
+  sessionId,
+  timestamp
+}: {
+  coachFeedback?: string;
+  note?: string;
+  sessionId: string;
+  timestamp: string;
+}): Reflection {
   return {
     id: '66666666-6666-4666-8666-666666666666',
     userId,
     sessionId,
-    dailyFocusId: '55555555-5555-4555-8555-555555555555',
+    dailyFocusId: '99999999-9999-4999-8999-999999999999',
     focusRating: 5,
-    note: 'Closed out before watching the ball.',
+    coachFeedback,
+    note,
+    rememberNextTime: 'Locate matchup early.',
     createdAt: timestamp,
     updatedAt: timestamp
   };

@@ -1,44 +1,42 @@
 import {
-  CheckCircle2,
-  Eye,
   RotateCcw,
-  SkipForward,
   Target
 } from 'lucide-react';
 import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
+  QuickReflectionService,
   TodayService,
+  type QuickReflectionServicePort,
+  type QuickReflectionState,
   type TodayFocusResult
 } from '../../application/today';
-import { SessionReflectionService } from '../../application/sessions';
 import { AppShell } from '../../app/shell/AppShell';
 import { useAuth } from '../../app/providers/authContext';
 import { useLocalRepositories } from '../../app/providers/localRepositoriesContext';
 import { DailyFocusCard } from '../../components/basketball/DailyFocusCard';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
-import { Chip, type ChipTone } from '../../components/ui/Chip';
+import type { ChipTone } from '../../components/ui/Chip';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { basketballContentRepository } from '../../content/basketball';
-import { SessionReflectionPanel } from '../sessions/SessionReflectionPanel';
-import type {
-  DailyFocusStatus,
-  Guideline
-} from '../../domain';
+import type { Guideline } from '../../domain';
+import { QuickReflectionPanel } from './QuickReflectionPanel';
 
 type TodayRouteState =
-  | { status: 'loading'; result: null }
-  | { status: 'ready'; result: TodayFocusResult }
-  | { status: 'error'; result: null };
+  | { status: 'loading'; feedbackState: null; result: null }
+  | { status: 'ready'; feedbackState: QuickReflectionState; result: TodayFocusResult }
+  | { status: 'error'; feedbackState: null; result: null };
 
 interface TodayRouteProps {
+  quickReflectionService?: QuickReflectionServicePort;
   service?: TodayService;
 }
 
@@ -48,25 +46,20 @@ interface GuidelineCopy {
   title: string;
 }
 
-const statusActions: Array<{
-  icon: typeof Eye;
-  status: DailyFocusStatus;
-  translationKey: string;
-}> = [
-  { icon: Eye, status: 'viewed', translationKey: 'today.actions.markViewed' },
-  { icon: CheckCircle2, status: 'completed', translationKey: 'today.actions.markCompleted' },
-  { icon: SkipForward, status: 'skipped', translationKey: 'today.actions.markSkipped' }
-];
-
-export function TodayRoute({ service: injectedService }: TodayRouteProps) {
+export function TodayRoute({
+  quickReflectionService: injectedQuickReflectionService,
+  service: injectedService
+}: TodayRouteProps) {
   const { state: authState } = useAuth();
   const repositories = useLocalRepositories();
   const { t } = useTranslation(['common', 'content']);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [routeState, setRouteState] = useState<TodayRouteState>({
     status: 'loading',
+    feedbackState: null,
     result: null
   });
-  const [savingStatus, setSavingStatus] = useState<DailyFocusStatus | null>(null);
+  const viewedFocusIdsRef = useRef<Set<string>>(new Set());
 
   const todayService = useMemo(
     () =>
@@ -82,60 +75,113 @@ export function TodayRoute({ service: injectedService }: TodayRouteProps) {
       }),
     [injectedService, repositories],
   );
-  const sessionReflectionService = useMemo(
+  const quickReflectionService = useMemo(
     () =>
-      new SessionReflectionService({
-        checkInRepository: repositories.checkIns,
+      injectedQuickReflectionService ??
+      new QuickReflectionService({
         dailyFocusRepository: repositories.dailyFocus,
         reflectionRepository: repositories.reflections,
         sessionRepository: repositories.sessions
       }),
-    [repositories],
+    [injectedQuickReflectionService, repositories],
   );
 
-  const loadFocus = useCallback(async () => {
+  const loadToday = useCallback(async () => {
     if (authState.status !== 'authenticated') {
       return;
     }
 
-    setRouteState({ status: 'loading', result: null });
+    setIsFeedbackOpen(false);
+    setRouteState({ status: 'loading', feedbackState: null, result: null });
 
     try {
-      const result = await todayService.getOrCreateTodayFocus(authState.user.id);
-      setRouteState({ status: 'ready', result });
+      const [result, feedbackState] = await Promise.all([
+        todayService.getOrCreateTodayFocus(authState.user.id),
+        quickReflectionService.getTodayState(authState.user.id)
+      ]);
+      setRouteState({ status: 'ready', result, feedbackState });
     } catch {
-      setRouteState({ status: 'error', result: null });
+      setRouteState({ status: 'error', feedbackState: null, result: null });
     }
-  }, [authState, todayService]);
+  }, [authState, quickReflectionService, todayService]);
 
   useEffect(() => {
-    void loadFocus();
-  }, [loadFocus]);
+    void loadToday();
+  }, [loadToday]);
 
-  const updateStatus = async (status: DailyFocusStatus) => {
-    if (authState.status !== 'authenticated') {
+  useEffect(() => {
+    if (authState.status !== 'authenticated' || routeState.status !== 'ready') {
       return;
     }
 
-    setSavingStatus(status);
+    const focus = routeState.result.dailyFocus;
 
-    try {
-      const result = await todayService.updateTodayFocusStatus(authState.user.id, status);
-      setRouteState({ status: 'ready', result });
-    } catch {
-      setRouteState({ status: 'error', result: null });
-    } finally {
-      setSavingStatus(null);
+    if (
+      !focus ||
+      !routeState.result.guideline ||
+      focus.status !== 'planned' ||
+      viewedFocusIdsRef.current.has(focus.id)
+    ) {
+      return;
     }
+
+    viewedFocusIdsRef.current.add(focus.id);
+
+    void todayService
+      .updateTodayFocusStatus(authState.user.id, 'viewed')
+      .then((result) => {
+        setRouteState((currentState) => {
+          if (currentState.status !== 'ready') {
+            return currentState;
+          }
+
+          const currentFocus = currentState.result.dailyFocus;
+
+          if (!currentFocus || currentFocus.id !== result.dailyFocus?.id || currentFocus.status !== 'planned') {
+            return currentState;
+          }
+
+          return { ...currentState, result };
+        });
+      })
+      .catch(() => {
+        viewedFocusIdsRef.current.delete(focus.id);
+      });
+  }, [authState, routeState, todayService]);
+
+  const handleFeedbackSaved = (feedbackState: QuickReflectionState) => {
+    setIsFeedbackOpen(false);
+    setRouteState((currentState) => {
+      if (currentState.status !== 'ready') {
+        return currentState;
+      }
+
+      return {
+        ...currentState,
+        feedbackState,
+        result: {
+          ...currentState.result,
+          dailyFocus: feedbackState.dailyFocus ?? currentState.result.dailyFocus
+        }
+      };
+    });
   };
 
   return (
     <AppShell activeItemId="today">
       <div className="space-y-5 pb-3">
-        <section className="space-y-3 pt-2">
-          <p className="text-sm font-bold text-hoopjot-purple">{t('today.eyebrow')}</p>
-          <h1 className="text-4xl font-black leading-none">{t('today.title')}</h1>
-          <p className="text-base leading-7 text-hoopjot-muted">{t('today.intro')}</p>
+        <section className="space-y-1 pt-2">
+          <h1 className="text-sm font-black uppercase text-hoopjot-purple">
+            {t('today.eyebrow')}
+          </h1>
+          {routeState.status === 'ready' ? (
+            <time
+              className="block text-sm font-bold text-hoopjot-muted"
+              dateTime={routeState.result.localDate}
+            >
+              {routeState.result.localDate}
+            </time>
+          ) : null}
         </section>
 
         {routeState.status === 'loading' ? (
@@ -150,7 +196,7 @@ export function TodayRoute({ service: injectedService }: TodayRouteProps) {
               <Button
                 icon={<RotateCcw className="h-5 w-5" aria-hidden="true" />}
                 onClick={() => {
-                  void loadFocus();
+                  void loadToday();
                 }}
                 size="sm"
               >
@@ -163,19 +209,14 @@ export function TodayRoute({ service: injectedService }: TodayRouteProps) {
           />
         ) : null}
 
-        {routeState.status === 'ready' ? (
+        {routeState.status === 'ready' && authState.status === 'authenticated' ? (
           <TodayFocusContent
-            onStatusChange={(status) => {
-              void updateStatus(status);
-            }}
+            feedbackState={routeState.feedbackState}
+            isFeedbackOpen={isFeedbackOpen}
+            onFeedbackSaved={handleFeedbackSaved}
+            onOpenFeedback={() => setIsFeedbackOpen(true)}
+            quickReflectionService={quickReflectionService}
             result={routeState.result}
-            savingStatus={savingStatus}
-          />
-        ) : null}
-
-        {authState.status === 'authenticated' ? (
-          <SessionReflectionPanel
-            service={sessionReflectionService}
             userId={authState.user.id}
           />
         ) : null}
@@ -185,13 +226,21 @@ export function TodayRoute({ service: injectedService }: TodayRouteProps) {
 }
 
 function TodayFocusContent({
-  onStatusChange,
+  feedbackState,
+  isFeedbackOpen,
+  onFeedbackSaved,
+  onOpenFeedback,
+  quickReflectionService,
   result,
-  savingStatus
+  userId
 }: {
-  onStatusChange: (status: DailyFocusStatus) => void;
+  feedbackState: QuickReflectionState;
+  isFeedbackOpen: boolean;
+  onFeedbackSaved: (state: QuickReflectionState) => void;
+  onOpenFeedback: () => void;
+  quickReflectionService: QuickReflectionServicePort;
   result: TodayFocusResult;
-  savingStatus: DailyFocusStatus | null;
+  userId: string;
 }) {
   const { t } = useTranslation(['common', 'content']);
 
@@ -206,72 +255,38 @@ function TodayFocusContent({
   }
 
   const copy = getGuidelineCopy(t, result.guideline);
+  const hasSavedReflection = Boolean(feedbackState.reflection);
 
   return (
     <section className="space-y-4" aria-label={t('today.focusSectionLabel')}>
-      <div className="flex flex-wrap items-center gap-2">
-        <Chip tone={getStatusTone(result.dailyFocus.status)}>
-          {t(`today.statuses.${result.dailyFocus.status}`)}
-        </Chip>
-        <Chip tone="neutral">{result.localDate}</Chip>
-      </div>
-
       <DailyFocusCard
-        actionIcon={<Eye className="h-5 w-5" aria-hidden="true" />}
-        actionLabel={t('today.actions.markViewed')}
         categoryLabel={t(`game.categories.${result.guideline.category}`)}
         categoryTone={getCategoryTone(result.guideline.category)}
         cue={copy.cue}
         explanation={copy.instruction}
-        footer={
-          <StatusControls
-            currentStatus={result.dailyFocus.status}
-            onStatusChange={onStatusChange}
-            savingStatus={savingStatus}
-          />
-        }
-        onAction={() => onStatusChange('viewed')}
         reason={getReasonText(t, result)}
         reasonLabel={t('today.reasonLabel')}
         title={copy.title}
       />
-    </section>
-  );
-}
 
-function StatusControls({
-  currentStatus,
-  onStatusChange,
-  savingStatus
-}: {
-  currentStatus: DailyFocusStatus;
-  onStatusChange: (status: DailyFocusStatus) => void;
-  savingStatus: DailyFocusStatus | null;
-}) {
-  const { t } = useTranslation('common');
-
-  return (
-    <section className="space-y-3" aria-label={t('today.statusLabel')}>
-      <p className="text-sm font-black text-hoopjot-ink">{t('today.statusLabel')}</p>
-      <div className="grid gap-2 sm:grid-cols-3">
-        {statusActions.map((action) => {
-          const Icon = action.icon;
-
-          return (
-            <Button
-              aria-pressed={currentStatus === action.status}
-              disabled={savingStatus !== null}
-              icon={<Icon className="h-4 w-4" aria-hidden="true" />}
-              key={action.status}
-              onClick={() => onStatusChange(action.status)}
-              size="sm"
-              variant={currentStatus === action.status ? 'primary' : 'secondary'}
-            >
-              {savingStatus === action.status ? t('today.actions.saving') : t(action.translationKey)}
-            </Button>
-          );
-        })}
-      </div>
+      {hasSavedReflection ? (
+        <p
+          className="rounded-card border border-hoopjot-line bg-hoopjot-surface px-4 py-3 text-sm font-black leading-6"
+          role="status"
+        >
+          {t('today.savedConfirmation')}
+        </p>
+      ) : isFeedbackOpen ? (
+        <QuickReflectionPanel
+          onSaved={onFeedbackSaved}
+          service={quickReflectionService}
+          userId={userId}
+        />
+      ) : (
+        <Button className="w-full" onClick={onOpenFeedback}>
+          {t('today.actions.logHowItWent')}
+        </Button>
+      )}
     </section>
   );
 }
@@ -330,19 +345,6 @@ function getCategoryTone(category: string): ChipTone {
       return 'progress';
     case 'communication':
       return 'reflection';
-    default:
-      return 'neutral';
-  }
-}
-
-function getStatusTone(status: DailyFocusStatus): ChipTone {
-  switch (status) {
-    case 'completed':
-      return 'progress';
-    case 'skipped':
-      return 'reflection';
-    case 'viewed':
-      return 'transition';
     default:
       return 'neutral';
   }

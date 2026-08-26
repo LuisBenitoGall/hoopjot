@@ -25,12 +25,22 @@ test('opens Profile from the authenticated header and persists editable profile 
   await expect(page.getByRole('heading', { name: 'Ready to start' })).toBeVisible();
   await page.getByRole('button', { name: 'Finish' }).click();
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
   await page.getByRole('link', { name: 'Profile' }).click();
 
   await expect(page).toHaveURL(/\/profile$/);
   await expect(page.getByRole('heading', { name: 'Profile' })).toBeVisible();
   await expect(page.getByLabel('Birth year')).toHaveValue('2004');
+  await expect(page.getByLabel('App language')).toHaveValue('en');
+  await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible();
+
+  const primaryNavigation = page.getByRole('navigation', { name: 'Primary' });
+  await expect(primaryNavigation.getByRole('link', { name: 'Today' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Plan' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Journal' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Profile' })).toHaveCount(0);
+  await expect(page.getByText('Weekly review')).toHaveCount(0);
+  await expect(page.getByText('Progress signals')).toHaveCount(0);
 
   await page.getByLabel('Alias').fill('Lead Guard');
   await page.getByLabel('Height in cm').fill('188');

@@ -2,9 +2,9 @@ import 'fake-indexeddb/auto';
 
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor, type RenderResult } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import userEvent, { PointerEventsCheckLevel } from '@testing-library/user-event';
 
-import { AuthProvider } from '../../app/providers/AuthProvider';
+import { AuthContext, type AuthContextValue } from '../../app/providers/authContext';
 import { LocalRepositoriesProvider } from '../../app/providers/LocalRepositoriesProvider';
 import i18n from '../../i18n/config';
 import {
@@ -14,7 +14,7 @@ import {
   type HoopjotLocalDb,
   type LocalRepositories
 } from '../../persistence/local';
-import type { AuthService, AuthUser } from '../../services/auth';
+import type { AuthUser } from '../../services/auth';
 import { OnboardingRoute } from './OnboardingRoute';
 
 const userId = '11111111-1111-4111-8111-111111111111';
@@ -43,7 +43,7 @@ describe('OnboardingRoute', () => {
   });
 
   it('completes onboarding with alias, height and physical note omitted', async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     const { repositories } = renderOnboarding();
 
     await completeRequiredOnboardingSteps(user);
@@ -69,7 +69,7 @@ describe('OnboardingRoute', () => {
   });
 
   it('blocks players below the minimum age', async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     renderOnboarding();
 
@@ -82,7 +82,7 @@ describe('OnboardingRoute', () => {
   });
 
   it('enforces the three-goal limit', async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     renderOnboarding();
     await advanceToGoals(user);
@@ -101,7 +101,7 @@ describe('OnboardingRoute', () => {
   });
 
   it('switches locale immediately', async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     renderOnboarding();
 
@@ -114,7 +114,7 @@ describe('OnboardingRoute', () => {
   });
 
   it('reloads saved onboarding progress from IndexedDB', async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     const { repositories, view } = renderOnboarding();
 
     await user.click(await screen.findByRole('button', { name: 'Continue' }));
@@ -139,6 +139,14 @@ describe('OnboardingRoute', () => {
     expect(screen.getByLabelText('Birth year')).toHaveValue(2010);
   });
 });
+
+function setupUser(): ReturnType<typeof userEvent.setup> {
+  return userEvent.setup({
+    delay: null,
+    pointerEventsCheck: PointerEventsCheckLevel.Never,
+    skipHover: true
+  });
+}
 
 async function completeRequiredOnboardingSteps(user: ReturnType<typeof userEvent.setup>) {
   await advanceToGoals(user);
@@ -170,11 +178,11 @@ function renderOnboarding(existingRepositories?: LocalRepositories): {
   const repositories = existingRepositories ?? makeRepositories();
   const view = render(
     <LocalRepositoriesProvider repositories={repositories}>
-      <AuthProvider authService={createFakeAuthService()} playerProfileRepository={repositories.profiles}>
+      <AuthContext.Provider value={authenticatedAuthValue()}>
         <MemoryRouter initialEntries={['/onboarding']}>
           <OnboardingRoute />
         </MemoryRouter>
-      </AuthProvider>
+      </AuthContext.Provider>
     </LocalRepositoriesProvider>,
   );
 
@@ -188,14 +196,20 @@ function makeRepositories(): LocalRepositories {
   return createLocalRepositories(db);
 }
 
-function createFakeAuthService(): AuthService {
+function authenticatedAuthValue(): AuthContextValue {
   return {
-    getCurrentUser: vi.fn(async () => authUser),
-    onAuthStateChange: vi.fn(() => ({ unsubscribe: vi.fn() })),
+    error: null,
+    refreshOnboardingStatus: vi.fn(async () => undefined),
+    resetError: vi.fn(),
     sendPasswordResetEmail: vi.fn(async () => undefined),
-    signIn: vi.fn(async () => authUser),
+    signIn: vi.fn(async () => undefined),
     signOut: vi.fn(async () => undefined),
     signUp: vi.fn(async () => ({ requiresEmailConfirmation: false, user: authUser })),
-    updatePassword: vi.fn(async () => authUser)
+    state: {
+      isPasswordRecoverySession: false,
+      status: 'authenticated',
+      user: authUser
+    },
+    updatePassword: vi.fn(async () => undefined)
   };
 }

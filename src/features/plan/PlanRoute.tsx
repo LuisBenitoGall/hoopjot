@@ -133,7 +133,9 @@ export function ProfileSnapshot({
 }) {
   const { t } = useTranslation('common');
   const facts = getProfileFacts(t, profile);
-  const activeGoalLabels = activeGoals.map((goal) => getGoalLabel(t, goal));
+  const activeGoalLabels = activeGoals
+    .map((goal) => getGoalLabel(t, goal))
+    .filter((goalLabel): goalLabel is string => Boolean(goalLabel));
 
   return (
     <section className="space-y-4 border-y border-hoopjot-line py-5">
@@ -177,7 +179,7 @@ export function HowHoopjotWorks({ steps }: { steps: PlanHowItWorksStepContent[] 
       <ol className="grid gap-4 sm:grid-cols-4">
         {steps.map((step, index) => (
           <li className="border-t-2 border-hoopjot-ink/20 pt-3" key={step.title}>
-            <p className="text-xs font-black text-hoopjot-orange">
+            <p className="text-xs font-black text-hoopjot-ink">
               {String(index + 1).padStart(2, '0')}
             </p>
             <h2 className="mt-2 text-lg font-black leading-tight">{step.title}</h2>
@@ -247,7 +249,7 @@ export function DevelopmentSection({
   prefersReducedMotion: boolean;
   section: PlanSectionContent;
 }) {
-  const accentClassName = getSectionAccentClassName(section.id);
+  const accentClassName = getSectionAccentClassName();
 
   return (
     <article
@@ -616,7 +618,7 @@ function usePlanMapMotion() {
         setHasEntered(true);
         observer.disconnect();
       },
-      { threshold: 0.18 },
+      { threshold: 0 },
     );
 
     observer.observe(element);
@@ -713,12 +715,12 @@ function getProfileFacts(t: TFunction<'common'>, profile: PlayerProfile | null):
   return facts;
 }
 
-function getGoalLabel(t: TFunction<'common'>, goal: PlayerGoal): string {
+function getGoalLabel(t: TFunction<'common'>, goal: PlayerGoal): string | null {
   if (goal.goalType === 'custom') {
-    return goal.customLabel ?? goal.goalType;
+    return goal.customLabel ?? t('onboarding.goals.custom');
   }
 
-  return t(`onboarding.goals.${goal.goalType}`, { defaultValue: goal.goalType });
+  return t(`onboarding.goals.${goal.goalType}`);
 }
 
 function getGuidelineCopy(t: TFunction, guideline: Guideline): GuidelineCopy {
@@ -766,17 +768,6 @@ function getCategoryTone(category: string): ChipTone {
   }
 }
 
-function getSectionAccentClassName(sectionId: string): string {
-  switch (sectionId) {
-    case 'attack':
-      return 'text-hoopjot-orange';
-    case 'defense':
-      return 'text-hoopjot-purple';
-    case 'transition':
-      return 'text-hoopjot-blue';
-    case 'communication-decisions':
-      return 'text-hoopjot-ink';
-    default:
-      return 'text-hoopjot-success';
-  }
+function getSectionAccentClassName(): string {
+  return 'text-hoopjot-ink';
 }

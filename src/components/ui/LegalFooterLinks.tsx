@@ -18,20 +18,32 @@ export function LegalFooterLinks({ className }: LegalFooterLinksProps) {
       aria-label={t('footer.label')}
       className={cx('flex flex-wrap items-center justify-center gap-x-4 gap-y-2', className)}
     >
-      <Link className="text-xs font-bold text-hoopjot-muted underline" to="/legal/notice">
+      <Link
+        className="inline-flex min-h-9 items-center text-xs font-bold text-hoopjot-muted underline"
+        to="/legal/notice"
+      >
         {t('documents.notice')}
       </Link>
-      <Link className="text-xs font-bold text-hoopjot-muted underline" to="/legal/privacy">
+      <Link
+        className="inline-flex min-h-9 items-center text-xs font-bold text-hoopjot-muted underline"
+        to="/legal/privacy"
+      >
         {t('documents.privacy')}
       </Link>
-      <Link className="text-xs font-bold text-hoopjot-muted underline" to="/legal/cookies">
+      <Link
+        className="inline-flex min-h-9 items-center text-xs font-bold text-hoopjot-muted underline"
+        to="/legal/cookies"
+      >
         {t('documents.cookies')}
       </Link>
-      <Link className="text-xs font-bold text-hoopjot-muted underline" to="/legal/terms">
+      <Link
+        className="inline-flex min-h-9 items-center text-xs font-bold text-hoopjot-muted underline"
+        to="/legal/terms"
+      >
         {t('documents.terms')}
       </Link>
       <button
-        className="inline-flex items-center gap-1 text-xs font-bold text-hoopjot-muted underline outline-none hover:text-hoopjot-ink focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
+        className="inline-flex min-h-9 items-center gap-1 text-xs font-bold text-hoopjot-muted underline outline-none hover:text-hoopjot-ink focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
         onClick={() => cookieConsent?.openPreferences()}
         type="button"
       >

@@ -1,4 +1,11 @@
 import { basketballCatalog } from '../basketball/catalog';
+import {
+  competitiveLevelSchema,
+  goalTypeSchema,
+  playerPositionSchema,
+} from '../../domain';
+import enCommon from '../../i18n/en/common.json';
+import esCommon from '../../i18n/es/common.json';
 import { getPlanContent, linkedPlanGuidelineIds, planContentV1, planContentVersion } from './index';
 
 describe('plan content', () => {
@@ -67,5 +74,22 @@ describe('plan content', () => {
       'habits.confidence.next-play-reset',
     ]);
     expect(linkedPlanGuidelineIds.every((guidelineId) => catalogIds.has(guidelineId))).toBe(true);
+  });
+
+  it('keeps ProfileSnapshot enum labels localized for both locales', () => {
+    for (const position of playerPositionSchema.options) {
+      expect(enCommon.onboarding.positions).toHaveProperty(position);
+      expect(esCommon.onboarding.positions).toHaveProperty(position);
+    }
+
+    for (const level of competitiveLevelSchema.options) {
+      expect(enCommon.onboarding.competitiveLevels).toHaveProperty(level);
+      expect(esCommon.onboarding.competitiveLevels).toHaveProperty(level);
+    }
+
+    for (const goalType of goalTypeSchema.options) {
+      expect(enCommon.onboarding.goals).toHaveProperty(goalType);
+      expect(esCommon.onboarding.goals).toHaveProperty(goalType);
+    }
   });
 });

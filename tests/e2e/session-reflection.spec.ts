@@ -14,23 +14,23 @@ test('records a session and rating-only reflection locally while offline', async
 
   await page.goto('/app');
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Session and reflection' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Session and reflection' })).toHaveCount(0);
 
   await context.setOffline(true);
 
-  await page.getByRole('button', { name: 'Start session' }).click();
-  await expect(page.getByText('In progress')).toBeVisible();
-
+  await page.getByRole('button', { name: 'Log how it went' }).click();
   await page.locator('input[name="focus-rating"][value="4"] + span').click();
-  await page.getByRole('button', { name: 'Complete + save reflection' }).click();
+  await page.getByRole('button', { name: 'Save' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Reflection saved' })).toBeVisible();
-  await expect(page.getByText('Reflection saved with focus rating 4 of 5.')).toBeVisible();
+  await expect(
+    page.getByText('Saved. We will take it into account for the next focuses.'),
+  ).toBeVisible();
 
   await context.setOffline(false);
   await page.reload();
 
-  await expect(page.getByRole('heading', { name: 'Reflection saved' })).toBeVisible();
-  await expect(page.getByText('Reflection saved with focus rating 4 of 5.')).toBeVisible();
+  await expect(
+    page.getByText('Saved. We will take it into account for the next focuses.'),
+  ).toBeVisible();
 });

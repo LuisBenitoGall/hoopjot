@@ -6,7 +6,7 @@ import { Card } from '../ui/Card';
 import { Chip, type ChipTone } from '../ui/Chip';
 
 interface DailyFocusCardProps {
-  actionLabel: string;
+  actionLabel?: string;
   actionIcon?: ReactNode;
   categoryLabel: string;
   categoryTone: ChipTone;
@@ -52,13 +52,15 @@ export function DailyFocusCard({
           <p className="mt-1 text-sm leading-6 text-hoopjot-muted">{reason}</p>
         </div>
 
-        <Button
-          className="w-full"
-          icon={actionIcon ?? <Play className="h-5 w-5" aria-hidden="true" />}
-          onClick={onAction}
-        >
-          {actionLabel}
-        </Button>
+        {actionLabel ? (
+          <Button
+            className="w-full"
+            icon={actionIcon ?? <Play className="h-5 w-5" aria-hidden="true" />}
+            onClick={onAction}
+          >
+            {actionLabel}
+          </Button>
+        ) : null}
 
         {footer ? <div className="space-y-3">{footer}</div> : null}
       </div>

@@ -53,7 +53,7 @@ const authenticatedScreens: Array<{
   path: string;
   screenshot: string;
 }> = [
-  { heading: /^(Today's focus|Foco de hoy)$/, path: '/app', screenshot: '02-today.png' },
+  { heading: /^(TODAY'S FOCUS|FOCO DE HOY)$/, path: '/app', screenshot: '02-today.png' },
   { heading: /^Your game plan$/, path: '/plan', screenshot: '03-plan.png' },
   { heading: /^(Journal|Diario)$/, path: '/journal', screenshot: '04-journal.png' },
   { heading: /^(Profile|Perfil)$/, path: '/profile', screenshot: '05-profile.png' },
@@ -112,7 +112,7 @@ test('authenticates against deployed Hoopjot and captures authenticated navigati
     await validateAuthenticatedScreen(
       page,
       {
-        heading: /^(Today's focus|Foco de hoy)$/,
+        heading: /^(TODAY'S FOCUS|FOCO DE HOY)$/,
         path: '/app',
         screenshot: '07-today-desktop.png',
       },
@@ -161,7 +161,7 @@ async function waitForAuthenticatedBootstrap(
     if (
       route.startsWith('/app') &&
       (await page
-        .getByRole('heading', { level: 1, name: /^(Today's focus|Foco de hoy)$/ })
+        .getByRole('heading', { level: 1, name: /^(TODAY'S FOCUS|FOCO DE HOY)$/ })
         .isVisible())
     ) {
       await expectStableAuthenticatedApp(page, diagnostics);

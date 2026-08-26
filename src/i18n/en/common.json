@@ -162,9 +162,10 @@
       "emptyTitle": "Session not found"
     },
     "empty": {
-      "description": "Start and reflect on a session, then it will appear here for review.",
-      "title": "No sessions yet"
+      "description": "Nothing in your journal yet.",
+      "title": "Nothing in your journal yet."
     },
+    "entriesLabel": "Journal entries",
     "errors": {
       "detailDescription": "This session detail could not be loaded from this device.",
       "detailTitle": "Session detail unavailable",
@@ -181,7 +182,7 @@
       "none": "No focus attached",
       "title": "Daily focus"
     },
-    "intro": "Your sessions, focuses and quick reflections in one place.",
+    "intro": "Your practice and game notes, without turning them into a report.",
     "loading": "Loading journal",
     "loadingDetail": "Loading session detail",
     "notLogged": "Not logged",
@@ -317,11 +318,14 @@
     "goalCount": "{{count}} of {{max}} goals selected",
     "goals": {
       "confidence": "Confidence",
+      "custom": "Custom",
       "decision_making": "Decision making",
       "defense": "Defense",
       "finishing": "Finishing",
       "fundamentals": "Fundamentals",
       "game_understanding": "Game understanding",
+      "inside_game": "Inside game",
+      "more_minutes": "More minutes",
       "rebounding": "Rebounding",
       "rebuild_game_confidence": "Rebuild game confidence"
     },
@@ -534,6 +538,7 @@
   "smokeTitle": "Smoke test route",
   "today": {
     "actions": {
+      "logHowItWent": "Log how it went",
       "markCompleted": "Complete",
       "markSkipped": "Skip",
       "markViewed": "Mark viewed",
@@ -544,7 +549,7 @@
       "loadDescription": "Your local focus could not be loaded. Try again from this device.",
       "loadTitle": "Focus unavailable"
     },
-    "eyebrow": "Today",
+    "eyebrow": "TODAY'S FOCUS",
     "focusSectionLabel": "Daily focus",
     "intro": "One court-side cue for the next session. It saves locally and stays available offline.",
     "loading": "Loading today's focus",
@@ -554,7 +559,16 @@
       "recoveryDescription": "Recovery sessions stay in your journal, but Hoopjot does not generate MVP basketball guideline recommendations for recovery days.",
       "recoveryTitle": "No basketball focus today"
     },
-    "reasonLabel": "Why this focus",
+    "quickReflection": {
+      "coachFeedbackToggle": "Add coach feedback",
+      "mainNoteLabel": "What did you notice or want to remember?",
+      "ratingLabel": "How did the focus go?",
+      "ratingMax": "5",
+      "ratingMin": "1",
+      "save": "Save",
+      "sessionTypeLabel": "What was it today?"
+    },
+    "reasonLabel": "Why today",
     "reasons": {
       "coach_feedback": "This focus connects to a recent structured coach-feedback note.",
       "development_path": "This focus fits the next step in the current development path.",
@@ -569,6 +583,7 @@
       "skipped": "Skipped",
       "viewed": "Viewed"
     },
+    "savedConfirmation": "Saved. We will take it into account for the next focuses.",
     "title": "Today's focus"
   },
   "profile": {

@@ -42,15 +42,15 @@ test('completes onboarding locally and unlocks app after reload', async ({ page 
   await expect(page.getByRole('heading', { name: 'Ready to start' })).toBeVisible();
   await page.getByRole('button', { name: 'Finish' }).click();
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
 
   await page.reload();
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
 
   await page.goto('/onboarding');
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
 });
 
 test('restores a remote completed profile before asking for onboarding again', async ({
@@ -108,7 +108,7 @@ test('restores a remote completed profile before asking for onboarding again', a
 
   await page.goto('/app');
 
-  await expect(page.getByRole('heading', { name: "Today's focus" })).toBeVisible();
+  await expect(page.getByRole('heading', { name: "TODAY'S FOCUS" })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Pick your language' })).toHaveCount(0);
 
   await page.getByRole('link', { name: 'Profile' }).click();
