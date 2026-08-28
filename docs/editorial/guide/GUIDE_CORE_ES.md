@@ -2,7 +2,7 @@
 
 ## 30 ideas para aprender, entrenar y competir mejor
 
-**Estado editorial:** E0.4 — redacción final para aprobación  
+**Estado editorial:** E0.4 — versión revisada para aprobación  
 **Idioma:** Español  
 **Fuente canónica:** `GUIDE_SOURCE_IRIA_ES.md`
 
@@ -439,6 +439,22 @@ Para participar bien en ella debes entender:
 - la posición de la defensa;
 - qué ventaja intenta crear la acción;
 - qué ocurre después.
+
+### PASA CERCA DEL BLOQUEO
+
+Si eres quien se beneficia de un bloqueo, no dejes un pasillo entre tu trayectoria y quien bloquea.
+
+Pasa **hombro con hombro**.
+
+Cuanto mayor sea el espacio que dejas, más fácil resulta para tu defensor atravesar ese hueco y anular la ventaja.
+
+Cerrar ese espacio es responsabilidad de quien utiliza el bloqueo.
+
+No esperes que quien bloquea se desplace para cerrarlo por ti. En el momento del contacto debe mantener una posición legal. Si se mueve para interceptar o corregir la trayectoria del defensor, puede convertir un buen bloqueo en una falta de ataque.
+
+Esto importa tanto en un bloqueo directo como en uno indirecto.
+
+**Quien bloquea crea el obstáculo. Quien utiliza el bloqueo debe aprovecharlo.**
 
 Según tu función tendrás que aprender a poner bloqueos, utilizarlos, rechazarlos, cambiar ángulos, continuar, abrirte, volver a bloquear o leer la reacción defensiva.
 
