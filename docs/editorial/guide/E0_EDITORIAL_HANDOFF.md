@@ -2,190 +2,118 @@
 
 ## Current status
 
-The Guide editorial system is complete in Spanish and English through **E0.11**.
+The Guide editorial and implementation-specification work is complete through **E0.12**.
 
-- Spanish edition: frozen at E0.9.
-- English translation: completed at E0.10.
-- ES ↔ EN equivalence audit: passed at E0.11.
-- Next phase: **E0.12 — Codex implementation contract**.
+- E0.9: Spanish edition frozen.
+- E0.10: English translation completed.
+- E0.11: ES ↔ EN equivalence passed.
+- **E0.12: Codex implementation contract completed.**
 
-The frozen editorial content should not be reopened during E0.12 unless an objective error is found.
+Guide is now ready to be implemented in the Hoopjot PWA.
 
 ---
 
-# 1. Product objective
+# Codex entry point
 
-These files are not intended to become 25 separate static manuals.
+Give Codex:
 
-They are modular editorial sources for the Hoopjot PWA.
+`E0_12_CODEX_TASK.md`
 
-Guide is composed deterministically at runtime from:
+Codex must then follow:
+
+`E0_12_CODEX_IMPLEMENTATION_CONTRACT.md`
+
+and consume:
+
+`E0_12_GUIDE_CONTENT_REGISTRY.json`
+
+together with the canonical bilingual Guide sources.
+
+---
+
+# Product model
+
+Guide is not 25 authored manuals.
+
+It is resolved deterministically from:
+
+```text
+locale
+primaryPosition
+secondaryPosition
+```
+
+using:
 
 ```text
 CORE
-+
-PRIMARY POSITION ROLE PACK
-+
-OPTIONAL HYBRID POSITION BRIDGE
++ PRIMARY ROLE PACK
++ OPTIONAL ORDER-INDEPENDENT HYBRID BRIDGE
 ```
 
-There is no LLM content generation at runtime.
+No LLM is used at runtime.
 
-Guide V1 uses only:
-
-- `primaryPosition`
-- `secondaryPosition`
-
-as editorial selectors.
+Only `primaryPosition` and `secondaryPosition` select canonical Guide content.
 
 ---
 
-# 2. Canonical bilingual sources
+# Canonical editorial sources
 
-## Spanish
+Spanish:
 
 - `GUIDE_CORE_ES.md`
 - `GUIDE_ROLE_MATRIX_ES.md`
-- 5 `roles/*_ES.md` primary role packs
-- 10 `roles/*_ES.md` hybrid bridges
+- 5 primary role packs `_ES`
+- 10 hybrid bridges `_ES`
 
-Spanish is the semantic source of truth and remains frozen at E0.9.
-
-## English
+English:
 
 - `GUIDE_CORE_EN.md`
 - `GUIDE_ROLE_MATRIX_EN.md`
-- 5 `roles/*_EN.md` primary role packs
-- 10 `roles/*_EN.md` hybrid bridges
+- 5 primary role packs `_EN`
+- 10 hybrid bridges `_EN`
 
-English passed ES ↔ EN equivalence at E0.11.
+Spanish remains the semantic source of truth.
 
----
-
-# 3. Runtime selection model
-
-For `locale = es`:
-
-```text
-GUIDE_CORE_ES
-+ ROLE_ES(primaryPosition)
-+ BRIDGE_ES(primaryPosition, secondaryPosition) if secondaryPosition exists
-```
-
-For `locale = en`:
-
-```text
-GUIDE_CORE_EN
-+ ROLE_EN(primaryPosition)
-+ BRIDGE_EN(primaryPosition, secondaryPosition) if secondaryPosition exists
-```
-
-The bridge key is order-independent.
-
-Examples:
-
-```text
-PG + SG → PG role + PG_SG bridge
-SG + PG → SG role + PG_SG bridge
-```
-
-The primary role pack always supplies the dominant perspective.
+English passed equivalence at E0.11.
 
 ---
 
-# 4. Position keys
+# Implementation constraints
 
-Primary positions:
+Codex must:
 
-- `PG`
-- `SG`
-- `SF`
-- `PF`
-- `C`
+- ingest editorial Markdown into a deterministic structured representation;
+- avoid free-form Markdown splicing in the client at runtime;
+- normalize bridge keys independently of position order;
+- preserve the primary role as the dominant perspective;
+- apply only authorized INSERT / OVERRIDE / BRIDGE interventions;
+- keep the 17 Core-only points invariant;
+- support ES and EN without runtime translation;
+- hide editorial metadata from players;
+- validate all 25 position selections in both locales.
 
-Order-independent bridge keys:
+Codex must not:
 
-- `PG_SG`
-- `PG_SF`
-- `PG_PF`
-- `PG_C`
-- `SG_SF`
-- `SG_PF`
-- `SG_C`
-- `SF_PF`
-- `SF_C`
-- `PF_C`
-
----
-
-# 5. Normative source
-
-`GUIDE_ROLE_MATRIX_ES.md` is the authoritative composition specification.
-
-`GUIDE_ROLE_MATRIX_EN.md` is its equivalent English edition.
-
-The Matrix defines:
-
-- allowed intervention points;
-- `INSERT`;
-- `OVERRIDE`;
-- `BRIDGE`;
-- exact Core anchors;
-- Core-only points;
-- the P09 screen invariant;
-- selector boundaries;
-- medical and product boundaries;
-- final composition order.
+- edit canonical Guide copy;
+- infer position or content from height/body/experience/medical data;
+- introduce LLM generation;
+- create 25 duplicated static Guides per language;
+- add mandatory tracking mechanics to Guide.
 
 ---
 
-# 6. E0.11 result
+# Current files added by E0.12
 
-All 17 ES/EN canonical content pairs preserve:
-
-- structure;
-- point IDs;
-- intervention types;
-- role priorities;
-- bridge neutrality;
-- technical basketball meaning;
-- medical and product boundaries.
-
-Small English terminology/fluency corrections were made during E0.11.
-
-No frozen Spanish content was changed.
-
-See:
-
-- `E0_11_EQUIVALENCE_AUDIT.md`
-- `E0_11_EQUIVALENCE_MANIFEST.json`
+- `E0_12_CODEX_IMPLEMENTATION_CONTRACT.md`
+- `E0_12_CODEX_TASK.md`
+- `E0_12_GUIDE_CONTENT_REGISTRY.json`
+- `E0_12_IMPLEMENTATION_MANIFEST.md`
+- `E0_12_IMPLEMENTATION_MANIFEST.json`
 
 ---
 
-# 7. E0.12 objective
-
-E0.12 must convert the editorial architecture into an explicit implementation contract for Codex.
-
-The contract must define at minimum:
-
-- file/resource mapping;
-- TypeScript position and locale types;
-- bridge-key normalization;
-- deterministic composition algorithm;
-- representation of Core points and intervention anchors;
-- behavior of `INSERT`, `OVERRIDE` and `BRIDGE`;
-- locale fallback behavior;
-- profile selector boundaries;
-- rendering expectations;
-- validation/tests;
-- what must never be inferred from profile data;
-- what editorial files Codex may and may not modify.
-
-E0.12 is the first phase intended to be directly actionable by Codex.
-
----
-
-# 8. Phase status
+# Phase status
 
 - E0.4 Core ES: closed
 - E0.5 Role Matrix ES: closed
@@ -194,5 +122,7 @@ E0.12 is the first phase intended to be directly actionable by Codex.
 - E0.8 Compilation and audit ES: closed
 - E0.9 Spanish freeze: closed
 - E0.10 English translation: closed
-- **E0.11 ES/EN equivalence: closed**
-- E0.12 Codex implementation contract: next
+- E0.11 ES/EN equivalence: closed
+- **E0.12 Codex implementation contract: closed**
+
+The next step is application implementation, not further Guide editorial drafting.

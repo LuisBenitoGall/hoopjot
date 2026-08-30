@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 1,
+  "editorialVersion": "E0.11",
+  "implementationContractVersion": "E0.12",
+  "locales": [
+    "es",
+    "en"
+  ],
+  "defaultLocale": "es",
+  "positions": [
+    "PG",
+    "SG",
+    "SF",
+    "PF",
+    "C"
+  ],
+  "positionRank": {
+    "PG": 0,
+    "SG": 1,
+    "SF": 2,
+    "PF": 3,
+    "C": 4
+  },
+  "bridgeKeys": [
+    "PG_SG",
+    "PG_SF",
+    "PG_PF",
+    "PG_C",
+    "SG_SF",
+    "SG_PF",
+    "SG_C",
+    "SF_PF",
+    "SF_C",
+    "PF_C"
+  ],
+  "files": {
+    "core": {
+      "es": "GUIDE_CORE_ES.md",
+      "en": "GUIDE_CORE_EN.md"
+    },
+    "matrix": {
+      "es": "GUIDE_ROLE_MATRIX_ES.md",
+      "en": "GUIDE_ROLE_MATRIX_EN.md"
+    },
+    "roles": {
+      "es": {
+        "PG": "roles/PG_ES.md",
+        "SG": "roles/SG_ES.md",
+        "SF": "roles/SF_ES.md",
+        "PF": "roles/PF_ES.md",
+        "C": "roles/C_ES.md"
+      },
+      "en": {
+        "PG": "roles/PG_EN.md",
+        "SG": "roles/SG_EN.md",
+        "SF": "roles/SF_EN.md",
+        "PF": "roles/PF_EN.md",
+        "C": "roles/C_EN.md"
+      }
+    },
+    "bridges": {
+      "es": {
+        "PG_SG": "roles/PG_SG_ES.md",
+        "PG_SF": "roles/PG_SF_ES.md",
+        "PG_PF": "roles/PG_PF_ES.md",
+        "PG_C": "roles/PG_C_ES.md",
+        "SG_SF": "roles/SG_SF_ES.md",
+        "SG_PF": "roles/SG_PF_ES.md",
+        "SG_C": "roles/SG_C_ES.md",
+        "SF_PF": "roles/SF_PF_ES.md",
+        "SF_C": "roles/SF_C_ES.md",
+        "PF_C": "roles/PF_C_ES.md"
+      },
+      "en": {
+        "PG_SG": "roles/PG_SG_EN.md",
+        "PG_SF": "roles/PG_SF_EN.md",
+        "PG_PF": "roles/PG_PF_EN.md",
+        "PG_C": "roles/PG_C_EN.md",
+        "SG_SF": "roles/SG_SF_EN.md",
+        "SG_PF": "roles/SG_PF_EN.md",
+        "SG_C": "roles/SG_C_EN.md",
+        "SF_PF": "roles/SF_PF_EN.md",
+        "SF_C": "roles/SF_C_EN.md",
+        "PF_C": "roles/PF_C_EN.md"
+      }
+    }
+  },
+  "pointOrder": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30"
+  ],
+  "chapters": [
+    {
+      "id": "chapter_1",
+      "points": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05"
+      ]
+    },
+    {
+      "id": "chapter_2",
+      "points": [
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ]
+    },
+    {
+      "id": "chapter_3",
+      "points": [
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15"
+      ]
+    },
+    {
+      "id": "chapter_4",
+      "points": [
+        "P16",
+        "P17",
+        "P18",
+        "P19",
+        "P20"
+      ]
+    },
+    {
+      "id": "chapter_5",
+      "points": [
+        "P21",
+        "P22",
+        "P23",
+        "P24"
+      ]
+    },
+    {
+      "id": "chapter_6",
+      "points": [
+        "P25",
+        "P26",
+        "P27",
+        "P28",
+        "P29",
+        "P30"
+      ]
+    }
+  ],
+  "coreOnlyPoints": [
+    "P02",
+    "P05",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P23",
+    "P24",
+    "P25",
+    "P28",
+    "P29",
+    "P30"
+  ],
+  "roleInsertPoints": [
+    "P01",
+    "P03",
+    "P06",
+    "P07",
+    "P08",
+    "P21",
+    "P22"
+  ],
+  "roleOverridePoints": [
+    "P04",
+    "P09",
+    "P10",
+    "P11",
+    "P26",
+    "P27"
+  ],
+  "bridgeAllowedPoints": [
+    "P03",
+    "P04",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P21",
+    "P22",
+    "P26",
+    "P27"
+  ],
+  "interventionSlots": {
+    "P01": {
+      "roleMode": "insert",
+      "slotId": "after_role_influence_before_common_principle",
+      "bridgeAllowed": false,
+      "bridgePlacement": null
+    },
+    "P03": {
+      "roleMode": "insert",
+      "slotId": "after_role_variation_before_become_useful",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P04": {
+      "roleMode": "override",
+      "slotId": "replace_level_specific_content",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P06": {
+      "roleMode": "insert",
+      "slotId": "after_body_and_laterality_before_body_as_tool",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P07": {
+      "roleMode": "insert",
+      "slotId": "after_rebound_role_variation_before_never_do",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P08": {
+      "roleMode": "insert",
+      "slotId": "after_transition_state_blocks_before_arrive_early_close",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P09": {
+      "roleMode": "override",
+      "slotId": "replace_positional_screen_responsibility",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P10": {
+      "roleMode": "override",
+      "slotId": "replace_generic_fundamentals_priority",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P11": {
+      "roleMode": "override",
+      "slotId": "replace_generic_video_questions",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P21": {
+      "roleMode": "insert",
+      "slotId": "after_common_team_examples_before_invisible_work",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P22": {
+      "roleMode": "insert",
+      "slotId": "after_information_from_your_place_before_speaking_close",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P26": {
+      "roleMode": "override",
+      "slotId": "replace_phase_specific_content",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    },
+    "P27": {
+      "roleMode": "override",
+      "slotId": "replace_invisible_actions_and_questions",
+      "bridgeAllowed": true,
+      "bridgePlacement": "after_primary_intervention_before_core_closing"
+    }
+  },
+  "selectionCases": [
+    {
+      "primaryPosition": "PG",
+      "secondaryPosition": null,
+      "bridgeKey": null
+    },
+    {
+      "primaryPosition": "PG",
+      "secondaryPosition": "SG",
+      "bridgeKey": "PG_SG"
+    },
+    {
+      "primaryPosition": "PG",
+      "secondaryPosition": "SF",
+      "bridgeKey": "PG_SF"
+    },
+    {
+      "primaryPosition": "PG",
+      "secondaryPosition": "PF",
+      "bridgeKey": "PG_PF"
+    },
+    {
+      "primaryPosition": "PG",
+      "secondaryPosition": "C",
+      "bridgeKey": "PG_C"
+    },
+    {
+      "primaryPosition": "SG",
+      "secondaryPosition": null,
+      "bridgeKey": null
+    },
+    {
+      "primaryPosition": "SG",
+      "secondaryPosition": "PG",
+      "bridgeKey": "PG_SG"
+    },
+    {
+      "primaryPosition": "SG",
+      "secondaryPosition": "SF",
+      "bridgeKey": "SG_SF"
+    },
+    {
+      "primaryPosition": "SG",
+      "secondaryPosition": "PF",
+      "bridgeKey": "SG_PF"
+    },
+    {
+      "primaryPosition": "SG",
+      "secondaryPosition": "C",
+      "bridgeKey": "SG_C"
+    },
+    {
+      "primaryPosition": "SF",
+      "secondaryPosition": null,
+      "bridgeKey": null
+    },
+    {
+      "primaryPosition": "SF",
+      "secondaryPosition": "PG",
+      "bridgeKey": "PG_SF"
+    },
+    {
+      "primaryPosition": "SF",
+      "secondaryPosition": "SG",
+      "bridgeKey": "SG_SF"
+    },
+    {
+      "primaryPosition": "SF",
+      "secondaryPosition": "PF",
+      "bridgeKey": "SF_PF"
+    },
+    {
+      "primaryPosition": "SF",
+      "secondaryPosition": "C",
+      "bridgeKey": "SF_C"
+    },
+    {
+      "primaryPosition": "PF",
+      "secondaryPosition": null,
+      "bridgeKey": null
+    },
+    {
+      "primaryPosition": "PF",
+      "secondaryPosition": "PG",
+      "bridgeKey": "PG_PF"
+    },
+    {
+      "primaryPosition": "PF",
+      "secondaryPosition": "SG",
+      "bridgeKey": "SG_PF"
+    },
+    {
+      "primaryPosition": "PF",
+      "secondaryPosition": "SF",
+      "bridgeKey": "SF_PF"
+    },
+    {
+      "primaryPosition": "PF",
+      "secondaryPosition": "C",
+      "bridgeKey": "PF_C"
+    },
+    {
+      "primaryPosition": "C",
+      "secondaryPosition": null,
+      "bridgeKey": null
+    },
+    {
+      "primaryPosition": "C",
+      "secondaryPosition": "PG",
+      "bridgeKey": "PG_C"
+    },
+    {
+      "primaryPosition": "C",
+      "secondaryPosition": "SG",
+      "bridgeKey": "SG_C"
+    },
+    {
+      "primaryPosition": "C",
+      "secondaryPosition": "SF",
+      "bridgeKey": "SF_C"
+    },
+    {
+      "primaryPosition": "C",
+      "secondaryPosition": "PF",
+      "bridgeKey": "PF_C"
+    }
+  ],
+  "runtimeRules": {
+    "editorialSelectors": [
+      "primaryPosition",
+      "secondaryPosition"
+    ],
+    "nonEditorialProfileFields": [
+      "alias",
+      "birthYear",
+      "heightCm",
+      "dominantHand",
+      "experienceYears",
+      "competitiveLevel",
+      "weeklyPractices",
+      "weeklyGames",
+      "physicalContext"
+    ],
+    "bridgeKeyIsOrderIndependent": true,
+    "primaryRoleIsDominant": true,
+    "llmAtRuntime": false,
+    "store25PrecompiledGuides": false,
+    "parseFreeFormMarkdownAtClientRuntime": false,
+    "medicalPersonalization": false
+  }
+}
