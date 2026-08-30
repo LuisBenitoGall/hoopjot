@@ -2,7 +2,7 @@
 
 ## Base / Point Guard
 
-**Estado editorial:** E0.6 — redacción definitiva propuesta  
+**Estado editorial:** E0.9 — edición española congelada  
 **Idioma:** Español  
 **Rol:** PG — Base  
 **Depende de:** `GUIDE_CORE_ES.md` y `GUIDE_ROLE_MATRIX_ES.md`
@@ -232,34 +232,20 @@ Antes de usarlo, observa:
 
 - la posición de quien te defiende;
 - la posición de quien defiende al bloqueador;
-- el ángulo del bloqueo;
-- el espacio disponible;
+- el ángulo disponible;
+- el espacio alrededor de la acción;
 - las ayudas;
 - el lado débil.
 
-No llegues al bloqueo de cualquier manera.
-
-Ayuda primero a que el bloqueo tenga efecto.
-
-Lleva a tu defensor hacia él.
-
-Espera a que quien bloquea haya establecido una posición legal.
-
-Después utiliza el bloqueo pasando **hombro con hombro**, sin dejar una vía por la que tu defensor pueda atravesar cómodamente entre los dos.
-
-No obligues al bloqueador a desplazarse para corregir una trayectoria demasiado abierta.
-
-Utilizar correctamente el ángulo que te ofrece es responsabilidad tuya.
+Prepara a tu defensor y llega al bloqueo con una intención.
 
 A partir de ahí, cambia el ritmo y lee.
 
-¿Tu defensor ha pasado por encima?
-
-¿Ha pasado por debajo?
+¿Tu defensor pasa por encima o por debajo?
 
 ¿Hay cambio defensivo?
 
-¿El defensor del bloqueador contiene, se hunde, salta o realiza una defensa agresiva sobre el balón?
+¿El defensor del bloqueador contiene, se hunde o salta sobre el balón?
 
 ¿Puedes llegar al aro?
 
@@ -267,7 +253,7 @@ A partir de ahí, cambia el ritmo y lee.
 
 ¿Aparece un pase corto?
 
-¿Ha quedado disponible el lado débil?
+¿Queda disponible el lado débil?
 
 ¿Existe tiro si la defensa concede espacio?
 
@@ -278,7 +264,7 @@ Aprende también a:
 - mantener vivo el bote mientras necesitas más información;
 - volver a utilizar un segundo bloqueo cuando la primera acción no genera ventaja;
 - atacar una recuperación defensiva;
-- salir del bloqueo preparado para pasar, tirar o penetrar.
+- salir preparado para pasar, tirar o penetrar.
 
 El bloqueo directo no consiste en memorizar una respuesta.
 

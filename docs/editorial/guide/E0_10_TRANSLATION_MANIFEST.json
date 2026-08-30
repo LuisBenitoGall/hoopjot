@@ -1,0 +1,297 @@
+{
+  "project": "Hoopjot",
+  "phase": "E0.10",
+  "status": "English translation complete",
+  "source_freeze": "E0.9 Spanish edition",
+  "spanish_canonical_files": 17,
+  "english_translation_files": 17,
+  "spanish_sources_unchanged": true,
+  "structural_validation_errors": [],
+  "mapping": [
+    {
+      "es": "GUIDE_CORE_ES.md",
+      "en": "GUIDE_CORE_EN.md",
+      "points": 0,
+      "types": []
+    },
+    {
+      "es": "GUIDE_ROLE_MATRIX_ES.md",
+      "en": "GUIDE_ROLE_MATRIX_EN.md",
+      "points": 0,
+      "types": []
+    },
+    {
+      "es": "roles/C_ES.md",
+      "en": "roles/C_EN.md",
+      "points": 13,
+      "types": [
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE"
+      ]
+    },
+    {
+      "es": "roles/PF_C_ES.md",
+      "en": "roles/PF_C_EN.md",
+      "points": 8,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/PF_ES.md",
+      "en": "roles/PF_EN.md",
+      "points": 13,
+      "types": [
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE"
+      ]
+    },
+    {
+      "es": "roles/PG_C_ES.md",
+      "en": "roles/PG_C_EN.md",
+      "points": 11,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/PG_ES.md",
+      "en": "roles/PG_EN.md",
+      "points": 13,
+      "types": [
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE"
+      ]
+    },
+    {
+      "es": "roles/PG_PF_ES.md",
+      "en": "roles/PG_PF_EN.md",
+      "points": 11,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/PG_SF_ES.md",
+      "en": "roles/PG_SF_EN.md",
+      "points": 11,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/PG_SG_ES.md",
+      "en": "roles/PG_SG_EN.md",
+      "points": 10,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/SF_C_ES.md",
+      "en": "roles/SF_C_EN.md",
+      "points": 11,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/SF_ES.md",
+      "en": "roles/SF_EN.md",
+      "points": 13,
+      "types": [
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE"
+      ]
+    },
+    {
+      "es": "roles/SF_PF_ES.md",
+      "en": "roles/SF_PF_EN.md",
+      "points": 10,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/SG_C_ES.md",
+      "en": "roles/SG_C_EN.md",
+      "points": 10,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/SG_ES.md",
+      "en": "roles/SG_EN.md",
+      "points": 13,
+      "types": [
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE",
+        "OVERRIDE",
+        "INSERT",
+        "INSERT",
+        "OVERRIDE",
+        "OVERRIDE"
+      ]
+    },
+    {
+      "es": "roles/SG_PF_ES.md",
+      "en": "roles/SG_PF_EN.md",
+      "points": 11,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    },
+    {
+      "es": "roles/SG_SF_ES.md",
+      "en": "roles/SG_SF_EN.md",
+      "points": 9,
+      "types": [
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE",
+        "BRIDGE"
+      ]
+    }
+  ],
+  "next_phase": "E0.11 ES ↔ EN equivalence audit"
+}

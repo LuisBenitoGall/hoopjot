@@ -2,10 +2,10 @@
 
 ## Matriz normativa de composición editorial de Guide
 
-**Estado editorial:** E0.5 — versión revisada para aprobación  
+**Estado editorial:** E0.9 — edición española congelada  
 **Idioma:** Español  
 **Depende de:** `GUIDE_CORE_ES.md`  
-**Fuente canónica original:** `GUIDE_SOURCE_IRIA_ES.md`
+**Fuente editorial original:** `archive/GUIDE_SOURCE_IRIA_ES.md`
 
 ---
 
@@ -17,7 +17,7 @@ No contiene el texto de los role packs.
 
 No contiene el texto de los hybrid bridges.
 
-Su función es establecer los límites editoriales dentro de los cuales podrán redactarse posteriormente.
+Su función es establecer los límites editoriales que rigen los role packs y los hybrid bridges de la edición española congelada.
 
 La composición de Guide es determinista y utiliza exclusivamente contenido preescrito:
 
@@ -621,23 +621,23 @@ Su función es cerrar el manual sobre una idea común:
 
 ---
 
-# 22. RESTRICCIONES PARA E0.6 Y E0.7
+# 22. RESTRICCIONES QUE RIGEN ROLE PACKS Y HYBRID BRIDGES
 
 ## E0.6 · ROLE PACKS
 
-Los cinco role packs solo podrán intervenir en los 13 puntos autorizados por esta matriz.
+Los cinco role packs solo pueden intervenir en los 13 puntos autorizados por esta matriz.
 
-No podrán modificar otros puntos.
+No pueden modificar otros puntos.
 
 Toda intervención debe ser texto preescrito.
 
-Si durante su redacción aparece una necesidad editorial legítima fuera de esas zonas, deberá reabrirse E0.5 antes de introducirla.
+Cualquier modificación futura que necesite intervenir fuera de esas zonas exige reabrir explícitamente esta matriz y romper el freeze E0.9 antes de introducirla.
 
 ## E0.7 · HYBRID BRIDGES
 
-Los diez bridges solo podrán añadir contenido en las 12 zonas autorizadas.
+Los diez bridges solo pueden añadir contenido en las 12 zonas autorizadas.
 
-No podrán:
+No pueden:
 
 - ejecutar overrides;
 - modificar Core;

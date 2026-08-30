@@ -2,7 +2,7 @@
 
 ## Escolta / Shooting Guard
 
-**Estado editorial:** E0.6 — redacción definitiva  
+**Estado editorial:** E0.9 — edición española congelada  
 **Idioma:** Español  
 **Rol:** SG — Escolta  
 **Depende de:** `GUIDE_CORE_ES.md` y `GUIDE_ROLE_MATRIX_ES.md`
@@ -238,55 +238,40 @@ Comunica emparejamientos.
 
 **Tipo:** OVERRIDE
 
-Como escolta debes aprender a utilizar especialmente bien los bloqueos indirectos y, cuando tu función lo requiera, también los directos.
+Como escolta debes aprender especialmente a utilizar los bloqueos indirectos y, cuando tu función lo requiera, también el bloqueo directo como creador secundario.
 
-Antes de utilizar un bloqueo indirecto, prepara a quien te defiende.
+Antes de una salida indirecta, prepara a quien te defiende.
 
-No corras directamente hacia el bloqueador desde una posición cómoda para la defensa.
+Cambia de ritmo y dirección para obligarle a reaccionar antes de la pantalla.
 
-Cambia de ritmo.
+Después lee la respuesta defensiva.
 
-Cambia de dirección.
+Si te persiguen, conserva la ventaja de la salida.
 
-Haz que tu defensor tenga que reaccionar.
+Si anticipan por arriba, puede aparecer un corte hacia el aro.
 
-Después utiliza el bloqueo con una trayectoria cerrada y aplica el principio Core de **hombro con hombro**.
+Si cambian, reconoce rápidamente el nuevo emparejamiento.
 
-Lee la defensa mientras sales.
+Si conceden espacio, llega preparado para recibir y tirar.
 
-Si te persigue por detrás, puedes mantener la salida y crear una recepción con ventaja.
+Si niegan agresivamente la recepción, continúa la acción en lugar de detenerte.
 
-Si intenta anticiparse por arriba, puede aparecer un corte hacia el aro.
-
-Si la defensa cambia, reconoce rápidamente el nuevo emparejamiento.
-
-Si concede demasiado espacio, prepárate para recibir y tirar.
-
-Si cierra agresivamente la recepción, sigue jugando sin detener la acción.
-
-Aprende diferentes soluciones:
+Aprende soluciones como:
 
 - salida directa;
-- curl hacia dentro;
-- flare hacia fuera;
-- corte hacia el aro;
-- rechazo del bloqueo;
-- reubicación después de pasar;
+- curl;
+- flare;
+- puerta atrás;
+- rechazo de la salida;
+- reubicación;
 - segundo bloqueo;
 - recepción y ataque inmediato.
 
-Cuando utilices un bloqueo directo como creador secundario, aplica las mismas ideas básicas:
-
-- llega con una intención;
-- lleva a tu defensor hacia el bloqueo;
-- pasa cerrado;
-- cambia el ritmo;
-- lee la cobertura;
-- decide rápido.
+Cuando utilices un bloqueo directo como creador secundario, aplica la misma idea: provoca una respuesta, lee la cobertura y decide rápido.
 
 Un bloqueo no sirve únicamente para conseguir un tiro.
 
-Sirve para obligar a la defensa a reaccionar y crear una ventaja para el equipo.
+Sirve para desplazar la defensa y crear una ventaja para el equipo.
 
 ---
 

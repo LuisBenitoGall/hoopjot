@@ -1,0 +1,143 @@
+{
+  "project": "Hoopjot",
+  "phase": "E0.11",
+  "status": "PASS",
+  "spanish_source": "E0.9 frozen edition",
+  "english_files_audited": 17,
+  "pairwise_structural_checks": 17,
+  "validation_errors": [],
+  "spanish_sources_unchanged": true,
+  "semantic_review_scope": [
+    "Core medical, nutrition, body/laterality, screening, development and Rules content",
+    "Matrix selectors, intervention rules, bridge neutrality, P09 invariant, medical and product boundaries",
+    "Role identity/priorities plus P09 and P26 for PG, SG, SF, PF and C",
+    "Bridge purpose, P09 and P26 across all 10 neutral position pairs",
+    "Basketball terminology consistency and natural English wording"
+  ],
+  "english_content_corrections": [
+    "GUIDE_CORE_EN.md",
+    "roles/PF_EN.md",
+    "roles/PG_C_EN.md",
+    "roles/PG_SF_EN.md",
+    "roles/SG_C_EN.md",
+    "roles/SG_EN.md",
+    "roles/SG_PF_EN.md",
+    "roles/SG_SF_EN.md",
+    "roles/SF_EN.md"
+  ],
+  "english_status_metadata_only": [
+    "GUIDE_ROLE_MATRIX_EN.md",
+    "roles/C_EN.md",
+    "roles/PF_C_EN.md",
+    "roles/PG_EN.md",
+    "roles/PG_PF_EN.md",
+    "roles/PG_SG_EN.md",
+    "roles/SF_C_EN.md",
+    "roles/SF_PF_EN.md"
+  ],
+  "pair_results": [
+    {
+      "es": "GUIDE_CORE_ES.md",
+      "en": "GUIDE_CORE_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "GUIDE_ROLE_MATRIX_ES.md",
+      "en": "GUIDE_ROLE_MATRIX_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "C_ES.md",
+      "en": "C_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PF_C_ES.md",
+      "en": "PF_C_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PF_ES.md",
+      "en": "PF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PG_C_ES.md",
+      "en": "PG_C_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PG_ES.md",
+      "en": "PG_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PG_PF_ES.md",
+      "en": "PG_PF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PG_SF_ES.md",
+      "en": "PG_SF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "PG_SG_ES.md",
+      "en": "PG_SG_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SF_C_ES.md",
+      "en": "SF_C_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SF_ES.md",
+      "en": "SF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SF_PF_ES.md",
+      "en": "SF_PF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SG_C_ES.md",
+      "en": "SG_C_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SG_ES.md",
+      "en": "SG_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SG_PF_ES.md",
+      "en": "SG_PF_EN.md",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "es": "SG_SF_ES.md",
+      "en": "SG_SF_EN.md",
+      "status": "PASS",
+      "issues": []
+    }
+  ],
+  "next_phase": "E0.12 Codex implementation contract"
+}

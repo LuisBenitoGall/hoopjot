@@ -1,0 +1,21 @@
+{
+  "phase": "E0.8 compilation audit corrections",
+  "changed_files": [
+    "PG_SG_ES.md",
+    "PF_C_ES.md"
+  ],
+  "changes": {
+    "PG_SG_ES.md": [
+      "P11 orthotypographic correction: independent capitalized questions."
+    ],
+    "PF_C_ES.md": [
+      "Bridge reduced for adjacency: removed redundant P06, P07, P08 and P22 interventions.",
+      "P03, P04, P10 and P21 compacted to retain only hybrid-specific emphasis."
+    ]
+  },
+  "reason": "Compilation showed PF_C was the longest bridge despite being the closest positional intersection, with high duplication against both role packs.",
+  "unchanged_normative_files": [
+    "GUIDE_CORE_ES.md",
+    "GUIDE_ROLE_MATRIX_ES.md"
+  ]
+}

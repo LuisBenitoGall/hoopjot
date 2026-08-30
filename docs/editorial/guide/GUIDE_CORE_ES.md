@@ -2,9 +2,9 @@
 
 ## 30 ideas para aprender, entrenar y competir mejor
 
-**Estado editorial:** E0.4 — versión revisada para aprobación  
+**Estado editorial:** E0.9 — edición española congelada  
 **Idioma:** Español  
-**Fuente canónica:** `GUIDE_SOURCE_IRIA_ES.md`
+**Fuente editorial original:** `archive/GUIDE_SOURCE_IRIA_ES.md`
 
 ---
 

@@ -1,0 +1,85 @@
+{
+  "phase": "E0.8 normalization pass 1",
+  "changed_files": [
+    "C_ES.md",
+    "PF_C_ES.md",
+    "PF_ES.md",
+    "PG_C_ES.md",
+    "PG_ES.md",
+    "PG_PF_ES.md",
+    "PG_SF_ES.md",
+    "PG_SG_ES.md",
+    "SF_C_ES.md",
+    "SF_ES.md",
+    "SF_PF_ES.md",
+    "SG_C_ES.md",
+    "SG_ES.md",
+    "SG_PF_ES.md",
+    "SG_SF_ES.md"
+  ],
+  "changes": {
+    "role_P09": [
+      "C_ES.md",
+      "PF_ES.md",
+      "PG_ES.md",
+      "SF_ES.md",
+      "SG_ES.md"
+    ],
+    "bridge_P09": [
+      "PF_C_ES.md",
+      "PG_C_ES.md",
+      "PG_PF_ES.md",
+      "PG_SF_ES.md",
+      "PG_SG_ES.md",
+      "SF_C_ES.md",
+      "SF_PF_ES.md",
+      "SG_C_ES.md",
+      "SG_PF_ES.md",
+      "SG_SF_ES.md"
+    ],
+    "bridge_P26": [
+      "PF_C_ES.md",
+      "PG_C_ES.md",
+      "PG_PF_ES.md",
+      "PG_SF_ES.md",
+      "PG_SG_ES.md",
+      "SF_C_ES.md",
+      "SF_PF_ES.md",
+      "SG_C_ES.md",
+      "SG_PF_ES.md",
+      "SG_SF_ES.md"
+    ],
+    "bridge_P11": [
+      "PF_C_ES.md",
+      "PG_C_ES.md",
+      "PG_PF_ES.md",
+      "PG_SF_ES.md",
+      "PG_SG_ES.md",
+      "SF_C_ES.md",
+      "SF_PF_ES.md",
+      "SG_C_ES.md",
+      "SG_PF_ES.md",
+      "SG_SF_ES.md"
+    ],
+    "bridge_P27": [
+      "PF_C_ES.md",
+      "PG_C_ES.md",
+      "PG_PF_ES.md",
+      "PG_SF_ES.md",
+      "PG_SG_ES.md",
+      "SF_C_ES.md",
+      "SF_PF_ES.md",
+      "SG_C_ES.md",
+      "SG_PF_ES.md",
+      "SG_SF_ES.md"
+    ]
+  },
+  "unchanged_normative_files": [
+    "GUIDE_CORE_ES.md",
+    "GUIDE_ROLE_MATRIX_ES.md"
+  ],
+  "validation_errors": [],
+  "notes": [
+    "P11/P27 de bridges compactados para evitar duplicación al compilar con el role pack primario."
+  ]
+}
