@@ -67,6 +67,11 @@ const PlanRoute = lazy(() =>
     default: PlanRoute
   })),
 );
+const GuideRoute = lazy(() =>
+  import('../../features/guide/GuideRoute').then(({ GuideRoute }) => ({
+    default: GuideRoute
+  })),
+);
 const JournalRoute = lazy(() =>
   import('../../features/journal/JournalRoutes').then(({ JournalRoute }) => ({
     default: JournalRoute
@@ -199,6 +204,14 @@ function createAppRouter() {
       element: (
         <RequireAuthenticatedApp>
           <PlanRoute />
+        </RequireAuthenticatedApp>
+      )
+    },
+    {
+      path: '/guide',
+      element: (
+        <RequireAuthenticatedApp>
+          <GuideRoute />
         </RequireAuthenticatedApp>
       )
     },

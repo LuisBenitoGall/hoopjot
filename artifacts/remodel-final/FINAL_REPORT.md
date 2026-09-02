@@ -1,6 +1,6 @@
 # Hoopjot Remodel Final Report
 
-Date: 2026-08-26
+Date: 2026-09-02
 
 ## 1. Final Route Map
 
@@ -145,14 +145,14 @@ English and Spanish strings remain present for the remodeled navigation, Today, 
 
 - `pnpm typecheck`: passed (`tsc --noEmit`)
 - `pnpm lint`: passed (`eslint . --max-warnings=0`)
-- `pnpm test`: passed; 33 files passed, 1 skipped; 119 tests passed, 1 skipped
-- `pnpm build`: passed; Vite production build completed; PWA generated 37 precache entries, 3638.80 KiB
+- `pnpm test`: passed; 41 files passed, 1 skipped; 282 tests passed, 1 skipped
+- `pnpm build`: passed; Vite production build completed; PWA generated 38 precache entries, 3971.09 KiB
 
 The skipped Vitest file is `src/sync/supabaseRlsIsolation.integration.test.ts`, gated by `HOOPJOT_RUN_SUPABASE_RLS_TESTS`; no new skip was added for R07.
 
 ## 15. E2E Results
 
-- `pnpm test:e2e`: passed; 21 Playwright tests passed
+- `pnpm test:e2e`: passed; 22 Playwright tests passed
 
 R07 E2E coverage includes:
 - exactly three bottom-navigation items

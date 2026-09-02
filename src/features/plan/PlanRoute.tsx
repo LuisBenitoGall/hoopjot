@@ -111,6 +111,7 @@ export function PlanRoute({
 }
 
 export function PlanHero({ alias, content }: { alias?: string; content: PlanHeroContent }) {
+  const { t } = useTranslation('common');
   const aliasSuffix = alias ? `, ${alias}` : '';
   const body = content.bodyTemplate.replace('{{aliasSuffix}}', aliasSuffix);
 
@@ -118,6 +119,18 @@ export function PlanHero({ alias, content }: { alias?: string; content: PlanHero
     <section className="space-y-4 pt-2">
       <h1 className="text-4xl font-black leading-none sm:text-5xl">{content.title}</h1>
       <p className="max-w-3xl text-base leading-7 text-hoopjot-muted sm:text-lg">{body}</p>
+      <Link
+        className="inline-flex min-h-12 max-w-full items-center justify-between gap-3 rounded-card border-2 border-hoopjot-line bg-hoopjot-surface px-4 py-3 text-left text-sm font-black text-hoopjot-ink outline-none hover:border-hoopjot-purple focus-visible:ring-4 focus-visible:ring-hoopjot-blue/30"
+        to="/guide"
+      >
+        <span className="grid gap-1">
+          <span>{t('plan.guideAccess.title')}</span>
+          <span className="text-xs font-bold leading-5 text-hoopjot-muted">
+            {t('plan.guideAccess.description')}
+          </span>
+        </span>
+        <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+      </Link>
     </section>
   );
 }

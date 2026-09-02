@@ -143,6 +143,23 @@
     },
     "title": "Base de conocimiento de baloncesto"
   },
+  "guide": {
+    "backToPlan": "Volver al Plan",
+    "contents": "Contenidos",
+    "errors": {
+      "loadDescription": "No se pudo cargar la guía desde tu perfil local y el contenido incluido.",
+      "loadTitle": "Guía no disponible",
+      "retry": "Reintentar"
+    },
+    "eyebrow": "Guía",
+    "loading": "Cargando guía",
+    "profileIncomplete": {
+      "action": "Editar perfil",
+      "description": "La guía necesita tu posición principal de jugador para seleccionar el bloque de rol correcto.",
+      "title": "Añade tu posición principal"
+    },
+    "rulesTitle": "12 reglas"
+  },
   "journal": {
     "actions": {
       "back": "Volver al diario",
@@ -220,6 +237,10 @@
   "plan": {
     "coreIdeaLabel": "Idea central:",
     "developmentMapLabel": "Mapa de desarrollo",
+    "guideAccess": {
+      "description": "Aprende cómo desarrollar tu juego",
+      "title": "Guía"
+    },
     "guideline": {
       "backToPlan": "Volver al Plan",
       "loading": "Cargando pauta",

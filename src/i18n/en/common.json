@@ -143,6 +143,23 @@
     },
     "title": "Basketball knowledge base"
   },
+  "guide": {
+    "backToPlan": "Back to Plan",
+    "contents": "Contents",
+    "errors": {
+      "loadDescription": "Guide could not be loaded from your local profile and bundled content.",
+      "loadTitle": "Guide unavailable",
+      "retry": "Retry"
+    },
+    "eyebrow": "Guide",
+    "loading": "Loading Guide",
+    "profileIncomplete": {
+      "action": "Edit profile",
+      "description": "Guide needs your primary player position to select the right role pack.",
+      "title": "Add your primary position"
+    },
+    "rulesTitle": "12 Rules"
+  },
   "journal": {
     "actions": {
       "back": "Back to Journal",
@@ -220,6 +237,10 @@
   "plan": {
     "coreIdeaLabel": "Core idea:",
     "developmentMapLabel": "Development map",
+    "guideAccess": {
+      "description": "Learn how to develop your game",
+      "title": "Guide"
+    },
     "guideline": {
       "backToPlan": "Back to Plan",
       "loading": "Loading guideline",

@@ -11,6 +11,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "guide:build": "node scripts/run-guide-command.mjs build",
+    "guide:check": "node scripts/run-guide-command.mjs check",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --config vitest.config.ts",
