@@ -141,9 +141,13 @@ async function createSyntheticPlayer(page: Page): Promise<void> {
 async function expectPrimaryNavigation(page: Page): Promise<void> {
   const primaryNavigation = page.getByRole('navigation', { name: 'Primary' });
 
-  await expect(primaryNavigation.getByRole('link')).toHaveCount(3);
+  await expect(primaryNavigation.getByRole('link')).toHaveCount(4);
   await expect(primaryNavigation.getByRole('link', { name: 'Today' })).toBeVisible();
   await expect(primaryNavigation.getByRole('link', { name: 'Plan' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Guide' })).toHaveAttribute(
+    'href',
+    '/guide',
+  );
   await expect(primaryNavigation.getByRole('link', { name: 'Journal' })).toBeVisible();
   await expect(primaryNavigation.getByRole('link', { name: 'Profile' })).toHaveCount(0);
   await expect(primaryNavigation.getByRole('link', { name: 'Game' })).toHaveCount(0);

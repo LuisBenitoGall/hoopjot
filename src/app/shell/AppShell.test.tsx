@@ -27,10 +27,16 @@ describe('AppShell', () => {
     const primaryNavigation = screen.getByRole('navigation', { name: 'Primary' });
     const primaryLinks = within(primaryNavigation).getAllByRole('link');
 
-    expect(primaryLinks.map((link) => link.textContent)).toEqual(['Today', 'Plan', 'Journal']);
+    expect(primaryLinks.map((link) => link.textContent)).toEqual([
+      'Today',
+      'Plan',
+      'Guide',
+      'Journal'
+    ]);
     expect(primaryLinks.map((link) => link.getAttribute('href'))).toEqual([
       '/app',
       '/plan',
+      '/guide',
       '/journal'
     ]);
   });

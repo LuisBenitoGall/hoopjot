@@ -55,7 +55,7 @@ export function GuideRoute({ service: injectedService }: GuideRouteProps) {
   }, [loadGuide]);
 
   return (
-    <AppShell activeItemId="plan" contentWidth="readable">
+    <AppShell activeItemId="guide" contentWidth="readable">
       <div className="mx-auto max-w-[900px] pb-3 pt-2">
         {routeState.status === 'loading' ? (
           <Card>

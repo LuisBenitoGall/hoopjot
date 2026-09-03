@@ -1,4 +1,4 @@
-import { BookOpen, ClipboardList, Home, Languages, UserCircle } from 'lucide-react';
+import { BookMarked, BookOpen, Home, Languages, Map, UserCircle } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,14 @@ import { useSyncStatus } from '../providers/syncContext';
 import type { OfflineBadgeStatus } from '../../components/ui/OfflineBadge';
 import type { SyncIndicatorStatus } from '../../sync';
 
-type PrimaryNavigationItemId = 'today' | 'plan' | 'journal' | 'game' | 'progress' | 'profile';
+type PrimaryNavigationItemId =
+  | 'today'
+  | 'plan'
+  | 'guide'
+  | 'journal'
+  | 'game'
+  | 'progress'
+  | 'profile';
 
 interface AppShellProps {
   activeItemId?: PrimaryNavigationItemId;
@@ -45,7 +52,8 @@ export function AppShell({
 
   const navigationItems: BottomNavigationItem[] = [
     { href: '/app', icon: Home, id: 'today', label: t('nav.today') },
-    { href: '/plan', icon: ClipboardList, id: 'plan', label: t('nav.plan') },
+    { href: '/plan', icon: Map, id: 'plan', label: t('nav.plan') },
+    { href: '/guide', icon: BookMarked, id: 'guide', label: t('nav.guide') },
     { href: '/journal', icon: BookOpen, id: 'journal', label: t('nav.journal') },
   ];
   const shellMaxWidthClassName = contentWidth === 'readable' ? 'max-w-[900px]' : 'max-w-[480px]';

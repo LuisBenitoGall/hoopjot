@@ -98,7 +98,12 @@ describe('ProfileRoute', () => {
     const primaryNavigation = screen.getByRole('navigation', { name: 'Primary' });
     const primaryLinks = within(primaryNavigation).getAllByRole('link');
 
-    expect(primaryLinks.map((link) => link.textContent)).toEqual(['Today', 'Plan', 'Journal']);
+    expect(primaryLinks.map((link) => link.textContent)).toEqual([
+      'Today',
+      'Plan',
+      'Guide',
+      'Journal',
+    ]);
     expect(within(primaryNavigation).queryByRole('link', { name: 'Profile' })).not.toBeInTheDocument();
     expect(screen.queryByText('Weekly review')).not.toBeInTheDocument();
     expect(screen.queryByText('Progress signals')).not.toBeInTheDocument();

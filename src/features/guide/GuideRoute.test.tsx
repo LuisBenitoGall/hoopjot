@@ -61,8 +61,11 @@ describe('GuideRoute', () => {
     expect(screen.getByRole('link', { name: 'Back to Plan' })).toHaveAttribute('href', '/plan');
 
     expectNoEditorialMetadata();
-    expectPrimaryNavigation(['Today', 'Plan', 'Journal']);
-    expect(screen.queryByRole('link', { name: 'Guide' })).not.toBeInTheDocument();
+    expectPrimaryNavigation(['Today', 'Plan', 'Guide', 'Journal']);
+    expect(screen.getByRole('link', { name: 'Guide', current: 'page' })).toHaveAttribute(
+      'href',
+      '/guide',
+    );
   });
 
   it('renders a hybrid PG and SG Guide without exposing internal bridge keys', async () => {

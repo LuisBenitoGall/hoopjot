@@ -77,7 +77,10 @@ describe('PlanRoute', () => {
     expect(
       await screen.findByRole('heading', { level: 1, name: 'Your game plan' }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Guide/ })).toHaveAttribute('href', '/guide');
+    expect(within(screen.getByRole('main')).getByRole('link', { name: /Guide/ })).toHaveAttribute(
+      'href',
+      '/guide',
+    );
     expect(
       await screen.findByText(
         'This is your development plan, Ace. It is not meant to be worked on all at once. It brings together decisions and habits that should become a natural part of your game. Hoopjot will take one idea at a time into practices and games. What you record afterwards will help decide what to keep, reinforce or revisit.',
@@ -125,7 +128,10 @@ describe('PlanRoute', () => {
     expect(
       await screen.findByRole('heading', { level: 1, name: 'Tu plan de juego' }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Guía/ })).toHaveAttribute('href', '/guide');
+    expect(within(screen.getByRole('main')).getByRole('link', { name: /Guía/ })).toHaveAttribute(
+      'href',
+      '/guide',
+    );
     expect(
       await screen.findByText(
         'Este es tu plan de trabajo, Ala. No está pensado para que lo hagas todo a la vez. Reúne decisiones y hábitos que queremos convertir en parte natural de tu juego. Hoopjot irá tomando una idea cada vez y la llevará a tus entrenamientos y partidos. Después, lo que registres servirá para decidir qué conviene mantener, reforzar o volver a mirar.',

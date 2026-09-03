@@ -12,7 +12,7 @@ test('opens Guide from Plan and keeps it available after direct reload', async (
   await expect(page.getByRole('heading', { level: 1, name: 'Your game plan' })).toBeVisible();
   await expectPrimaryNavigation(page);
 
-  await page.getByRole('link', { name: /Guide/ }).click();
+  await page.locator('main').getByRole('link', { name: /Guide/ }).click();
 
   await expect(page).toHaveURL(/\/guide$/);
   await expect(
@@ -69,11 +69,14 @@ async function enableE2EAuthService(page: Page, dbName: string): Promise<void> {
 async function expectPrimaryNavigation(page: Page): Promise<void> {
   const primaryNavigation = page.getByRole('navigation', { name: 'Primary' });
 
-  await expect(primaryNavigation.getByRole('link')).toHaveCount(3);
+  await expect(primaryNavigation.getByRole('link')).toHaveCount(4);
   await expect(primaryNavigation.getByRole('link', { name: 'Today' })).toBeVisible();
   await expect(primaryNavigation.getByRole('link', { name: 'Plan' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Guide' })).toHaveAttribute(
+    'href',
+    '/guide',
+  );
   await expect(primaryNavigation.getByRole('link', { name: 'Journal' })).toBeVisible();
-  await expect(primaryNavigation.getByRole('link', { name: 'Guide' })).toHaveCount(0);
   await expect(primaryNavigation.getByRole('link', { name: 'Game' })).toHaveCount(0);
   await expect(primaryNavigation.getByRole('link', { name: 'Progress' })).toHaveCount(0);
 }

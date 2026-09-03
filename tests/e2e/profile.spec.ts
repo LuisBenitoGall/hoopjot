@@ -37,6 +37,10 @@ test('opens Profile from the authenticated header and persists editable profile 
   const primaryNavigation = page.getByRole('navigation', { name: 'Primary' });
   await expect(primaryNavigation.getByRole('link', { name: 'Today' })).toBeVisible();
   await expect(primaryNavigation.getByRole('link', { name: 'Plan' })).toBeVisible();
+  await expect(primaryNavigation.getByRole('link', { name: 'Guide' })).toHaveAttribute(
+    'href',
+    '/guide',
+  );
   await expect(primaryNavigation.getByRole('link', { name: 'Journal' })).toBeVisible();
   await expect(primaryNavigation.getByRole('link', { name: 'Profile' })).toHaveCount(0);
   await expect(page.getByText('Weekly review')).toHaveCount(0);

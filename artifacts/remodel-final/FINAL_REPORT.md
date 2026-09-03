@@ -26,9 +26,10 @@ Existing auth protection remains in place for the authenticated app routes.
 
 ## 2. Final Bottom Navigation
 
-Bottom navigation contains exactly three items:
+Bottom navigation contains exactly four items:
 - Today -> `/app`
 - Plan -> `/plan`
+- Guide -> `/guide`
 - Journal -> `/journal`
 
 Profile, Game and Progress are absent from bottom navigation.
@@ -155,7 +156,7 @@ The skipped Vitest file is `src/sync/supabaseRlsIsolation.integration.test.ts`, 
 - `pnpm test:e2e`: passed; 22 Playwright tests passed
 
 R07 E2E coverage includes:
-- exactly three bottom-navigation items
+- exactly four bottom-navigation items
 - no Today Mark viewed / Complete / Skip controls
 - no old Today check-in
 - Quick Reflection opens inline

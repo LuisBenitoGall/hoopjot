@@ -79,11 +79,12 @@ Mandatory UX constraints:
 
 # 2. Navigation
 
-Bottom navigation must contain EXACTLY three items:
+Bottom navigation must contain EXACTLY four items:
 
 1. `Hoy` / `Today` → `/app`
 2. `Plan` / `Plan` → `/plan`
-3. `Diario` / `Journal` → `/journal`
+3. `Guía` / `Guide` → `/guide`
+4. `Diario` / `Journal` → `/journal`
 
 Remove from bottom navigation:
 - Game
@@ -1072,7 +1073,7 @@ Run:
 - `pnpm build`
 
 Required E2E assertions:
-1. exactly 3 bottom-nav items;
+1. exactly 4 bottom-nav items;
 2. Today has no Mark viewed/Complete/Skip;
 3. quick reflection opens;
 4. rating-only reflection can save;
@@ -1100,7 +1101,7 @@ Store:
 
 Visual failure conditions:
 - >1 obvious primary CTA on Today before feedback;
-- >3 bottom-nav items;
+- >4 bottom-nav items;
 - Plan looks like a metrics dashboard;
 - continuous animation;
 - progress percentage;
@@ -1285,7 +1286,7 @@ Report results and stop.
 
 The remodel is complete only if:
 
-- bottom navigation has exactly 3 entries;
+- bottom navigation has exactly 4 entries;
 - Profile is secondary;
 - Today has exactly one primary action before feedback;
 - focus status buttons are gone;
