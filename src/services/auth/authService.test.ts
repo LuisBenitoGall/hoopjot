@@ -76,4 +76,36 @@ describe('auth services', () => {
       code: 'network_unavailable'
     });
   });
+
+  it('sends signup confirmation emails back to the configured app origin', async () => {
+    const signUp = vi.fn(async () => ({
+      data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+      error: null
+    }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          signUp
+        }
+      } as unknown as SupabaseClient,
+      {
+        emailRedirectTo: 'https://hoopjot.vercel.app',
+        getOnlineStatus: () => true
+      },
+    );
+
+    await expect(
+      service.signUp({ email: 'player@example.com', password: 'password123' }),
+    ).resolves.toMatchObject({
+      requiresEmailConfirmation: true,
+      user: { email: 'player@example.com', id: 'user-1' }
+    });
+    expect(signUp).toHaveBeenCalledWith({
+      email: 'player@example.com',
+      options: {
+        emailRedirectTo: 'https://hoopjot.vercel.app'
+      },
+      password: 'password123'
+    });
+  });
 });

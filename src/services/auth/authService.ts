@@ -12,11 +12,13 @@ import {
 } from './types';
 
 interface SupabaseAuthServiceOptions {
+  emailRedirectTo?: string;
   getOnlineStatus?: () => boolean;
   resetRedirectUrl?: string;
 }
 
 export class SupabaseAuthService implements AuthService {
+  private readonly emailRedirectTo?: string;
   private readonly getOnlineStatus: () => boolean;
   private readonly resetRedirectUrl?: string;
 
@@ -24,6 +26,7 @@ export class SupabaseAuthService implements AuthService {
     private readonly client: SupabaseClient,
     options: SupabaseAuthServiceOptions = {},
   ) {
+    this.emailRedirectTo = options.emailRedirectTo;
     this.getOnlineStatus =
       options.getOnlineStatus ??
       (() => (typeof navigator === 'undefined' ? true : navigator.onLine));
@@ -94,7 +97,17 @@ export class SupabaseAuthService implements AuthService {
   async signUp(credentials: AuthCredentials): Promise<AuthSignUpResult> {
     this.assertOnline();
 
-    const { data, error } = await this.client.auth.signUp(credentials);
+    const { data, error } = await this.client.auth.signUp({
+      email: credentials.email,
+      password: credentials.password,
+      ...(this.emailRedirectTo
+        ? {
+            options: {
+              emailRedirectTo: this.emailRedirectTo
+            }
+          }
+        : {})
+    });
 
     if (error) {
       throw toAuthServiceError(error);

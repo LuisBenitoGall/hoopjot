@@ -34,7 +34,8 @@ The MVP is a private player journal and attention system. It is not a virtual co
    ```text
    VITE_SUPABASE_URL=your-project-url
    VITE_SUPABASE_ANON_KEY=your-publishable-or-anon-key
-   VITE_LEGAL_SITE_URL=https://your-production-domain.example
+   VITE_SITE_URL=https://hoopjot.vercel.app
+   VITE_LEGAL_SITE_URL=https://hoopjot.vercel.app
    VITE_LEGAL_EFFECTIVE_DATE=2026-08-23
    VITE_LEGAL_OWNER_NAME=your-legal-name-or-company
    VITE_LEGAL_OWNER_NIF=your-tax-id
@@ -71,7 +72,9 @@ Use the project ref from `https://<project-ref>.supabase.co`. `db push --dry-run
 Release checks:
 
 - Email auth is enabled.
-- Allowed redirect URLs include local development, Vercel previews and production.
+- Hosted Auth Site URL is `https://hoopjot.vercel.app` (not `http://localhost:3000`).
+- Allowed redirect URLs include local development, Vercel previews and `https://hoopjot.vercel.app`.
+- Confirm signup email template still uses `{{ .ConfirmationURL }}`.
 - Every user-owned table has RLS enabled and forced.
 - Policies restrict rows with `(select auth.uid()) = user_id`.
 - `authenticated` has the required Data API grants.

@@ -9,7 +9,8 @@ Create `.env.local` from `.env.example` and fill:
 ```text
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
-VITE_LEGAL_SITE_URL=
+VITE_SITE_URL=https://hoopjot.vercel.app
+VITE_LEGAL_SITE_URL=https://hoopjot.vercel.app
 VITE_LEGAL_EFFECTIVE_DATE=
 VITE_LEGAL_OWNER_NAME=
 VITE_LEGAL_OWNER_NIF=
@@ -30,11 +31,22 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
 1. Create a Supabase project.
 2. Enable email authentication.
-3. Configure frontend URLs:
-   - local development origin;
-   - Vercel preview origins used for review;
-   - production origin.
-4. Apply the migration under `supabase/migrations/` with the Supabase CLI:
+3. Configure hosted Auth URLs in the Supabase dashboard. This hosted Site URL is **not** taken from `supabase/config.toml` (that file is local-only). New projects default Site URL to `http://localhost:3000`, which is what signup confirmation emails use unless `emailRedirectTo` is allowed.
+
+   Open **Authentication → URL Configuration** (`https://supabase.com/dashboard/project/<project-ref>/auth/url-configuration`):
+
+   - **Site URL:** `https://hoopjot.vercel.app`
+     Save. Confirmation emails without a valid `emailRedirectTo` fall back to this value.
+   - **Redirect URLs:** add at least:
+     - `https://hoopjot.vercel.app`
+     - `https://hoopjot.vercel.app/**`
+     - `http://127.0.0.1:5173/**` and `http://localhost:5173/**` for local Vite
+     - `https://*-.vercel.app/**` for Vercel previews (optional)
+
+   `emailRedirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it).
+
+4. Keep the Confirm signup email template on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.vercel.app`. `{{ .ConfirmationURL }}` already includes `redirect_to` from `emailRedirectTo`.
+5. Apply the migration under `supabase/migrations/` with the Supabase CLI:
 
    ```bash
    npx supabase login
@@ -46,13 +58,13 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
    The project ref is the subdomain in `https://<project-ref>.supabase.co`. The remote database will not contain `profiles`, `sessions`, `reflections` or the other app tables until `db push --linked` completes successfully.
 
-5. Confirm user-owned tables are exposed to the Data API only through the `authenticated` role grants in the migration.
-6. Verify RLS:
+6. Confirm user-owned tables are exposed to the Data API only through the `authenticated` role grants in the migration.
+7. Verify RLS:
    - all user-owned tables have RLS enabled;
    - all user-owned tables force RLS;
    - select/insert/update/delete policies use `(select auth.uid()) = user_id`;
    - update policies include both `USING` and `WITH CHECK`.
-7. Run a manual two-account isolation test:
+8. Run a manual two-account isolation test:
    - account A creates profile/session/reflection data;
    - account B cannot read, update or delete account A rows;
    - account A can still read and update their own rows.
@@ -88,6 +100,7 @@ Environment variables:
 ```text
 VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY
+VITE_SITE_URL=https://hoopjot.vercel.app
 VITE_LEGAL_SITE_URL
 VITE_LEGAL_EFFECTIVE_DATE
 VITE_LEGAL_OWNER_NAME

@@ -1,3 +1,4 @@
+export * from './authRedirectUrl';
 export * from './authService';
 export * from './browserAuthService';
 export * from './e2eAuthService';
