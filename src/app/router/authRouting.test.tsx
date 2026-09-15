@@ -2,16 +2,18 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { AuthProvider } from '../providers/AuthProvider';
-import { SyncContext, defaultSyncContextValue, type SyncContextValue } from '../providers/syncContext';
 import {
+  SyncContext,
+  defaultSyncContextValue,
+  type SyncContextValue,
+} from '../providers/syncContext';
+import {
+  DefaultRoute,
   PublicAuthRoute,
   RequireAuthenticatedApp,
-  RequireOnboardingState
+  RequireOnboardingState,
 } from './authGuards';
-import {
-  RecoveryRoute,
-  SignInRoute
-} from '../../features/auth/AuthRoutes';
+import { RecoveryRoute, SignInRoute } from '../../features/auth/AuthRoutes';
 import i18n from '../../i18n/config';
 import type { AuthService, AuthUser } from '../../services/auth';
 
@@ -35,7 +37,7 @@ describe('auth routing', () => {
 
   it('waits for initial remote bootstrap before sending an authenticated user to onboarding', async () => {
     renderAuthRoutes(createFakeAuthService(createUser(false)), '/app', {
-      initialBootstrapStatus: 'syncing'
+      initialBootstrapStatus: 'syncing',
     });
 
     expect(await screen.findByText('Checking session')).toBeInTheDocument();
@@ -44,7 +46,7 @@ describe('auth routing', () => {
 
   it('shows sync attention instead of repeating onboarding when profile bootstrap fails', async () => {
     renderAuthRoutes(createFakeAuthService(createUser(false)), '/app', {
-      initialBootstrapStatus: 'needs_attention'
+      initialBootstrapStatus: 'needs_attention',
     });
 
     expect(
@@ -62,8 +64,18 @@ describe('auth routing', () => {
   it('keeps recovery available to authenticated recovery sessions', async () => {
     renderAuthRoutes(createFakeAuthService(createUser(false)), '/recovery?type=recovery');
 
-    expect(await screen.findByRole('heading', { name: 'Create a new password' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Create a new password' }),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText('New password')).toBeInTheDocument();
+  });
+
+  it('sends recovery sessions that land on the app origin to the recovery screen', async () => {
+    renderAuthRoutes(createFakeAuthService(createUser(true)), '/?type=recovery');
+
+    expect(
+      await screen.findByRole('heading', { name: 'Create a new password' }),
+    ).toBeInTheDocument();
   });
 
   it('redirects normal authenticated recovery visits back to onboarding state', async () => {
@@ -85,6 +97,14 @@ function renderAuthRoutes(
       <SyncContext.Provider value={{ ...defaultSyncContextValue, ...syncOverrides }}>
         <MemoryRouter initialEntries={[initialPath]}>
           <Routes>
+            <Route
+              element={
+                <DefaultRoute>
+                  <p>Welcome</p>
+                </DefaultRoute>
+              }
+              path="/"
+            />
             <Route
               element={
                 <RequireAuthenticatedApp>
@@ -121,7 +141,7 @@ function createUser(onboardingCompleted: boolean): AuthUser {
   return {
     email: 'player@example.com',
     id: 'player-1',
-    onboardingCompleted
+    onboardingCompleted,
   };
 }
 
@@ -145,6 +165,6 @@ function createFakeAuthService(user: AuthUser | null): AuthService {
       }
 
       return user;
-    })
+    }),
   };
 }

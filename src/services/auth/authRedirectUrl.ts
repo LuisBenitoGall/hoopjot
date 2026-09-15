@@ -19,7 +19,10 @@ export function getAuthEmailRedirectTo(
 export function getAuthPasswordResetRedirectTo(
   env?: Pick<ImportMetaEnv, 'VITE_SITE_URL' | 'VITE_LEGAL_SITE_URL'>,
 ): string {
-  return `${getAuthAppOrigin(env)}/recovery`;
+  // Use the same origin as signup. `/recovery` is not in the hosted allow list unless
+  // `https://hoopjot.vercel.app/**` was added; Auth then falls back to Site URL
+  // (`http://localhost:3000` by default). The app routes `type=recovery` to `/recovery`.
+  return getAuthAppOrigin(env);
 }
 
 function normalizeOrigin(value: string | undefined): string | undefined {

@@ -59,9 +59,11 @@ export class SupabaseAuthService implements AuthService {
   async sendPasswordResetEmail(request: AuthRecoveryRequest): Promise<void> {
     this.assertOnline();
 
-    const { error } = await this.client.auth.resetPasswordForEmail(request.email, {
-      redirectTo: request.redirectTo ?? this.resetRedirectUrl,
-    });
+    const redirectTo = request.redirectTo ?? this.resetRedirectUrl;
+    const { error } = await this.client.auth.resetPasswordForEmail(
+      request.email,
+      redirectTo ? { redirectTo } : undefined,
+    );
 
     if (error) {
       throw toAuthServiceError(error);

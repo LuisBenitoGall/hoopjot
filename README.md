@@ -74,7 +74,7 @@ Release checks:
 - Email auth is enabled.
 - Hosted Auth Site URL is `https://hoopjot.vercel.app` (not `http://localhost:3000`).
 - Allowed redirect URLs include local development, Vercel previews and `https://hoopjot.vercel.app`.
-- Confirm signup email template still uses `{{ .ConfirmationURL }}`.
+- Confirm signup and reset password email templates still use `{{ .ConfirmationURL }}`.
 - Every user-owned table has RLS enabled and forced.
 - Policies restrict rows with `(select auth.uid()) = user_id`.
 - `authenticated` has the required Data API grants.
