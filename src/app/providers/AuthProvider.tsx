@@ -1,19 +1,16 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode
-} from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import {
   AuthServiceError,
+  clearPasswordRecoveryIntent,
   createBrowserAuthService,
+  hasPasswordRecoveryIntent,
+  rememberPasswordRecoveryIntent,
   type AuthCredentials,
   type AuthRecoveryRequest,
   type AuthService,
   type AuthState,
-  type AuthUser
+  type AuthUser,
 } from '../../services/auth';
 import type { PlayerProfileRepository } from '../../domain';
 import { AuthContext, type AuthContextValue } from './authContext';
@@ -27,7 +24,7 @@ interface AuthProviderProps {
 export function AuthProvider({
   authService,
   children,
-  playerProfileRepository
+  playerProfileRepository,
 }: AuthProviderProps) {
   const service = useMemo(() => authService ?? createBrowserAuthService(), [authService]);
   const [state, setState] = useState<AuthState>({ status: 'loading', user: null });
@@ -43,7 +40,7 @@ export function AuthProvider({
 
       return {
         ...user,
-        onboardingCompleted: Boolean(profile?.onboardingCompletedAt)
+        onboardingCompleted: Boolean(profile?.onboardingCompletedAt),
       };
     },
     [playerProfileRepository],
@@ -80,11 +77,15 @@ export function AuthProvider({
             event === 'password_recovery' ||
               Boolean(
                 resolvedUser &&
-                  currentState.status === 'authenticated' &&
-                  currentState.isPasswordRecoverySession,
+                currentState.status === 'authenticated' &&
+                currentState.isPasswordRecoverySession,
               ),
           ),
         );
+
+        if (event === 'password_recovery') {
+          rememberPasswordRecoveryIntent();
+        }
       });
     });
 
@@ -127,7 +128,7 @@ export function AuthProvider({
           setState({
             isPasswordRecoverySession: false,
             status: 'authenticated',
-            user
+            user,
           });
         }
 
@@ -146,6 +147,7 @@ export function AuthProvider({
 
     try {
       await service.signOut();
+      clearPasswordRecoveryIntent();
       setState({ status: 'unauthenticated', user: null });
     } catch (caughtError) {
       const authError = toAuthServiceError(caughtError);
@@ -180,6 +182,7 @@ export function AuthProvider({
           throw new AuthServiceError('provider_error', 'Authentication failed.');
         }
 
+        clearPasswordRecoveryIntent();
         setState({ isPasswordRecoverySession: false, status: 'authenticated', user });
       } catch (caughtError) {
         const authError = toAuthServiceError(caughtError);
@@ -197,14 +200,14 @@ export function AuthProvider({
 
     const user = await resolveOnboardingStatus({
       ...state.user,
-      onboardingCompleted: false
+      onboardingCompleted: false,
     });
 
     if (user) {
       setState({
         isPasswordRecoverySession: state.isPasswordRecoverySession,
         status: 'authenticated',
-        user
+        user,
       });
     }
   }, [resolveOnboardingStatus, state]);
@@ -219,7 +222,7 @@ export function AuthProvider({
       signOut,
       signUp,
       state,
-      updatePassword
+      updatePassword,
     }),
     [
       error,
@@ -229,7 +232,7 @@ export function AuthProvider({
       signOut,
       signUp,
       state,
-      updatePassword
+      updatePassword,
     ],
   );
 
@@ -258,15 +261,4 @@ function toAuthServiceError(error: unknown): AuthServiceError {
   }
 
   return new AuthServiceError('provider_error', 'Authentication failed.');
-}
-
-function hasPasswordRecoveryIntent(): boolean {
-  if (typeof globalThis.location === 'undefined') {
-    return false;
-  }
-
-  const searchParams = new URLSearchParams(globalThis.location.search);
-  const hashParams = new URLSearchParams(globalThis.location.hash.replace(/^#/, ''));
-
-  return searchParams.get('type') === 'recovery' || hashParams.get('type') === 'recovery';
 }
