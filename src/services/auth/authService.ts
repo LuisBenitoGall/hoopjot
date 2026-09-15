@@ -8,15 +8,17 @@ import {
   type AuthSignUpResult,
   type AuthStateListener,
   type AuthSubscription,
-  type AuthUser
+  type AuthUser,
 } from './types';
 
 interface SupabaseAuthServiceOptions {
+  emailRedirectTo?: string;
   getOnlineStatus?: () => boolean;
   resetRedirectUrl?: string;
 }
 
 export class SupabaseAuthService implements AuthService {
+  private readonly emailRedirectTo?: string;
   private readonly getOnlineStatus: () => boolean;
   private readonly resetRedirectUrl?: string;
 
@@ -24,6 +26,7 @@ export class SupabaseAuthService implements AuthService {
     private readonly client: SupabaseClient,
     options: SupabaseAuthServiceOptions = {},
   ) {
+    this.emailRedirectTo = options.emailRedirectTo;
     this.getOnlineStatus =
       options.getOnlineStatus ??
       (() => (typeof navigator === 'undefined' ? true : navigator.onLine));
@@ -49,7 +52,7 @@ export class SupabaseAuthService implements AuthService {
     });
 
     return {
-      unsubscribe: () => data.subscription.unsubscribe()
+      unsubscribe: () => data.subscription.unsubscribe(),
     };
   }
 
@@ -57,7 +60,7 @@ export class SupabaseAuthService implements AuthService {
     this.assertOnline();
 
     const { error } = await this.client.auth.resetPasswordForEmail(request.email, {
-      redirectTo: request.redirectTo ?? this.resetRedirectUrl
+      redirectTo: request.redirectTo ?? this.resetRedirectUrl,
     });
 
     if (error) {
@@ -94,7 +97,17 @@ export class SupabaseAuthService implements AuthService {
   async signUp(credentials: AuthCredentials): Promise<AuthSignUpResult> {
     this.assertOnline();
 
-    const { data, error } = await this.client.auth.signUp(credentials);
+    const { data, error } = await this.client.auth.signUp({
+      email: credentials.email,
+      password: credentials.password,
+      ...(this.emailRedirectTo
+        ? {
+            options: {
+              emailRedirectTo: this.emailRedirectTo,
+            },
+          }
+        : {}),
+    });
 
     if (error) {
       throw toAuthServiceError(error);
@@ -102,7 +115,7 @@ export class SupabaseAuthService implements AuthService {
 
     return {
       requiresEmailConfirmation: !data.session,
-      user: toAuthUser(data.session) ?? (data.user ? toAuthUserFromSupabaseUser(data.user) : null)
+      user: toAuthUser(data.session) ?? (data.user ? toAuthUserFromSupabaseUser(data.user) : null),
     };
   }
 
@@ -179,7 +192,7 @@ function toAuthUserFromSupabaseUser(user: User): AuthUser {
     id: user.id,
     onboardingCompleted:
       user.app_metadata?.onboarding_completed === true ||
-      user.user_metadata?.onboarding_completed === true
+      user.user_metadata?.onboarding_completed === true,
   };
 }
 

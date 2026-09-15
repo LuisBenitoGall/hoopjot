@@ -46,5 +46,8 @@ pnpm test:e2e:remote
 ## Deployment
 
 - Vercel preview has been reviewed on mobile.
-- Supabase Auth redirect URLs include the deployed origin.
+- Supabase Auth Site URL is `https://hoopjot.vercel.app` (Authentication → URL Configuration), not `http://localhost:3000`.
+- Supabase Auth redirect URLs include `https://hoopjot.vercel.app` and `https://hoopjot.vercel.app/**`.
+- Confirm signup email template uses `{{ .ConfirmationURL }}`.
+- Vercel `VITE_SITE_URL` is `https://hoopjot.vercel.app`.
 - Production build is deployed only after the automated gate passes.

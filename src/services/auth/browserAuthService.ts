@@ -1,3 +1,4 @@
+import { getAuthEmailRedirectTo, getAuthPasswordResetRedirectTo } from './authRedirectUrl';
 import { MissingSupabaseAuthService, SupabaseAuthService } from './authService';
 import { createE2EAuthService } from './e2eAuthService';
 import { createSupabaseBrowserClient, getSupabaseBrowserConfig } from './supabaseClient';
@@ -17,7 +18,7 @@ export function createBrowserAuthService(): AuthService {
   }
 
   return new SupabaseAuthService(createSupabaseBrowserClient(config), {
-    resetRedirectUrl:
-      typeof globalThis.location === 'undefined' ? undefined : `${globalThis.location.origin}/recovery`
+    emailRedirectTo: getAuthEmailRedirectTo(),
+    resetRedirectUrl: getAuthPasswordResetRedirectTo(),
   });
 }

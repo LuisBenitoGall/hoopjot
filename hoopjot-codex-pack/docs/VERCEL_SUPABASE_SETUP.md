@@ -5,12 +5,16 @@ This document intentionally avoids secrets. Fill real values only in platform da
 ## Supabase
 
 Create a project and record browser-safe values for:
+
 - project URL;
 - public/publishable/anon key.
 
 Configure email authentication according to the chosen email flow.
 
+Hosted Auth Site URL must be `https://hoopjot.vercel.app` (Authentication → URL Configuration). Do not leave the default `http://localhost:3000`. Add that production origin to Redirect URLs as well. `supabase/config.toml` only affects local Auth.
+
 When spec 012 is implemented:
+
 - apply SQL migrations;
 - verify RLS is enabled;
 - test cross-user isolation;
@@ -23,6 +27,7 @@ Do not expose the service-role key to the frontend.
 Import the GitHub repository.
 
 Framework/build:
+
 - Vite
 - install: `pnpm install --frozen-lockfile`
 - build: `pnpm build`
