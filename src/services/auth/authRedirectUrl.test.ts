@@ -2,7 +2,7 @@ import {
   PRODUCTION_APP_ORIGIN,
   getAuthAppOrigin,
   getAuthEmailRedirectTo,
-  getAuthPasswordResetRedirectTo
+  getAuthPasswordResetRedirectTo,
 } from './authRedirectUrl';
 
 describe('auth redirect URLs', () => {
@@ -17,7 +17,7 @@ describe('auth redirect URLs', () => {
     expect(
       getAuthEmailRedirectTo({
         VITE_LEGAL_SITE_URL: 'https://legal.example',
-        VITE_SITE_URL: 'https://hoopjot.vercel.app/'
+        VITE_SITE_URL: 'https://hoopjot.vercel.app/',
       }),
     ).toBe('https://hoopjot.vercel.app');
   });
@@ -26,7 +26,7 @@ describe('auth redirect URLs', () => {
     expect(
       getAuthAppOrigin({
         VITE_LEGAL_SITE_URL: 'https://hoopjot.vercel.app/legal',
-        VITE_SITE_URL: '   '
+        VITE_SITE_URL: '   ',
       }),
     ).toBe('https://hoopjot.vercel.app');
   });
@@ -34,7 +34,7 @@ describe('auth redirect URLs', () => {
   it('ignores invalid configured URLs', () => {
     expect(
       getAuthEmailRedirectTo({
-        VITE_SITE_URL: 'not-a-url'
+        VITE_SITE_URL: 'not-a-url',
       }),
     ).toBe(PRODUCTION_APP_ORIGIN);
   });

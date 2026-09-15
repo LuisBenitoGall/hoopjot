@@ -19,6 +19,6 @@ export function createBrowserAuthService(): AuthService {
 
   return new SupabaseAuthService(createSupabaseBrowserClient(config), {
     emailRedirectTo: getAuthEmailRedirectTo(),
-    resetRedirectUrl: getAuthPasswordResetRedirectTo()
+    resetRedirectUrl: getAuthPasswordResetRedirectTo(),
   });
 }

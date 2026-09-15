@@ -8,7 +8,7 @@ describe('auth services', () => {
     const service = new MissingSupabaseAuthService();
 
     await expect(service.getCurrentUser()).rejects.toMatchObject({
-      code: 'configuration_missing'
+      code: 'configuration_missing',
     });
   });
 
@@ -17,11 +17,11 @@ describe('auth services', () => {
     const service = new SupabaseAuthService(
       {
         auth: {
-          signInWithPassword
-        }
+          signInWithPassword,
+        },
       } as unknown as SupabaseClient,
       {
-        getOnlineStatus: () => false
+        getOnlineStatus: () => false,
       },
     );
 
@@ -31,7 +31,7 @@ describe('auth services', () => {
     await expect(
       service.signIn({ email: 'player@example.com', password: 'password123' }),
     ).rejects.toMatchObject({
-      code: 'network_unavailable'
+      code: 'network_unavailable',
     });
     expect(signInWithPassword).not.toHaveBeenCalled();
   });
@@ -41,16 +41,16 @@ describe('auth services', () => {
     const service = new SupabaseAuthService(
       {
         auth: {
-          updateUser
-        }
+          updateUser,
+        },
       } as unknown as SupabaseClient,
       {
-        getOnlineStatus: () => false
+        getOnlineStatus: () => false,
       },
     );
 
     await expect(service.updatePassword('password123')).rejects.toMatchObject({
-      code: 'network_unavailable'
+      code: 'network_unavailable',
     });
     expect(updateUser).not.toHaveBeenCalled();
   });
@@ -61,36 +61,36 @@ describe('auth services', () => {
         auth: {
           signInWithPassword: vi.fn(async () => ({
             data: null,
-            error: { message: 'Failed to fetch' }
-          }))
-        }
+            error: { message: 'Failed to fetch' },
+          })),
+        },
       } as unknown as SupabaseClient,
       {
-        getOnlineStatus: () => true
+        getOnlineStatus: () => true,
       },
     );
 
     await expect(
       service.signIn({ email: 'player@example.com', password: 'password123' }),
     ).rejects.toMatchObject({
-      code: 'network_unavailable'
+      code: 'network_unavailable',
     });
   });
 
   it('sends signup confirmation emails back to the configured app origin', async () => {
     const signUp = vi.fn(async () => ({
       data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
-      error: null
+      error: null,
     }));
     const service = new SupabaseAuthService(
       {
         auth: {
-          signUp
-        }
+          signUp,
+        },
       } as unknown as SupabaseClient,
       {
         emailRedirectTo: 'https://hoopjot.vercel.app',
-        getOnlineStatus: () => true
+        getOnlineStatus: () => true,
       },
     );
 
@@ -98,14 +98,14 @@ describe('auth services', () => {
       service.signUp({ email: 'player@example.com', password: 'password123' }),
     ).resolves.toMatchObject({
       requiresEmailConfirmation: true,
-      user: { email: 'player@example.com', id: 'user-1' }
+      user: { email: 'player@example.com', id: 'user-1' },
     });
     expect(signUp).toHaveBeenCalledWith({
       email: 'player@example.com',
       options: {
-        emailRedirectTo: 'https://hoopjot.vercel.app'
+        emailRedirectTo: 'https://hoopjot.vercel.app',
       },
-      password: 'password123'
+      password: 'password123',
     });
   });
 });
