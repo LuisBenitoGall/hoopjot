@@ -157,12 +157,12 @@ enabled = true
 # The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
 # in emails. This file only applies to `supabase start` (local Auth).
 # Hosted/production Site URL is configured in the Supabase dashboard, not here:
-# Authentication → URL Configuration → Site URL = https://hoopjot.vercel.app
+# Authentication → URL Configuration → Site URL = https://hoopjot.com
 site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-# Hosted Redirect URLs must also include https://hoopjot.vercel.app and https://hoopjot.vercel.app/**
+# Hosted Redirect URLs must also include https://hoopjot.com and https://hoopjot.com/**
 additional_redirect_urls = ["https://127.0.0.1:3000"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600

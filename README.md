@@ -34,8 +34,8 @@ The MVP is a private player journal and attention system. It is not a virtual co
    ```text
    VITE_SUPABASE_URL=your-project-url
    VITE_SUPABASE_ANON_KEY=your-publishable-or-anon-key
-   VITE_SITE_URL=https://hoopjot.vercel.app
-   VITE_LEGAL_SITE_URL=https://hoopjot.vercel.app
+   VITE_SITE_URL=https://hoopjot.com
+   VITE_LEGAL_SITE_URL=https://hoopjot.com
    VITE_LEGAL_EFFECTIVE_DATE=2026-08-23
    VITE_LEGAL_OWNER_NAME=your-legal-name-or-company
    VITE_LEGAL_OWNER_NIF=your-tax-id
@@ -72,8 +72,8 @@ Use the project ref from `https://<project-ref>.supabase.co`. `db push --dry-run
 Release checks:
 
 - Email auth is enabled.
-- Hosted Auth Site URL is `https://hoopjot.vercel.app` (not `http://localhost:3000`).
-- Allowed redirect URLs include local development, Vercel previews and `https://hoopjot.vercel.app`.
+- Hosted Auth Site URL is `https://hoopjot.com` (not `http://localhost:3000`).
+- Allowed redirect URLs include local development, Vercel previews and `https://hoopjot.com`.
 - Confirm signup and reset password email templates still use `{{ .ConfirmationURL }}`.
 - Every user-owned table has RLS enabled and forced.
 - Policies restrict rows with `(select auth.uid()) = user_id`.
@@ -100,7 +100,7 @@ The E2E suite runs against a production preview build and includes offline/PWA c
 To validate the deployed Vercel app against real Supabase Auth/data, run the separate remote suite with local shell secrets:
 
 ```powershell
-$env:PLAYWRIGHT_BASE_URL="https://hoopjot.vercel.app"
+$env:PLAYWRIGHT_BASE_URL="https://hoopjot.com"
 $env:E2E_EMAIL="..."
 $env:E2E_PASSWORD="..."
 pnpm test:e2e:remote

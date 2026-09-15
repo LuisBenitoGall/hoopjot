@@ -9,8 +9,8 @@ Create `.env.local` from `.env.example` and fill:
 ```text
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
-VITE_SITE_URL=https://hoopjot.vercel.app
-VITE_LEGAL_SITE_URL=https://hoopjot.vercel.app
+VITE_SITE_URL=https://hoopjot.com
+VITE_LEGAL_SITE_URL=https://hoopjot.com
 VITE_LEGAL_EFFECTIVE_DATE=
 VITE_LEGAL_OWNER_NAME=
 VITE_LEGAL_OWNER_NIF=
@@ -35,17 +35,19 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
    Open **Authentication → URL Configuration** (`https://supabase.com/dashboard/project/<project-ref>/auth/url-configuration`):
 
-   - **Site URL:** `https://hoopjot.vercel.app`
+   - **Site URL:** `https://hoopjot.com`
      Save. Confirmation emails without a valid `emailRedirectTo` fall back to this value.
    - **Redirect URLs:** add at least:
-     - `https://hoopjot.vercel.app`
-     - `https://hoopjot.vercel.app/**`
+     - `https://hoopjot.com`
+     - `https://hoopjot.com/**`
      - `http://127.0.0.1:5173/**` and `http://localhost:5173/**` for local Vite
      - `https://*-.vercel.app/**` for Vercel previews (optional)
 
-   `emailRedirectTo` / recovery `redirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it). Signup and password recovery both send `https://hoopjot.vercel.app` (no extra path). The app then moves a recovery callback to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
+   Do not leave Site URL, Redirect URLs, or Vercel `VITE_SITE_URL` on `https://hoopjot.vercel.app`. Auth rejects `redirectTo` values that are not on this list, which surfaces as a generic auth error on the forgot-password form.
 
-4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.vercel.app`. `{{ .ConfirmationURL }}` already includes `redirect_to`.
+   `emailRedirectTo` / recovery `redirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it). Signup and password recovery both send `https://hoopjot.com` (no extra path). The app then moves a recovery callback to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
+
+4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.com`. `{{ .ConfirmationURL }}` already includes `redirect_to`.
 5. Apply the migration under `supabase/migrations/` with the Supabase CLI:
 
    ```bash
@@ -100,7 +102,7 @@ Environment variables:
 ```text
 VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY
-VITE_SITE_URL=https://hoopjot.vercel.app
+VITE_SITE_URL=https://hoopjot.com
 VITE_LEGAL_SITE_URL
 VITE_LEGAL_EFFECTIVE_DATE
 VITE_LEGAL_OWNER_NAME
@@ -134,7 +136,7 @@ The normal `pnpm test:e2e` command stays local and controlled. Use the remote co
 PowerShell:
 
 ```powershell
-$env:PLAYWRIGHT_BASE_URL="https://hoopjot.vercel.app"
+$env:PLAYWRIGHT_BASE_URL="https://hoopjot.com"
 $env:E2E_EMAIL="..."
 $env:E2E_PASSWORD="..."
 pnpm test:e2e:remote

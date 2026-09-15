@@ -17,7 +17,7 @@ All commands must pass. Investigate warnings that affect release risk, especiall
 For deployed-environment validation, run the separate remote smoke after setting local/CI secrets:
 
 ```powershell
-$env:PLAYWRIGHT_BASE_URL="https://hoopjot.vercel.app"
+$env:PLAYWRIGHT_BASE_URL="https://hoopjot.com"
 $env:E2E_EMAIL="..."
 $env:E2E_PASSWORD="..."
 pnpm test:e2e:remote
@@ -46,8 +46,8 @@ pnpm test:e2e:remote
 ## Deployment
 
 - Vercel preview has been reviewed on mobile.
-- Supabase Auth Site URL is `https://hoopjot.vercel.app` (Authentication → URL Configuration), not `http://localhost:3000`.
-- Supabase Auth redirect URLs include `https://hoopjot.vercel.app` and `https://hoopjot.vercel.app/**`.
+- Supabase Auth Site URL is `https://hoopjot.com` (Authentication → URL Configuration), not `http://localhost:3000`.
+- Supabase Auth redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
 - Confirm signup email template uses `{{ .ConfirmationURL }}`.
-- Vercel `VITE_SITE_URL` is `https://hoopjot.vercel.app`.
+- Vercel `VITE_SITE_URL` is `https://hoopjot.com`.
 - Production build is deployed only after the automated gate passes.
