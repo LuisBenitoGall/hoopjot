@@ -20,9 +20,10 @@ export function createSupabaseBrowserClient(config: SupabaseBrowserConfig): Supa
   return createClient(config.url, config.anonKey, {
     auth: {
       autoRefreshToken: true,
+      // Implicit hash tokens and PKCE `?code=` both need to be read before React Router
+      // navigation. Do not set flowType to pkce without an `/auth/confirm` token-hash route.
       detectSessionInUrl: true,
-      persistSession: true
-    }
+      persistSession: true,
+    },
   });
 }
-

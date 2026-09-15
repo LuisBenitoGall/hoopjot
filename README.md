@@ -73,8 +73,9 @@ Release checks:
 
 - Email auth is enabled.
 - Hosted Auth Site URL is `https://hoopjot.com` (not `http://localhost:3000`).
-- Allowed redirect URLs include local development, Vercel previews and `https://hoopjot.com`.
+- Allowed redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
 - Confirm signup and reset password email templates still use `{{ .ConfirmationURL }}`.
+- Built-in auth email is limited to 2/hour until custom SMTP is set.
 - Every user-owned table has RLS enabled and forced.
 - Policies restrict rows with `(select auth.uid()) = user_id`.
 - `authenticated` has the required Data API grants.

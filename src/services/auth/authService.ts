@@ -1,5 +1,6 @@
 import type { AuthChangeEvent, Session, SupabaseClient, User } from '@supabase/supabase-js';
 
+import { PRODUCTION_APP_ORIGIN } from './authRedirectUrl';
 import {
   AuthServiceError,
   type AuthCredentials,
@@ -59,11 +60,10 @@ export class SupabaseAuthService implements AuthService {
   async sendPasswordResetEmail(request: AuthRecoveryRequest): Promise<void> {
     this.assertOnline();
 
-    const redirectTo = request.redirectTo ?? this.resetRedirectUrl;
-    const { error } = await this.client.auth.resetPasswordForEmail(
-      request.email,
-      redirectTo ? { redirectTo } : undefined,
-    );
+    const redirectTo = request.redirectTo ?? this.resetRedirectUrl ?? PRODUCTION_APP_ORIGIN;
+    const { error } = await this.client.auth.resetPasswordForEmail(request.email, {
+      redirectTo,
+    });
 
     if (error) {
       throw toAuthServiceError(error);
@@ -102,13 +102,9 @@ export class SupabaseAuthService implements AuthService {
     const { data, error } = await this.client.auth.signUp({
       email: credentials.email,
       password: credentials.password,
-      ...(this.emailRedirectTo
-        ? {
-            options: {
-              emailRedirectTo: this.emailRedirectTo,
-            },
-          }
-        : {}),
+      options: {
+        emailRedirectTo: this.emailRedirectTo ?? PRODUCTION_APP_ORIGIN,
+      },
     });
 
     if (error) {
@@ -198,12 +194,20 @@ function toAuthUserFromSupabaseUser(user: User): AuthUser {
   };
 }
 
-function toAuthServiceError(error: { message: string }): AuthServiceError {
+function toAuthServiceError(error: {
+  code?: string | null;
+  message: string;
+  status?: number;
+}): AuthServiceError {
   if (isNetworkErrorMessage(error.message)) {
     return new AuthServiceError(
       'network_unavailable',
       'A network connection is required for this authentication action.',
     );
+  }
+
+  if (isRateLimitError(error)) {
+    return new AuthServiceError('rate_limited', error.message);
   }
 
   return new AuthServiceError('provider_error', error.message);
@@ -217,5 +221,33 @@ function isNetworkErrorMessage(message: string): boolean {
     normalizedMessage.includes('load failed') ||
     normalizedMessage.includes('networkerror') ||
     normalizedMessage.includes('network error')
+  );
+}
+
+function isRateLimitError(error: {
+  code?: string | null;
+  message: string;
+  status?: number;
+}): boolean {
+  if (error.status === 429) {
+    return true;
+  }
+
+  const code = error.code?.toLowerCase() ?? '';
+
+  if (
+    code === 'over_email_send_rate_limit' ||
+    code === 'over_request_rate_limit' ||
+    code === 'too_many_requests'
+  ) {
+    return true;
+  }
+
+  const normalizedMessage = error.message.toLowerCase();
+
+  return (
+    normalizedMessage.includes('rate limit') ||
+    normalizedMessage.includes('too many requests') ||
+    normalizedMessage.includes('email rate')
   );
 }
