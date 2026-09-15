@@ -43,9 +43,9 @@ Only browser-safe values belong here. Legal identity and contact values are publ
      - `http://127.0.0.1:5173/**` and `http://localhost:5173/**` for local Vite
      - `https://*-.vercel.app/**` for Vercel previews (optional)
 
-   `emailRedirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it).
+   `emailRedirectTo` / recovery `redirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it). Signup and password recovery both send `https://hoopjot.vercel.app` (no extra path). After a recovery link, the app routes `type=recovery` to `/recovery`.
 
-4. Keep the Confirm signup email template on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.vercel.app`. `{{ .ConfirmationURL }}` already includes `redirect_to` from `emailRedirectTo`.
+4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.vercel.app`. `{{ .ConfirmationURL }}` already includes `redirect_to`.
 5. Apply the migration under `supabase/migrations/` with the Supabase CLI:
 
    ```bash

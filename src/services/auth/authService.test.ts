@@ -108,4 +108,24 @@ describe('auth services', () => {
       password: 'password123',
     });
   });
+
+  it('sends password recovery emails back to the same production origin as signup', async () => {
+    const resetPasswordForEmail = vi.fn(async () => ({ data: {}, error: null }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          resetPasswordForEmail,
+        },
+      } as unknown as SupabaseClient,
+      {
+        getOnlineStatus: () => true,
+        resetRedirectUrl: 'https://hoopjot.vercel.app',
+      },
+    );
+
+    await service.sendPasswordResetEmail({ email: 'player@example.com' });
+    expect(resetPasswordForEmail).toHaveBeenCalledWith('player@example.com', {
+      redirectTo: 'https://hoopjot.vercel.app',
+    });
+  });
 });

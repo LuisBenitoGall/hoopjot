@@ -10,7 +10,7 @@ describe('auth redirect URLs', () => {
     expect(PRODUCTION_APP_ORIGIN).toBe('https://hoopjot.vercel.app');
     expect(getAuthAppOrigin({})).toBe('https://hoopjot.vercel.app');
     expect(getAuthEmailRedirectTo({})).toBe('https://hoopjot.vercel.app');
-    expect(getAuthPasswordResetRedirectTo({})).toBe('https://hoopjot.vercel.app/recovery');
+    expect(getAuthPasswordResetRedirectTo({})).toBe('https://hoopjot.vercel.app');
   });
 
   it('prefers VITE_SITE_URL over the legal site URL and the production fallback', () => {

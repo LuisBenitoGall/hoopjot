@@ -30,6 +30,10 @@ export function DefaultRoute({ children }: { children: ReactNode }) {
   }
 
   if (state.status === 'authenticated') {
+    if (state.isPasswordRecoverySession) {
+      return <Navigate replace to="/recovery" />;
+    }
+
     const bootstrapGate = getOnboardingBootstrapGate(
       state.user.onboardingCompleted,
       initialBootstrapStatus,
@@ -52,7 +56,7 @@ interface PublicAuthRouteProps {
 
 export function PublicAuthRoute({
   allowPasswordRecoverySession = false,
-  children
+  children,
 }: PublicAuthRouteProps) {
   const { state } = useAuth();
   const { initialBootstrapStatus } = useSyncStatus();
@@ -61,10 +65,11 @@ export function PublicAuthRoute({
     return <AuthLoadingRoute />;
   }
 
-  if (
-    state.status === 'authenticated' &&
-    !(allowPasswordRecoverySession && state.isPasswordRecoverySession)
-  ) {
+  if (state.status === 'authenticated') {
+    if (state.isPasswordRecoverySession) {
+      return allowPasswordRecoverySession ? children : <Navigate replace to="/recovery" />;
+    }
+
     const bootstrapGate = getOnboardingBootstrapGate(
       state.user.onboardingCompleted,
       initialBootstrapStatus,
@@ -93,6 +98,10 @@ export function RequireAuthenticatedApp({ children }: { children: ReactNode }) {
     return <Navigate replace state={{ from: location.pathname }} to="/sign-in" />;
   }
 
+  if (state.isPasswordRecoverySession) {
+    return <Navigate replace to="/recovery" />;
+  }
+
   const bootstrapGate = getOnboardingBootstrapGate(
     state.user.onboardingCompleted,
     initialBootstrapStatus,
@@ -119,6 +128,10 @@ export function RequireOnboardingState({ children }: { children: ReactNode }) {
 
   if (state.status !== 'authenticated') {
     return <Navigate replace to="/sign-in" />;
+  }
+
+  if (state.isPasswordRecoverySession) {
+    return <Navigate replace to="/recovery" />;
   }
 
   if (state.user.onboardingCompleted) {
@@ -153,7 +166,7 @@ function getOnboardingBootstrapGate(
 }
 
 function AuthBootstrapBlockedRoute({
-  status
+  status,
 }: {
   status: Extract<InitialSyncBootstrapStatus, 'needs_attention' | 'offline'>;
 }) {
@@ -167,11 +180,7 @@ function AuthBootstrapBlockedRoute({
         <p className="text-sm font-bold text-hoopjot-purple">{t('sync.bootstrap.eyebrow')}</p>
         <div className="space-y-2">
           <h1 className="text-2xl font-black leading-tight">
-            {t(
-              isOffline
-                ? 'sync.bootstrap.offlineTitle'
-                : 'sync.bootstrap.needsAttentionTitle',
-            )}
+            {t(isOffline ? 'sync.bootstrap.offlineTitle' : 'sync.bootstrap.needsAttentionTitle')}
           </h1>
           <p className="text-sm leading-6 text-hoopjot-muted">
             {t(
