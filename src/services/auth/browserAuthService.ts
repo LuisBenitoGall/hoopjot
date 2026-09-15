@@ -1,3 +1,4 @@
+import { relocatePasswordRecoveryCallback } from './authCallback';
 import { getAuthEmailRedirectTo, getAuthPasswordResetRedirectTo } from './authRedirectUrl';
 import { MissingSupabaseAuthService, SupabaseAuthService } from './authService';
 import { createE2EAuthService } from './e2eAuthService';
@@ -16,6 +17,9 @@ export function createBrowserAuthService(): AuthService {
   if (!config) {
     return new MissingSupabaseAuthService();
   }
+
+  // Move recovery tokens/code onto /recovery before the client reads the URL.
+  relocatePasswordRecoveryCallback();
 
   return new SupabaseAuthService(createSupabaseBrowserClient(config), {
     emailRedirectTo: getAuthEmailRedirectTo(),

@@ -6,6 +6,7 @@ import { type ReactNode } from 'react';
 import type { InitialSyncBootstrapStatus } from '../../sync';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { getPasswordRecoveryRedirectTarget } from '../../services/auth/authCallback';
 import { useAuth } from '../providers/authContext';
 import { useSyncStatus } from '../providers/syncContext';
 
@@ -31,7 +32,7 @@ export function DefaultRoute({ children }: { children: ReactNode }) {
 
   if (state.status === 'authenticated') {
     if (state.isPasswordRecoverySession) {
-      return <Navigate replace to="/recovery" />;
+      return <Navigate replace to={getPasswordRecoveryRedirectTarget()} />;
     }
 
     const bootstrapGate = getOnboardingBootstrapGate(
@@ -67,7 +68,11 @@ export function PublicAuthRoute({
 
   if (state.status === 'authenticated') {
     if (state.isPasswordRecoverySession) {
-      return allowPasswordRecoverySession ? children : <Navigate replace to="/recovery" />;
+      return allowPasswordRecoverySession ? (
+        children
+      ) : (
+        <Navigate replace to={getPasswordRecoveryRedirectTarget()} />
+      );
     }
 
     const bootstrapGate = getOnboardingBootstrapGate(
@@ -99,7 +104,7 @@ export function RequireAuthenticatedApp({ children }: { children: ReactNode }) {
   }
 
   if (state.isPasswordRecoverySession) {
-    return <Navigate replace to="/recovery" />;
+    return <Navigate replace to={getPasswordRecoveryRedirectTarget()} />;
   }
 
   const bootstrapGate = getOnboardingBootstrapGate(
@@ -131,7 +136,7 @@ export function RequireOnboardingState({ children }: { children: ReactNode }) {
   }
 
   if (state.isPasswordRecoverySession) {
-    return <Navigate replace to="/recovery" />;
+    return <Navigate replace to={getPasswordRecoveryRedirectTarget()} />;
   }
 
   if (state.user.onboardingCompleted) {

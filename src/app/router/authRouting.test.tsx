@@ -7,6 +7,7 @@ import {
   defaultSyncContextValue,
   type SyncContextValue,
 } from '../providers/syncContext';
+import { clearPasswordRecoveryIntent } from '../../services/auth/authCallback';
 import {
   DefaultRoute,
   PublicAuthRoute,
@@ -21,6 +22,7 @@ describe('auth routing', () => {
   beforeEach(() => {
     document.documentElement.lang = 'en';
     void i18n.changeLanguage('en');
+    clearPasswordRecoveryIntent();
   });
 
   it('redirects unauthenticated app routes to sign in', async () => {
