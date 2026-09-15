@@ -89,7 +89,7 @@ describe('auth services', () => {
         },
       } as unknown as SupabaseClient,
       {
-        emailRedirectTo: 'https://hoopjot.vercel.app',
+        emailRedirectTo: 'https://hoopjot.com',
         getOnlineStatus: () => true,
       },
     );
@@ -103,7 +103,7 @@ describe('auth services', () => {
     expect(signUp).toHaveBeenCalledWith({
       email: 'player@example.com',
       options: {
-        emailRedirectTo: 'https://hoopjot.vercel.app',
+        emailRedirectTo: 'https://hoopjot.com',
       },
       password: 'password123',
     });
@@ -119,13 +119,13 @@ describe('auth services', () => {
       } as unknown as SupabaseClient,
       {
         getOnlineStatus: () => true,
-        resetRedirectUrl: 'https://hoopjot.vercel.app',
+        resetRedirectUrl: 'https://hoopjot.com',
       },
     );
 
     await service.sendPasswordResetEmail({ email: 'player@example.com' });
     expect(resetPasswordForEmail).toHaveBeenCalledWith('player@example.com', {
-      redirectTo: 'https://hoopjot.vercel.app',
+      redirectTo: 'https://hoopjot.com',
     });
   });
 });

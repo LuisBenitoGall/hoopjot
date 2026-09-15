@@ -32,6 +32,12 @@ describe('password recovery callback', () => {
     globalThis.history.replaceState(null, '', '/app');
     relocatePasswordRecoveryCallback();
     expect(globalThis.location.pathname).toBe('/app');
+
+    globalThis.history.replaceState(null, '', '/recovery');
+    relocatePasswordRecoveryCallback();
+    expect(globalThis.location.pathname).toBe('/recovery');
+    expect(globalThis.location.search).toBe('');
+    expect(hasPasswordRecoveryIntent()).toBe(false);
   });
 
   it('keeps search and hash when building an in-app recovery redirect', () => {
