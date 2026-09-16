@@ -14,7 +14,7 @@ import {
   RequireAuthenticatedApp,
   RequireOnboardingState,
 } from './authGuards';
-import { RecoveryRoute, SignInRoute } from '../../features/auth/AuthRoutes';
+import { RecoveryRoute, SignInRoute, SignUpRoute } from '../../features/auth/AuthRoutes';
 import i18n from '../../i18n/config';
 import type { AuthService, AuthUser } from '../../services/auth';
 
@@ -85,6 +85,15 @@ describe('auth routing', () => {
 
     expect(await screen.findByText('Onboarding gate')).toBeInTheDocument();
   });
+
+  it('renders email, password, and password confirmation on the real signup route', async () => {
+    renderAuthRoutes(createFakeAuthService(null), '/sign-up');
+
+    expect(await screen.findByRole('heading', { name: 'Create account' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    expect(screen.getByLabelText('Confirm password')).toBeInTheDocument();
+  });
 });
 
 function renderAuthRoutes(
@@ -132,6 +141,14 @@ function renderAuthRoutes(
               path="/recovery"
             />
             <Route element={<SignInRoute />} path="/sign-in" />
+            <Route
+              element={
+                <PublicAuthRoute>
+                  <SignUpRoute />
+                </PublicAuthRoute>
+              }
+              path="/sign-up"
+            />
           </Routes>
         </MemoryRouter>
       </SyncContext.Provider>

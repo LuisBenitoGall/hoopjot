@@ -80,6 +80,28 @@ describe('AuthForm', () => {
     });
   });
 
+  it('shows email, password, and password confirmation on signup only', () => {
+    render(<AuthForm mode="signUp" />, { wrapper: createAuthWrapper(createFakeAuthService()) });
+
+    expect(screen.getByLabelText('Email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    expect(screen.getByLabelText('Confirm password')).toBeInTheDocument();
+  });
+
+  it('does not show password confirmation on sign in or recovery', () => {
+    const { unmount } = render(<AuthForm mode="signIn" />, {
+      wrapper: createAuthWrapper(createFakeAuthService()),
+    });
+
+    expect(screen.queryByLabelText('Confirm password')).not.toBeInTheDocument();
+    unmount();
+
+    render(<AuthForm mode="recovery" />, {
+      wrapper: createAuthWrapper(createFakeAuthService()),
+    });
+    expect(screen.queryByLabelText('Confirm password')).not.toBeInTheDocument();
+  });
+
   it('requires matching passwords on signup and logs the user in without a check-email step', async () => {
     const user = userEvent.setup();
     const signUp = vi.fn(async () => ({
