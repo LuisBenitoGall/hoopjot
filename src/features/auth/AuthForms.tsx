@@ -14,24 +14,19 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
-  const {
-    error,
-    resetError,
-    sendPasswordResetEmail,
-    signIn,
-    signUp,
-    state,
-    updatePassword
-  } = useAuth();
+  const { error, resetError, sendPasswordResetEmail, signIn, signUp, state, updatePassword } =
+    useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation('common');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [localErrorCode, setLocalErrorCode] = useState<AuthErrorCode | null>(null);
   const requiresEmail = mode !== 'updatePassword';
   const requiresPassword = mode !== 'recovery';
+  const requiresPasswordConfirmation = mode === 'signUp';
 
   const errorCode =
     state.status === 'configuration_error' ? null : (localErrorCode ?? error?.code ?? null);
@@ -48,13 +43,20 @@ export function AuthForm({ mode }: AuthFormProps) {
         await signIn({ email, password });
         navigate('/app', { replace: true });
       } else if (mode === 'signUp') {
-        const result = await signUp({ email, password });
-
-        if (result.requiresEmailConfirmation) {
-          setSuccessMessage(t('auth.messages.checkEmail'));
-        } else {
-          navigate('/onboarding', { replace: true });
+        if (password !== passwordConfirmation) {
+          throw new AuthServiceError('password_mismatch', 'Passwords do not match.');
         }
+
+        await signUp({ email, password });
+        navigate('/onboarding', { replace: true });
+
+        // Confirmation-email client flow (restore if Confirm email is re-enabled):
+        // const result = await signUp({ email, password });
+        // if (result.requiresEmailConfirmation) {
+        //   setSuccessMessage(t('auth.messages.checkEmail'));
+        // } else {
+        //   navigate('/onboarding', { replace: true });
+        // }
       } else if (mode === 'recovery') {
         await sendPasswordResetEmail({ email });
         setSuccessMessage(t('auth.messages.recoverySent'));
@@ -109,6 +111,22 @@ export function AuthForm({ mode }: AuthFormProps) {
             required
             type="password"
             value={password}
+          />
+        </label>
+      ) : null}
+
+      {requiresPasswordConfirmation ? (
+        <label className="block space-y-2">
+          <span className="text-sm font-bold">{t('auth.confirmPasswordLabel')}</span>
+          <input
+            autoComplete="new-password"
+            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
+            minLength={8}
+            name="passwordConfirmation"
+            onChange={(event) => setPasswordConfirmation(event.target.value)}
+            required
+            type="password"
+            value={passwordConfirmation}
           />
         </label>
       ) : null}

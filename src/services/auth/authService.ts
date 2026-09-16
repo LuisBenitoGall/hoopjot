@@ -28,6 +28,8 @@ export class SupabaseAuthService implements AuthService {
     options: SupabaseAuthServiceOptions = {},
   ) {
     this.emailRedirectTo = options.emailRedirectTo;
+    // Kept for the commented confirmation-email client flow in signUp.
+    void this.emailRedirectTo;
     this.getOnlineStatus =
       options.getOnlineStatus ??
       (() => (typeof navigator === 'undefined' ? true : navigator.onLine));
@@ -102,19 +104,37 @@ export class SupabaseAuthService implements AuthService {
     const { data, error } = await this.client.auth.signUp({
       email: credentials.email,
       password: credentials.password,
-      options: {
-        emailRedirectTo: this.emailRedirectTo ?? PRODUCTION_APP_ORIGIN,
-      },
+      // Confirmation-email client flow. Hosted Auth Confirm email is off, so signUp
+      // returns a session and the user is logged in immediately. Restore this if
+      // confirmations are re-enabled:
+      // options: {
+      //   emailRedirectTo: this.emailRedirectTo ?? PRODUCTION_APP_ORIGIN,
+      // },
     });
 
     if (error) {
       throw toAuthServiceError(error);
     }
 
+    const user = toAuthUser(data.session);
+
+    if (!user) {
+      throw new AuthServiceError(
+        'provider_error',
+        'Sign up did not return a session. Disable Confirm email in Authentication → Providers → Email.',
+      );
+    }
+
     return {
-      requiresEmailConfirmation: !data.session,
-      user: toAuthUser(data.session) ?? (data.user ? toAuthUserFromSupabaseUser(data.user) : null),
+      requiresEmailConfirmation: false,
+      user,
     };
+
+    // Confirmation-email client flow (restore with the options block above):
+    // return {
+    //   requiresEmailConfirmation: !data.session,
+    //   user: toAuthUser(data.session) ?? (data.user ? toAuthUserFromSupabaseUser(data.user) : null),
+    // };
   }
 
   async updatePassword(password: string): Promise<AuthUser> {

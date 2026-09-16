@@ -31,7 +31,17 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
 1. Create a Supabase project.
 2. Enable email authentication.
-3. Configure hosted Auth URLs in the Supabase dashboard. This hosted Site URL is **not** taken from `supabase/config.toml` (that file is local-only). New projects default Site URL to `http://localhost:3000`.
+3. Disable **Confirm email** so signup logs the user in immediately. Hosted Auth defaults this to on; with it enabled, `signUp` returns a user but `session` is null and the app cannot skip the check-email step.
+
+   Open **Authentication → Providers → Email** (`https://supabase.com/dashboard/project/<project-ref>/auth/providers`):
+
+   - Find **Confirm email**
+   - Turn it **off**
+   - Save
+
+   Local `supabase/config.toml` already has `[auth.email] enable_confirmations = false`. That file does **not** change the hosted project. Login and password recovery stay enabled; only the signup confirmation email is skipped.
+
+4. Configure hosted Auth URLs in the Supabase dashboard. This hosted Site URL is **not** taken from `supabase/config.toml` (that file is local-only). New projects default Site URL to `http://localhost:3000`.
 
    Open **Authentication → URL Configuration** (`https://supabase.com/dashboard/project/<project-ref>/auth/url-configuration`):
 
@@ -45,10 +55,10 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
    Do not leave Site URL or Redirect URLs on `https://hoopjot.vercel.app` or `http://localhost:3000`.
 
-   The production app **always** sends `emailRedirectTo` / recovery `redirectTo` as `https://hoopjot.com` (no path, no www, not the current tab origin). If that value is missing from Site URL and Redirect URLs, Auth rejects the request and **does not send** the signup or recovery email. The app then moves a recovery callback that includes `type=recovery` to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
+   The production app **always** sends recovery `redirectTo` as `https://hoopjot.com` (no path, no www, not the current tab origin). Signup `emailRedirectTo` is commented out while Confirm email is off. If recovery `redirectTo` is missing from Site URL and Redirect URLs, Auth rejects the request and **does not send** the recovery email. The app then moves a recovery callback that includes `type=recovery` to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
 
-4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000`, do not swap the button for `{{ .SiteURL }}`, and do not build a PKCE `/auth/confirm?token_hash=` link unless that route exists in the app. `{{ .ConfirmationURL }}` already includes `redirect_to`. There are no email templates in this repo; hosted templates live only in **Authentication → Email Templates**.
-5. Apply the migration under `supabase/migrations/` with the Supabase CLI:
+5. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}` for recovery (and if Confirm email is turned back on). Do not hardcode `http://localhost:3000`, do not swap the button for `{{ .SiteURL }}`, and do not build a PKCE `/auth/confirm?token_hash=` link unless that route exists in the app. `{{ .ConfirmationURL }}` already includes `redirect_to`. There are no email templates in this repo; hosted templates live only in **Authentication → Email Templates**.
+6. Apply the migration under `supabase/migrations/` with the Supabase CLI:
 
    ```bash
    npx supabase login
@@ -60,13 +70,13 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
    The project ref is the subdomain in `https://<project-ref>.supabase.co`. The remote database will not contain `profiles`, `sessions`, `reflections` or the other app tables until `db push --linked` completes successfully.
 
-6. Confirm user-owned tables are exposed to the Data API only through the `authenticated` role grants in the migration.
-7. Verify RLS:
+7. Confirm user-owned tables are exposed to the Data API only through the `authenticated` role grants in the migration.
+8. Verify RLS:
    - all user-owned tables have RLS enabled;
    - all user-owned tables force RLS;
    - select/insert/update/delete policies use `(select auth.uid()) = user_id`;
    - update policies include both `USING` and `WITH CHECK`.
-8. Run a manual two-account isolation test:
+9. Run a manual two-account isolation test:
    - account A creates profile/session/reflection data;
    - account B cannot read, update or delete account A rows;
    - account A can still read and update their own rows.
@@ -88,13 +98,14 @@ Keep these account passwords in a local shell or CI secret store. Do not put the
 
 ## Hosted Auth leftovers (dashboard only)
 
-These cannot be changed from the app repo. After deploying code that sends `https://hoopjot.com`:
+These cannot be changed from the app repo:
 
-1. **Allow-list** — Authentication → URL Configuration: Site URL `https://hoopjot.com`; Redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
-2. **Templates** — Authentication → Email Templates: Confirm signup and Reset password must use `{{ .ConfirmationURL }}` as the link href. Custom SMTP “click tracking” must be off or it rewrites the verify URL.
-3. **Rate limits** — Authentication → Rate Limits. The built-in mailer is **2 emails per hour for the whole project**. After that, `/auth/v1/recover` returns 429 (`over_email_send_rate_limit`) and no mail is sent. The app now shows a rate-limit message instead of a generic auth error. Raising the limit requires **custom SMTP** or the Send Email hook.
-4. **SMTP** — Authentication → Emails / SMTP. Until custom SMTP is configured, recovery and confirmation mail uses the Supabase built-in provider (easy to rate-limit; some inboxes treat it as spam). Set a production sender after DNS is verified.
-5. **User exists** — `resetPasswordForEmail` is enumeration-safe: the form reports success even when the address is not a confirmed user, and no email is sent in that case.
+1. **Confirm email** — Authentication → Providers → Email: turn **Confirm email** off and save. Until this is off, signup returns no session and the form shows a generic auth error instead of logging in. The confirmation-email client flow is commented out in the app, not deleted.
+2. **Allow-list** — Authentication → URL Configuration: Site URL `https://hoopjot.com`; Redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**` (still required for password recovery).
+3. **Templates** — Authentication → Email Templates: Reset password must use `{{ .ConfirmationURL }}` as the link href. Custom SMTP “click tracking” must be off or it rewrites the verify URL.
+4. **Rate limits** — Authentication → Rate Limits. The built-in mailer is **2 emails per hour for the whole project**. After that, `/auth/v1/recover` returns 429 (`over_email_send_rate_limit`) and no mail is sent. Raising the limit requires **custom SMTP** or the Send Email hook.
+5. **SMTP** — Authentication → Emails / SMTP. Until custom SMTP is configured, recovery mail uses the Supabase built-in provider.
+6. **User exists** — `resetPasswordForEmail` is enumeration-safe: the form reports success even when the address is not a confirmed user, and no email is sent in that case.
 
 ## Vercel
 

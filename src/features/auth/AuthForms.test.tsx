@@ -79,6 +79,55 @@ describe('AuthForm', () => {
       email: 'player@example.com',
     });
   });
+
+  it('requires matching passwords on signup and logs the user in without a check-email step', async () => {
+    const user = userEvent.setup();
+    const signUp = vi.fn(async () => ({
+      requiresEmailConfirmation: false,
+      user: {
+        email: 'player@example.com',
+        id: 'player-1',
+        onboardingCompleted: false,
+      },
+    }));
+    const authService = createFakeAuthService({ signUp });
+
+    render(<AuthForm mode="signUp" />, { wrapper: createAuthWrapper(authService) });
+
+    await user.type(screen.getByLabelText('Email'), 'player@example.com');
+    await user.type(screen.getByLabelText('Password'), 'password123');
+    await user.type(screen.getByLabelText('Confirm password'), 'password123');
+    await user.click(screen.getByRole('button', { name: 'Create account' }));
+
+    expect(signUp).toHaveBeenCalledWith({
+      email: 'player@example.com',
+      password: 'password123',
+    });
+    expect(screen.queryByText('Check your email to confirm your account.')).not.toBeInTheDocument();
+  });
+
+  it('does not submit signup when the password confirmation does not match', async () => {
+    const user = userEvent.setup();
+    const signUp = vi.fn(async () => ({
+      requiresEmailConfirmation: false,
+      user: {
+        email: 'player@example.com',
+        id: 'player-1',
+        onboardingCompleted: false,
+      },
+    }));
+    const authService = createFakeAuthService({ signUp });
+
+    render(<AuthForm mode="signUp" />, { wrapper: createAuthWrapper(authService) });
+
+    await user.type(screen.getByLabelText('Email'), 'player@example.com');
+    await user.type(screen.getByLabelText('Password'), 'password123');
+    await user.type(screen.getByLabelText('Confirm password'), 'password456');
+    await user.click(screen.getByRole('button', { name: 'Create account' }));
+
+    expect(await screen.findByText('Passwords do not match.')).toBeInTheDocument();
+    expect(signUp).not.toHaveBeenCalled();
+  });
 });
 
 function createAuthWrapper(authService: AuthService) {
