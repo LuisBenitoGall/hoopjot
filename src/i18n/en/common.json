@@ -5,6 +5,7 @@
     "errors": {
       "configuration_missing": "Supabase is not configured for this environment.",
       "network_unavailable": "A network connection is required for this auth action.",
+      "password_mismatch": "Passwords do not match.",
       "provider_error": "Authentication could not be completed. Check the details and try again.",
       "rate_limited": "Too many auth emails were requested. Wait about an hour, or configure custom SMTP in the Supabase dashboard."
     },
@@ -15,6 +16,7 @@
       "passwordUpdated": "Password updated.",
       "recoverySent": "Recovery email sent if the address is registered."
     },
+    "confirmPasswordLabel": "Confirm password",
     "newPasswordLabel": "New password",
     "onboarding": {
       "description": "Your account is ready. The profile and goals flow arrives in the next milestone.",

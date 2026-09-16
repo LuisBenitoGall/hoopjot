@@ -23,7 +23,11 @@ export type AuthState =
     };
 
 export type AuthErrorCode =
-  'configuration_missing' | 'network_unavailable' | 'provider_error' | 'rate_limited';
+  | 'configuration_missing'
+  | 'network_unavailable'
+  | 'password_mismatch'
+  | 'provider_error'
+  | 'rate_limited';
 
 export class AuthServiceError extends Error {
   readonly code: AuthErrorCode;

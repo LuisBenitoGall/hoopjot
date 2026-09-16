@@ -77,9 +77,14 @@ describe('auth services', () => {
     });
   });
 
-  it('sends signup confirmation emails back to the configured app origin', async () => {
+  it('creates a session on signup without sending a confirmation redirect', async () => {
     const signUp = vi.fn(async () => ({
-      data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+      data: {
+        session: {
+          user: { email: 'player@example.com', id: 'user-1' },
+        },
+        user: { email: 'player@example.com', id: 'user-1' },
+      },
       error: null,
     }));
     const service = new SupabaseAuthService(
@@ -97,17 +102,96 @@ describe('auth services', () => {
     await expect(
       service.signUp({ email: 'player@example.com', password: 'password123' }),
     ).resolves.toMatchObject({
-      requiresEmailConfirmation: true,
+      requiresEmailConfirmation: false,
       user: { email: 'player@example.com', id: 'user-1' },
     });
     expect(signUp).toHaveBeenCalledWith({
       email: 'player@example.com',
-      options: {
-        emailRedirectTo: 'https://hoopjot.com',
-      },
       password: 'password123',
     });
   });
+
+  it('fails signup when Confirm email is still enabled and no session is returned', async () => {
+    const signUp = vi.fn(async () => ({
+      data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+      error: null,
+    }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          signUp,
+        },
+      } as unknown as SupabaseClient,
+      {
+        getOnlineStatus: () => true,
+      },
+    );
+
+    await expect(
+      service.signUp({ email: 'player@example.com', password: 'password123' }),
+    ).rejects.toMatchObject({
+      code: 'provider_error',
+    });
+  });
+
+  // Confirmation-email client flow (restore if Confirm email is re-enabled):
+  // it('sends signup confirmation emails back to the configured app origin', async () => {
+  //   const signUp = vi.fn(async () => ({
+  //     data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+  //     error: null,
+  //   }));
+  //   const service = new SupabaseAuthService(
+  //     {
+  //       auth: {
+  //         signUp,
+  //       },
+  //     } as unknown as SupabaseClient,
+  //     {
+  //       emailRedirectTo: 'https://hoopjot.com',
+  //       getOnlineStatus: () => true,
+  //     },
+  //   );
+  //
+  //   await expect(
+  //     service.signUp({ email: 'player@example.com', password: 'password123' }),
+  //   ).resolves.toMatchObject({
+  //     requiresEmailConfirmation: true,
+  //     user: { email: 'player@example.com', id: 'user-1' },
+  //   });
+  //   expect(signUp).toHaveBeenCalledWith({
+  //     email: 'player@example.com',
+  //     options: {
+  //       emailRedirectTo: 'https://hoopjot.com',
+  //     },
+  //     password: 'password123',
+  //   });
+  // });
+  //
+  // it('still sends signup confirmation emails to the public origin when no redirect is injected', async () => {
+  //   const signUp = vi.fn(async () => ({
+  //     data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+  //     error: null,
+  //   }));
+  //   const service = new SupabaseAuthService(
+  //     {
+  //       auth: {
+  //         signUp,
+  //       },
+  //     } as unknown as SupabaseClient,
+  //     {
+  //       getOnlineStatus: () => true,
+  //     },
+  //   );
+  //
+  //   await service.signUp({ email: 'player@example.com', password: 'password123' });
+  //   expect(signUp).toHaveBeenCalledWith({
+  //     email: 'player@example.com',
+  //     options: {
+  //       emailRedirectTo: 'https://hoopjot.com',
+  //     },
+  //     password: 'password123',
+  //   });
+  // });
 
   it('sends password recovery emails back to the same production origin as signup', async () => {
     const resetPasswordForEmail = vi.fn(async () => ({ data: {}, error: null }));
@@ -145,32 +229,6 @@ describe('auth services', () => {
     await service.sendPasswordResetEmail({ email: 'player@example.com' });
     expect(resetPasswordForEmail).toHaveBeenCalledWith('player@example.com', {
       redirectTo: 'https://hoopjot.com',
-    });
-  });
-
-  it('still sends signup confirmation emails to the public origin when no redirect is injected', async () => {
-    const signUp = vi.fn(async () => ({
-      data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
-      error: null,
-    }));
-    const service = new SupabaseAuthService(
-      {
-        auth: {
-          signUp,
-        },
-      } as unknown as SupabaseClient,
-      {
-        getOnlineStatus: () => true,
-      },
-    );
-
-    await service.signUp({ email: 'player@example.com', password: 'password123' });
-    expect(signUp).toHaveBeenCalledWith({
-      email: 'player@example.com',
-      options: {
-        emailRedirectTo: 'https://hoopjot.com',
-      },
-      password: 'password123',
     });
   });
 

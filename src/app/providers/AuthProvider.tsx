@@ -124,13 +124,22 @@ export function AuthProvider({
         const result = await service.signUp(credentials);
         const user = await resolveOnboardingStatus(result.user);
 
-        if (user && !result.requiresEmailConfirmation) {
+        if (user) {
           setState({
             isPasswordRecoverySession: false,
             status: 'authenticated',
             user,
           });
         }
+
+        // Confirmation-email client flow: only authenticate when Confirm email is off.
+        // if (user && !result.requiresEmailConfirmation) {
+        //   setState({
+        //     isPasswordRecoverySession: false,
+        //     status: 'authenticated',
+        //     user,
+        //   });
+        // }
 
         return { ...result, user };
       } catch (caughtError) {

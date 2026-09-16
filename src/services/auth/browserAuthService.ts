@@ -22,6 +22,7 @@ export function createBrowserAuthService(): AuthService {
   relocatePasswordRecoveryCallback();
 
   return new SupabaseAuthService(createSupabaseBrowserClient(config), {
+    // Kept for the commented confirmation-email client flow in SupabaseAuthService.signUp.
     emailRedirectTo: getAuthEmailRedirectTo(),
     resetRedirectUrl: getAuthPasswordResetRedirectTo(),
   });

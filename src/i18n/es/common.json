@@ -5,6 +5,7 @@
     "errors": {
       "configuration_missing": "Supabase no está configurado para este entorno.",
       "network_unavailable": "Se necesita conexión para esta acción de autenticación.",
+      "password_mismatch": "Las contraseñas no coinciden.",
       "provider_error": "No se pudo completar la autenticación. Revisa los datos e inténtalo de nuevo.",
       "rate_limited": "Se han pedido demasiados emails de autenticación. Espera una hora o configura SMTP propio en el panel de Supabase."
     },
@@ -15,6 +16,7 @@
       "passwordUpdated": "Contraseña actualizada.",
       "recoverySent": "Si la dirección está registrada, se enviará un email de recuperación."
     },
+    "confirmPasswordLabel": "Confirmar contraseña",
     "newPasswordLabel": "Nueva contraseña",
     "onboarding": {
       "description": "Tu cuenta está lista. El flujo de perfil y objetivos llega en el siguiente hito.",

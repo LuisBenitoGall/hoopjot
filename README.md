@@ -72,9 +72,10 @@ Use the project ref from `https://<project-ref>.supabase.co`. `db push --dry-run
 Release checks:
 
 - Email auth is enabled.
+- Hosted Auth **Confirm email** is off (Authentication → Providers → Email) so signup returns a session.
 - Hosted Auth Site URL is `https://hoopjot.com` (not `http://localhost:3000`).
 - Allowed redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
-- Confirm signup and reset password email templates still use `{{ .ConfirmationURL }}`.
+- Reset password email templates still use `{{ .ConfirmationURL }}`.
 - Built-in auth email is limited to 2/hour until custom SMTP is set.
 - Every user-owned table has RLS enabled and forced.
 - Policies restrict rows with `(select auth.uid()) = user_id`.

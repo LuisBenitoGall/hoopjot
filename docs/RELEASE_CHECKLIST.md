@@ -46,6 +46,7 @@ pnpm test:e2e:remote
 ## Deployment
 
 - Vercel preview has been reviewed on mobile.
+- Supabase Auth **Confirm email** is off (Authentication → Providers → Email).
 - Supabase Auth Site URL is `https://hoopjot.com` (Authentication → URL Configuration), not `http://localhost:3000`.
 - Supabase Auth redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
 - Confirm signup and Reset password email templates use `{{ .ConfirmationURL }}`.
