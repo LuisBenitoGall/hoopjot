@@ -4,11 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { AuthProvider } from '../../app/providers/AuthProvider';
-import {
-  AuthServiceError,
-  type AuthService,
-  type AuthUser
-} from '../../services/auth';
+import { AuthServiceError, type AuthService, type AuthUser } from '../../services/auth';
 import i18n from '../../i18n/config';
 import { AuthForm } from './AuthForms';
 
@@ -26,7 +22,7 @@ describe('AuthForm', () => {
           'network_unavailable',
           'A network connection is required for this authentication action.',
         );
-      })
+      }),
     });
 
     render(<AuthForm mode="signIn" />, { wrapper: createAuthWrapper(authService) });
@@ -40,7 +36,7 @@ describe('AuthForm', () => {
     ).toBeInTheDocument();
     expect(authService.signIn).toHaveBeenCalledWith({
       email: 'player@example.com',
-      password: 'password123'
+      password: 'password123',
     });
   });
 
@@ -49,7 +45,7 @@ describe('AuthForm', () => {
     const updatePassword = vi.fn(async () => ({
       email: 'player@example.com',
       id: 'player-1',
-      onboardingCompleted: true
+      onboardingCompleted: true,
     }));
     const authService = createFakeAuthService({ updatePassword });
 
@@ -59,6 +55,29 @@ describe('AuthForm', () => {
     await user.click(screen.getByRole('button', { name: 'Update password' }));
 
     expect(updatePassword).toHaveBeenCalledWith('password123');
+  });
+
+  it('shows a rate-limit message when recovery email sending is throttled', async () => {
+    const user = userEvent.setup();
+    const authService = createFakeAuthService({
+      sendPasswordResetEmail: vi.fn(async () => {
+        throw new AuthServiceError('rate_limited', 'email rate limit exceeded');
+      }),
+    });
+
+    render(<AuthForm mode="recovery" />, { wrapper: createAuthWrapper(authService) });
+
+    await user.type(screen.getByLabelText('Email'), 'player@example.com');
+    await user.click(screen.getByRole('button', { name: 'Send recovery email' }));
+
+    expect(
+      await screen.findByText(
+        'Too many auth emails were requested. Wait about an hour, or configure custom SMTP in the Supabase dashboard.',
+      ),
+    ).toBeInTheDocument();
+    expect(authService.sendPasswordResetEmail).toHaveBeenCalledWith({
+      email: 'player@example.com',
+    });
   });
 });
 
@@ -76,7 +95,7 @@ function createFakeAuthService(overrides: Partial<AuthService> = {}): AuthServic
   const user: AuthUser = {
     email: 'player@example.com',
     id: 'player-1',
-    onboardingCompleted: true
+    onboardingCompleted: true,
   };
 
   return {
@@ -87,6 +106,6 @@ function createFakeAuthService(overrides: Partial<AuthService> = {}): AuthServic
     signOut: vi.fn(async () => undefined),
     signUp: vi.fn(async () => ({ requiresEmailConfirmation: false, user })),
     updatePassword: vi.fn(async () => user),
-    ...overrides
+    ...overrides,
   };
 }

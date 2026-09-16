@@ -31,23 +31,23 @@ Only browser-safe values belong here. Legal identity and contact values are publ
 
 1. Create a Supabase project.
 2. Enable email authentication.
-3. Configure hosted Auth URLs in the Supabase dashboard. This hosted Site URL is **not** taken from `supabase/config.toml` (that file is local-only). New projects default Site URL to `http://localhost:3000`, which is what signup confirmation emails use unless `emailRedirectTo` is allowed.
+3. Configure hosted Auth URLs in the Supabase dashboard. This hosted Site URL is **not** taken from `supabase/config.toml` (that file is local-only). New projects default Site URL to `http://localhost:3000`.
 
    Open **Authentication → URL Configuration** (`https://supabase.com/dashboard/project/<project-ref>/auth/url-configuration`):
 
    - **Site URL:** `https://hoopjot.com`
-     Save. Confirmation emails without a valid `emailRedirectTo` fall back to this value.
-   - **Redirect URLs:** add at least:
+     Save. This is the fallback when `emailRedirectTo` / `redirectTo` is omitted or rejected.
+   - **Redirect URLs** allow-list, exact values:
      - `https://hoopjot.com`
      - `https://hoopjot.com/**`
-     - `http://127.0.0.1:5173/**` and `http://localhost:5173/**` for local Vite
-     - `https://*-.vercel.app/**` for Vercel previews (optional)
+     - Optional: `https://www.hoopjot.com` and `https://www.hoopjot.com/**` if the site is also served on www
+     - Optional local Vite: `http://127.0.0.1:5173/**` and `http://localhost:5173/**`
 
-   Do not leave Site URL, Redirect URLs, or Vercel `VITE_SITE_URL` on `https://hoopjot.vercel.app`. Auth rejects `redirectTo` values that are not on this list, which surfaces as a generic auth error on the forgot-password form.
+   Do not leave Site URL or Redirect URLs on `https://hoopjot.vercel.app` or `http://localhost:3000`.
 
-   `emailRedirectTo` / recovery `redirectTo` from the app is rejected unless it matches Site URL or this allow list. If it is rejected, Auth still redirects to Site URL (`http://localhost:3000` until you change it). Signup and password recovery both send `https://hoopjot.com` (no extra path). The app then moves a recovery callback to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
+   The production app **always** sends `emailRedirectTo` / recovery `redirectTo` as `https://hoopjot.com` (no path, no www, not the current tab origin). If that value is missing from Site URL and Redirect URLs, Auth rejects the request and **does not send** the signup or recovery email. The app then moves a recovery callback that includes `type=recovery` to `/recovery` while keeping the query and hash so Auth can create the session before those params are stripped.
 
-4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000` or replace the confirmation link with `{{ .SiteURL }}` unless that Site URL is already `https://hoopjot.com`. `{{ .ConfirmationURL }}` already includes `redirect_to`.
+4. Keep Confirm signup and Reset password email templates on `{{ .ConfirmationURL }}`. Do not hardcode `http://localhost:3000`, do not swap the button for `{{ .SiteURL }}`, and do not build a PKCE `/auth/confirm?token_hash=` link unless that route exists in the app. `{{ .ConfirmationURL }}` already includes `redirect_to`. There are no email templates in this repo; hosted templates live only in **Authentication → Email Templates**.
 5. Apply the migration under `supabase/migrations/` with the Supabase CLI:
 
    ```bash
@@ -85,6 +85,16 @@ pnpm test -- src/sync/supabaseRlsIsolation.integration.test.ts
 ```
 
 Keep these account passwords in a local shell or CI secret store. Do not put them in Vercel frontend environment variables.
+
+## Hosted Auth leftovers (dashboard only)
+
+These cannot be changed from the app repo. After deploying code that sends `https://hoopjot.com`:
+
+1. **Allow-list** — Authentication → URL Configuration: Site URL `https://hoopjot.com`; Redirect URLs include `https://hoopjot.com` and `https://hoopjot.com/**`.
+2. **Templates** — Authentication → Email Templates: Confirm signup and Reset password must use `{{ .ConfirmationURL }}` as the link href. Custom SMTP “click tracking” must be off or it rewrites the verify URL.
+3. **Rate limits** — Authentication → Rate Limits. The built-in mailer is **2 emails per hour for the whole project**. After that, `/auth/v1/recover` returns 429 (`over_email_send_rate_limit`) and no mail is sent. The app now shows a rate-limit message instead of a generic auth error. Raising the limit requires **custom SMTP** or the Send Email hook.
+4. **SMTP** — Authentication → Emails / SMTP. Until custom SMTP is configured, recovery and confirmation mail uses the Supabase built-in provider (easy to rate-limit; some inboxes treat it as spam). Set a production sender after DNS is verified.
+5. **User exists** — `resetPasswordForEmail` is enumeration-safe: the form reports success even when the address is not a confirmed user, and no email is sent in that case.
 
 ## Vercel
 

@@ -162,7 +162,8 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-# Hosted Redirect URLs must also include https://hoopjot.com and https://hoopjot.com/**
+# Hosted Redirect URLs must include https://hoopjot.com and https://hoopjot.com/**.
+# The production app always sends those values as emailRedirectTo / recovery redirectTo.
 additional_redirect_urls = ["https://127.0.0.1:3000"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
@@ -198,6 +199,8 @@ password_requirements = ""
 # rp_origins = ["http://127.0.0.1:3000"]
 
 [auth.rate_limit]
+# Local-only. Hosted Auth rate limits are set in Authentication → Rate Limits.
+# Built-in email provider: 2 emails/hour for the whole project until custom SMTP is configured.
 # Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
 email_sent = 2
 # Number of SMS messages that can be sent per hour. Requires auth.sms to be enabled.

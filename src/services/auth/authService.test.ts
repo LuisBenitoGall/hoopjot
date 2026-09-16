@@ -128,4 +128,77 @@ describe('auth services', () => {
       redirectTo: 'https://hoopjot.com',
     });
   });
+
+  it('still sends recovery emails to the public origin when no reset URL is injected', async () => {
+    const resetPasswordForEmail = vi.fn(async () => ({ data: {}, error: null }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          resetPasswordForEmail,
+        },
+      } as unknown as SupabaseClient,
+      {
+        getOnlineStatus: () => true,
+      },
+    );
+
+    await service.sendPasswordResetEmail({ email: 'player@example.com' });
+    expect(resetPasswordForEmail).toHaveBeenCalledWith('player@example.com', {
+      redirectTo: 'https://hoopjot.com',
+    });
+  });
+
+  it('still sends signup confirmation emails to the public origin when no redirect is injected', async () => {
+    const signUp = vi.fn(async () => ({
+      data: { session: null, user: { email: 'player@example.com', id: 'user-1' } },
+      error: null,
+    }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          signUp,
+        },
+      } as unknown as SupabaseClient,
+      {
+        getOnlineStatus: () => true,
+      },
+    );
+
+    await service.signUp({ email: 'player@example.com', password: 'password123' });
+    expect(signUp).toHaveBeenCalledWith({
+      email: 'player@example.com',
+      options: {
+        emailRedirectTo: 'https://hoopjot.com',
+      },
+      password: 'password123',
+    });
+  });
+
+  it('surfaces hosted email rate limits instead of a generic provider error', async () => {
+    const resetPasswordForEmail = vi.fn(async () => ({
+      data: {},
+      error: {
+        code: 'over_email_send_rate_limit',
+        message: 'email rate limit exceeded',
+        status: 429,
+      },
+    }));
+    const service = new SupabaseAuthService(
+      {
+        auth: {
+          resetPasswordForEmail,
+        },
+      } as unknown as SupabaseClient,
+      {
+        getOnlineStatus: () => true,
+        resetRedirectUrl: 'https://hoopjot.com',
+      },
+    );
+
+    await expect(
+      service.sendPasswordResetEmail({ email: 'player@example.com' }),
+    ).rejects.toMatchObject({
+      code: 'rate_limited',
+    });
+  });
 });

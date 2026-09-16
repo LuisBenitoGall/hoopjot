@@ -5,7 +5,8 @@
     "errors": {
       "configuration_missing": "Supabase is not configured for this environment.",
       "network_unavailable": "A network connection is required for this auth action.",
-      "provider_error": "Authentication could not be completed. Check the details and try again."
+      "provider_error": "Authentication could not be completed. Check the details and try again.",
+      "rate_limited": "Too many auth emails were requested. Wait about an hour, or configure custom SMTP in the Supabase dashboard."
     },
     "eyebrow": "Private player account",
     "loading": "Checking session",

@@ -22,7 +22,8 @@ export type AuthState =
       message?: undefined;
     };
 
-export type AuthErrorCode = 'configuration_missing' | 'network_unavailable' | 'provider_error';
+export type AuthErrorCode =
+  'configuration_missing' | 'network_unavailable' | 'provider_error' | 'rate_limited';
 
 export class AuthServiceError extends Error {
   readonly code: AuthErrorCode;
