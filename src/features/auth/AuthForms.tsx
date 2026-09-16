@@ -13,6 +13,9 @@ interface AuthFormProps {
   mode: AuthFormMode;
 }
 
+const fieldClassName =
+  'min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20';
+
 export function AuthForm({ mode }: AuthFormProps) {
   const { error, resetError, sendPasswordResetEmail, signIn, signUp, state, updatePassword } =
     useAuth();
@@ -24,9 +27,6 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [localErrorCode, setLocalErrorCode] = useState<AuthErrorCode | null>(null);
-  const requiresEmail = mode !== 'updatePassword';
-  const requiresPassword = mode !== 'recovery';
-  const requiresPasswordConfirmation = mode === 'signUp';
 
   const errorCode =
     state.status === 'configuration_error' ? null : (localErrorCode ?? error?.code ?? null);
@@ -82,54 +82,68 @@ export function AuthForm({ mode }: AuthFormProps) {
       <AuthErrorMessage code={errorCode} getMessage={(code) => t(`auth.errors.${code}`)} />
       <AuthSuccessMessage message={successMessage} />
 
-      {requiresEmail ? (
-        <label className="block space-y-2">
-          <span className="text-sm font-bold">{t('auth.emailLabel')}</span>
-          <input
+      {mode === 'signUp' ? (
+        <div className="space-y-5">
+          <AuthLabeledInput
             autoComplete="email"
-            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
+            id="signup-email"
+            label={t('auth.emailLabel')}
             name="email"
-            onChange={(event) => setEmail(event.target.value)}
-            required
+            onChange={setEmail}
             type="email"
             value={email}
           />
-        </label>
-      ) : null}
-
-      {requiresPassword ? (
-        <label className="block space-y-2">
-          <span className="text-sm font-bold">
-            {mode === 'updatePassword' ? t('auth.newPasswordLabel') : t('auth.passwordLabel')}
-          </span>
-          <input
-            autoComplete={mode === 'signIn' ? 'current-password' : 'new-password'}
-            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
+          <AuthLabeledInput
+            autoComplete="new-password"
+            id="signup-password"
+            label={t('auth.passwordLabel')}
             minLength={8}
             name="password"
-            onChange={(event) => setPassword(event.target.value)}
-            required
+            onChange={setPassword}
             type="password"
             value={password}
           />
-        </label>
-      ) : null}
-
-      {requiresPasswordConfirmation ? (
-        <label className="block space-y-2">
-          <span className="text-sm font-bold">{t('auth.confirmPasswordLabel')}</span>
-          <input
+          <AuthLabeledInput
             autoComplete="new-password"
-            className="min-h-12 w-full rounded-card border-2 border-hoopjot-line bg-white px-4 text-base font-semibold outline-none focus:border-hoopjot-blue focus:ring-4 focus:ring-hoopjot-blue/20"
+            id="signup-password-confirmation"
+            label={t('auth.confirmPasswordLabel')}
             minLength={8}
-            name="passwordConfirmation"
-            onChange={(event) => setPasswordConfirmation(event.target.value)}
-            required
+            name="password_confirmation"
+            onChange={setPasswordConfirmation}
             type="password"
             value={passwordConfirmation}
           />
-        </label>
-      ) : null}
+        </div>
+      ) : (
+        <>
+          {mode !== 'updatePassword' ? (
+            <AuthLabeledInput
+              autoComplete="email"
+              id={`${mode}-email`}
+              label={t('auth.emailLabel')}
+              name="email"
+              onChange={setEmail}
+              type="email"
+              value={email}
+            />
+          ) : null}
+
+          {mode !== 'recovery' ? (
+            <AuthLabeledInput
+              autoComplete={mode === 'signIn' ? 'current-password' : 'new-password'}
+              id={`${mode}-password`}
+              label={
+                mode === 'updatePassword' ? t('auth.newPasswordLabel') : t('auth.passwordLabel')
+              }
+              minLength={8}
+              name="password"
+              onChange={setPassword}
+              type="password"
+              value={password}
+            />
+          ) : null}
+        </>
+      )}
 
       <Button className="w-full" disabled={submitting} type="submit">
         {submitting ? t('auth.submitting') : t(`auth.${mode}.submit`)}
@@ -137,6 +151,45 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       <AuthFormLinks mode={mode} />
     </form>
+  );
+}
+
+function AuthLabeledInput({
+  autoComplete,
+  id,
+  label,
+  minLength,
+  name,
+  onChange,
+  type,
+  value,
+}: {
+  autoComplete: string;
+  id: string;
+  label: string;
+  minLength?: number;
+  name: string;
+  onChange: (value: string) => void;
+  type: 'email' | 'password';
+  value: string;
+}) {
+  return (
+    <div className="block space-y-2">
+      <label className="text-sm font-bold" htmlFor={id}>
+        {label}
+      </label>
+      <input
+        autoComplete={autoComplete}
+        className={fieldClassName}
+        id={id}
+        minLength={minLength}
+        name={name}
+        onChange={(event) => onChange(event.target.value)}
+        required
+        type={type}
+        value={value}
+      />
+    </div>
   );
 }
 
